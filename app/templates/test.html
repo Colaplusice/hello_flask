@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            .font{
+            font-size:36pt
+}
+</style>
+
+       <script>
+
+            function btnClick() {
+                var text=document.getElementById("text").value;
+                {#发送给swift#}
+                window.webkit.messageHandlers.Test.postMessage(text)
+
+            }
+            //在viewcontroller.swift中呼叫
+            function setLableTitle(title) {
+                alert(title);
+                var label=document.getElementById("label");
+                label.innerHTML=title;
+            }
+       </script>
+    </head>
+
+<body>
+
+
+<div>
+<input id="text" type="text" class="font">
+</div>
+
+<div>
+    <input type="button" class="font" value="Button" onclick="btnClick()">
+
+</div>
+
+<div id="label" class="font"></div>
+</body>
+
+</html>
