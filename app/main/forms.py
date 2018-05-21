@@ -16,6 +16,7 @@ class UserEditForm(FlaskForm):
     submit=SubmitField('submit')
 
 
+# 管理员更改信息表格
 class EditProfileAdminForm(FlaskForm):
     email=StringField('Email',validators=[DataRequired(),Length(1,64),Email()])
     username=StringField('Username',validators=[DataRequired(),Length(1,64),
@@ -41,12 +42,11 @@ class EditProfileAdminForm(FlaskForm):
         User.query.filter_by(email=field.data).first():
             raise ValidationError('email already registered')
 
-    def validate_on_submit(self,field):
+    def validate_usename(self,field):
         if field.data!=self.user.name and\
             User.query.filter_by(username=field.data).first():
-            raise ValidationError('username already register')
 
-
+            raise ValidationError('用户已经注册')
 
 class PostForm(FlaskForm):
     body=PageDownField("what's your mind",validators=[DataRequired()])

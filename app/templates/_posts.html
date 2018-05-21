@@ -39,6 +39,14 @@
         </span>
     </a>
         {% endif %}
+
+
+    <a href="{{ url_for('.post',id=post.id) }}#comment">
+    <span class="label label-primary">
+        {{ post.comments.count() }}
+        Comments
+    </span>
+</a>
     </div>
 
 

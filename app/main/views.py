@@ -27,6 +27,29 @@ def show_followed():
     return resp
 
 
+@main.route('/moderate')
+@login_required
+@permission_required(Permisson.MODERATE_COMMENTS)
+def moderate():
+    page=request.args.get('page',1,type=int)
+    # 提取一页评论 吧把分页对象也传入html
+    pagination=Comment.query.order_by(Comment.timestamp.desc())\
+    .paginate(page,per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
+              error_out=False)
+
+    comments=pagination.items
+
+    return render_template('moderate.html',comments=comments,pagination=pagination,
+                           page=page)
+
+
+
+
+
+    pass
+
+
+
 @main.route('/',methods=['GET','POST'])
 def index():
     #发表文章
@@ -43,6 +66,7 @@ def index():
     if current_user.is_authenticated:
         show_followed=bool(request.cookies.get('show_followed',''))
     if show_followed:
+            print('show follow')
             query=current_user.followed_posts
     else:
             query=Post.query
@@ -64,7 +88,7 @@ def user(username):
 
 @main.route('/post/<int:id>',methods=['GET','POST'])
 def post(id):
-    post=Post.get_or_404(id)
+    post=Post.query.get_or_404(id)
     form=CommentForm()
     if form.validate_on_submit():
         comment=Comment(body=form.body.data,post=post,author=current_user._get_current_object())
@@ -73,12 +97,15 @@ def post(id):
         return redirect(url_for('.post',id=post.id,page=-1))
     page=request.args.get('page',1,type=int)
     if page==-1:
-        page=(post.comment.count()-1)/current_app.config['FLASKY_COMMENTS_PER_PAGE']+1
+        page=(post.comments.count()-1)/\
+             current_app.config['FLASKY_COMMENTS_PRE_PAGE']+1
+    pagnation=post.comments.order_by(Comment.timestamp.asc())\
+        .paginate(page,per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
+                  error_out=False)
 
+    comments=pagnation.items
+    return render_template('post.html',posts=[post],form=form,comments=comments,pagination=pagnation)
 
-
-    post=Post.query.get_or_404(id)
-    return render_template('post.html',posts=[post])
 
 @main.route('/edit/<int:id>',methods=['GET','POST'])
 @login_required
@@ -187,18 +214,20 @@ def edit_profile():
 @amdin_required
 def edit_profile_admin(id):
     #通过主键得到
-    user=User.queru.get_or_404(id)
+    user=User.query.get_or_404(id)
     form=EditProfileAdminForm(user)
+
     if form.validate_on_submit():
-        user.email=form.data.email.data
+        user.email=form.email.data
         user.username=form.username.data
         user.confirmed=form.confrimed.data
-        user.role=Role.query.filter_by(form.role.data)
+        if Role.query.filter_by(name=form.role.data).first:
+            user.role=Role.query.filter_by(name=form.role.data).first()
         user.name=form.name.data
         user.about_me=form.about_me.data
         user.location=form.location.data
         db.session.add(user)
-        flash('the profile has been updated')
+        flash('个人信息更新成功')
         return  redirect(url_for('.user',username=user.username))
     form.email.data=user.email
     form.username.data=user.username
@@ -209,3 +238,25 @@ def edit_profile_admin(id):
     form.confrimed.data=user.confirmed
 
     return render_template('edit_profile.html',form=form,user=user)
+
+@main.route('/moderate/enable/<int:id>')
+@login_required
+@permission_required(Permisson.MODERATE_COMMENTS)
+def moderate_enable(id):
+    comment=Comment.query.get_or_404(id)
+    if comment and comment.disabled:
+        comment.disabled=False
+        db.session.add(comment)
+        # 将request传递过来的page参数再传给moderate方法
+    return redirect(url_for('.moderate',page=request.args.get('page',type=int)))
+
+
+@main.route('/moderate/disable/<int:id>')
+@login_required
+@permission_required(Permisson.MODERATE_COMMENTS)
+def moderate_disable(id):
+    comment=Comment.query.get_or_404(id)
+    if comment and not comment.disabled:
+        comment.disabled=True
+        db.session.add(comment)
+    return redirect(url_for('.moderate',page=request.args.get('page',type=int)))

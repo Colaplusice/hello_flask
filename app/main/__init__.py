@@ -8,4 +8,3 @@ from . import views,errors
 @main.app_context_processor
 def inject_permission():
     return dict(Permisson=Permisson)
-

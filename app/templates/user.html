@@ -25,11 +25,11 @@
 
 {% if user==current_user %}
 
-<a href="{{ url_for('.edit_profile')}}" class="btn-default">Edit profile</a>
+<a href="{{ url_for('.edit_profile')}}" class="btn-default">修改信息</a>
 
 {% endif %}
 {% if current_user.isAdministrator() %}
-<a class="btn btn-danger" href="{{ url_for('.edit_profile_admin',id=user.id) }}"></a>
+<a class="btn btn-danger" href="{{ url_for('.edit_profile_admin',id=user.id) }}">修改信息</a>
 
 {% endif %}
 
@@ -45,17 +45,17 @@
     {% if current_user.can(Permisson.FOLLOW) and user != current_user %}
     {% if not current_user.is_following(user) %}
     <a href="{{ url_for('.follow',username=user.username) }}" class="btn btn-primary">
-    Follow</a>
+    关注</a>
     {% else %}
-<a href="{{ url_for('.unfollow',username=user.username)}}" class="btn btn-default">Unfollow</a>
+<a href="{{ url_for('.unfollow',username=user.username)}}" class="btn btn-default">取消关注</a>
     {% endif %}
     {% endif %}
 {#    查看关注username的人数#}
-<a href="{{ url_for('.followers',username=user.username) }}">Followers:
+<a href="{{ url_for('.followers',username=user.username) }}">关注者:
 <span class="badge"> {{ user.follower.count() - 1 }} </span>
 </a>
 {#    查看被username关注的人数#}
-    <a href="{{ url_for('.followed_by',username=user.username) }}">Following:
+    <a href="{{ url_for('.followed_by',username=user.username) }}">关注的人:
 <span class="badge"> {{ user.followed.count() - 1 }} </span>
 </a>
 {% if current_user.is_authenticated and user!=current_user and user.is_following(current_user) %}

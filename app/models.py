@@ -1,10 +1,11 @@
 #encoding=utf-8
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
+from app.exceptions import ValidationError
 from  . import login_manager
 from flask_login import UserMixin,AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app,request
+from flask import current_app,request,url_for
 from datetime import datetime
 from markdown import markdown
 import hashlib
@@ -157,6 +158,7 @@ class User(UserMixin, db.Model):
         s=Serializer(current_app.config['SECRET_KEY'],expiration)
         return s.dumps({'change_email':self.id,'new_email':new_email})
 
+    #换邮件
     def change_email(self,token):
         s=Serializer(current_app.config['SECRET_KEY'])
         try:
@@ -177,6 +179,7 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return True
 
+    #自动生成信息
     @staticmethod
     def generate_fake(count=100):
         from sqlalchemy.exc import IntegrityError
@@ -202,7 +205,7 @@ class User(UserMixin, db.Model):
 
 
 
-    # 邮件认证  如果token中的confrim和self.id是一样的，说明邮件认证成功
+    # 邮件注册认证  如果token中的confrim和self.id是一样的，说明邮件认证成功
     def confirm(self,token):
         s=Serializer(current_app.config['SECRET_KEY'])
         try:
@@ -217,6 +220,7 @@ class User(UserMixin, db.Model):
 
         return True
 
+#生成图片的链接md5码
     def gravatar(self,size=100,default='identicon',rating='g'):
         if request.is_secure:
             url='https://secure.gravatar.com/avatar'
@@ -244,8 +248,24 @@ class User(UserMixin, db.Model):
     def verify_password(self,password):
         return check_password_hash(self.password_hash,password)
 
+
+    #rest api
+    def verify_auth_token(self):
+        pass
+
+    def tojson(self):
+        json_user={
+        'url':url_for('api.get_post',id=self.id,_external=True),
+            'username':self.username,
+            'member_since':self.member_since,
+            'last_seen':self.last_seen,
+            'posts':url_for('api.get_user_followed_posts',id=self.id,_external=True),
+            'post_count':self.posts.count()
+        }
+        return json_user
     def __repr__(self):
         return '<User %r>'%self.username
+
 class Permisson:
     FOLLOW=0x01
     COMMIT=0X02
@@ -257,7 +277,6 @@ class Permisson:
 class AnonymousUser(AnonymousUserMixin):
     def can(self,permissions):
         return False
-
     def isAdministrator(self):
         return False
 login_manager.anonymous_user=AnonymousUser
@@ -265,13 +284,13 @@ login_manager.anonymous_user=AnonymousUser
 
 class Post(db.Model):
 
-
     __tablename__='posts'
     id=db.Column(db.Integer,primary_key=True)
     body=db.Column(db.Text)
+    # comments=db.relationship('Comment',backref='author',lazy='dynamic')
 
     body_html=db.Column(db.Text)
-
+    comments=db.relationship('Comment',backref='post',lazy='dynamic')
     timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
     author_id=db.Column(db.Integer,db.ForeignKey('users.id'))
 
@@ -294,6 +313,8 @@ class Post(db.Model):
             db.session.commit()
             print('生成成功!%d' % i)
 
+
+
     #在储存文本时将其转换为markdown
     @ staticmethod
     def on_changed_body(target,value,oldvalue,initiator):
@@ -305,6 +326,30 @@ class Post(db.Model):
         target.body_html=bleach.linkify(bleach.clean(markdown(value,output_formate='html'),
                                                      tags=allowed_tags,strip=True))
 
+    #生成令牌
+    def generate_auth_token(self):
+        pass
+
+    #转换为json资源
+    def tojson(self):
+        json_post={
+        'url':url_for('api.get_post',_external=True,id=self.id),
+            'body':self.body,
+            'body_html':self.body_html,
+            'timestamp':self.timestamp,
+            'author':url_for('api.get_user',id=self.author_id,_external=True),
+            'comment':url_for('api.get_comment',id=self.id,_external=True),
+            'comment_count':self.comments.count()
+        }
+        return json_post
+
+    #不需要创建用户或者对象实例
+    @staticmethod
+    def from_json(self,json_post):
+        body=json_post.get('body')
+        if body is None or body=='':
+            raise ValidationError('post does not have a body')
+        return Post(body=body)
 
 db.event.listen(Post.body,'set',Post.on_changed_body)
 
@@ -316,7 +361,7 @@ class Comment(db.Model):
     body=db.Column(db.Text)
     body_html=db.Column(db.Text)
     timestamp=db.Column(db.DateTime,index=True,default=datetime.utcnow)
-    disabled=db.Column(db.Boolean)
+    disabled=db.Column(db.Boolean,default=False)
     #和post主键形成外键映射
     author_id=db.Column(db.Integer,db.ForeignKey('users.id'))
     post_id=db.Column(db.Integer,db.ForeignKey('posts.id'))
@@ -328,6 +373,18 @@ class Comment(db.Model):
                       'i','strong']
         target.body_html=bleach.linkify(bleach.clean(markdown(value,output_format='html'),
                     tags=allowed_tags,strip=True ))
+
+    def tojson(self):
+        json_comment={
+        'url':url_for('api.get_comment',id=self.id,_external=True),
+        'post':url_for('api.get_post',id=self.post_id,_external=True),
+            'body':self.body,
+            'body_html':self.body_html,
+            'timestamp':self.timestamp,
+            'author':self.author_id,
+        }
+        return json_comment
+
 db.event.listen(Comment.body,'set',Comment.on_changed_body)
 
 
