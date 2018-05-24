@@ -8,6 +8,7 @@ from app.auth import auth
 from flask import request,g,jsonify,url_for,current_app
 
 @api.route('/posts/',methods=['POST'])
+@permission_required(Permisson.WRITE_ARTICLES)
 #接受客户端发过来的请求
 def new_post():
     post=Post.from_json(request.json)

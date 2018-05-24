@@ -7,6 +7,7 @@ from ..decorators import amdin_required,permission_required
 from .forms import NameForm,UserEditForm,EditProfileAdminForm,PostForm,CommentForm
 from app.auth.forms import  LoginForm
 from .. import db
+from flask_sqlalchemy import get_debug_queries
 from ..models import Permisson,Post
 from flask_login import login_required,current_user
 
@@ -42,11 +43,15 @@ def moderate():
     return render_template('moderate.html',comments=comments,pagination=pagination,
                            page=page)
 
-
-
-
-
-    pass
+@main.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration>=current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+                current_app.logger.warning(
+                    '缓慢的语句:%s\n 参数:%s\n 持续时长:%fs\n,内容:%s\n'
+                    %(query.statement,query.parameters,query.duration,query.context)
+                )
+    return response
 
 
 

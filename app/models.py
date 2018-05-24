@@ -129,6 +129,11 @@ class User(UserMixin, db.Model):
 
 
 
+    #生成令牌
+    def generate_auth_token(self,expiration):
+        s=Serializer(current_app.config['SECRET_KEY'],
+                     expires_in=expiration)
+        return s.dumps({'id':self.id}).decode('ascii')
 
     def __init__(self,**kwargs):
         super(User, self).__init__(**kwargs)
@@ -249,10 +254,16 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash,password)
 
 
-    #rest api
-    def verify_auth_token(self):
-        pass
+    #rest api 使用token登录认证
+    @staticmethod
+    def verify_auth_token(token):
+        s=Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data=s.loads(token)
 
+        except:
+            return None
+        return User.query.get(data['id'])
     def tojson(self):
         json_user={
         'url':url_for('api.get_post',id=self.id,_external=True),
@@ -326,9 +337,6 @@ class Post(db.Model):
         target.body_html=bleach.linkify(bleach.clean(markdown(value,output_formate='html'),
                                                      tags=allowed_tags,strip=True))
 
-    #生成令牌
-    def generate_auth_token(self):
-        pass
 
     #转换为json资源
     def tojson(self):
@@ -345,7 +353,7 @@ class Post(db.Model):
 
     #不需要创建用户或者对象实例
     @staticmethod
-    def from_json(self,json_post):
+    def from_json(json_post):
         body=json_post.get('body')
         if body is None or body=='':
             raise ValidationError('post does not have a body')

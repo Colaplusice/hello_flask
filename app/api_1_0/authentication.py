@@ -17,7 +17,7 @@ def verify_password(email_or_token,password):
         return True
 
     if password=='':
-        g.current_user=User.verify_auth_token()
+        g.current_user=User.verify_auth_token(email_or_token)
         g.token_used=True
         return g.current_user is not None
 
@@ -42,12 +42,16 @@ def get_token():
 
 
 
-
-
-    pass
+# 用户认证
+@api.before_request
+@auth.login_required
+def befor_request():
+    if not g.current_user.is_anonymous and \
+        not g.current_user.confirmed:
+        return forbidden("未认证的用户")
 
 @auth.error_handler
 def auth_error():
-    return unthorized('invalid credentials')
+    return unthorized('无效的证书')
 
 
