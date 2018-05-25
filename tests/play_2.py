@@ -1,13 +1,3 @@
-FOLLOW = 0x01
-COMMENT = 0x02
-WRITE_ARTICLES = 0x04
-MODERATE_COMMENTS = 0x08
-ADMINISTER = 0x80
+import os
 
-print(FOLLOW)
-print(COMMENT)
-print(WRITE_ARTICLES)
-
-print(FOLLOW|COMMENT|WRITE_ARTICLES)
-
-print(7&2)
+print(os.path.exists('.env'))
