@@ -26,7 +26,6 @@
     <index id="14" parent="6" name="sqlite_autoindex_alembic_version_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version_num</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="15" parent="6" name="alembic_version_pkc">
@@ -65,7 +64,6 @@
     </column>
     <index id="23" parent="7" name="ix_comments_timestamp">
       <ColNames>timestamp</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="24" parent="7">
       <ColNames>id</ColNames>
@@ -102,8 +100,6 @@
       <NameSurrogate>1</NameSurrogate>
       <ColNames>follower_id
 followed_id</ColNames>
-      <ColumnCollations>
-</ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="32" parent="8">
@@ -145,7 +141,6 @@ followed_id</ColNames>
     </column>
     <index id="40" parent="9" name="ix_posts_timestamp">
       <ColNames>timestamp</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="41" parent="9">
       <ColNames>id</ColNames>
@@ -176,12 +171,10 @@ followed_id</ColNames>
     <index id="47" parent="10" name="sqlite_autoindex_roles_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="48" parent="10" name="ix_roles_default">
       <ColNames>default</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="49" parent="10">
       <ColNames>id</ColNames>
@@ -265,12 +258,10 @@ followed_id</ColNames>
     </column>
     <index id="69" parent="12" name="ix_users_email">
       <ColNames>email</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="70" parent="12" name="ix_users_username">
       <ColNames>username</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="71" parent="12">
