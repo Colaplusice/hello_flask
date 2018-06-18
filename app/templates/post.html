@@ -6,7 +6,8 @@
 
 {% block page_content %}
 
-{% include'_posts.html' %}
+{#{% include'_posts.html' %}#}
+{% include'_post_content.html' %}
 
 <h4 id="comment">Comment</h4>
     {% if current_user.can(Permisson.COMMIT) %}
@@ -17,6 +18,6 @@
 
     {% include "_comments.html" %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=posts[0].id) }}
+    {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=post.id) }}
 </div>
 {% endblock %}

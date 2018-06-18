@@ -42,7 +42,9 @@ def get_token():
 
 
 
+
 # 用户认证
+
 @api.before_request
 @auth.login_required
 def befor_request():
