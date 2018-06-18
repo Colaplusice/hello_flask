@@ -15,7 +15,20 @@
 
 <div>
 
-    {{ wtf.quick_form(form) }}
+ <form method="POST">
+    {{ form.hidden_tag() }}
+        <div class="form-group group-button">
+            {{ form.title.label }}
+            <br>
+                {{ form.title(cols=100,rows=1) }}
+        </div>
+    <div class='form-group'>
+    {{ form.body.label }}
+    {{ form.body(cols=100,rows=8) }}
+    </div>
+    {{  form.submit }}
+</form>
+{#    {{ wtf.quick_form(form) }}#}
 </div>
 
     {% endblock %}

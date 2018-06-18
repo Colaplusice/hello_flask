@@ -54,17 +54,20 @@ def after_request(response):
     return response
 
 
+@main.route('/post-article',methods=['GET','POST'])
+def post_article():
+    form=PostForm()
+    if current_user.can(Permisson.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        post = Post(title=form.title.data,body=form.body.data, author=current_user._get_current_object())
+#发表文章
+        # db.session.add(post)
+        return redirect(url_for('main.post_article'))
+    return render_template('post_article.html',form=form)
 
 @main.route('/',methods=['GET','POST'])
 def index():
-    #发表文章
 
-    form=PostForm()
-    if current_user.can(Permisson.WRITE_ARTICLES)and\
-        form.validate_on_submit():
-        post=Post(body=form.body.data,author=current_user._get_current_object())
-        db.session.add(post)
-        return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     show_followed=False
     #从cookie获得默认值
@@ -80,8 +83,7 @@ def index():
                 error_out=False
             )
     posts=pagination.items
-    return render_template('index.html',form=form,posts=posts,pagination=pagination)
-
+    return render_template('index.html',posts=posts,pagination=pagination)
 
 @main.route('/user/<username>')
 def user(username):
@@ -90,6 +92,7 @@ def user(username):
         abort(404)
     posts=user.posts.order_by(Post.timestamp.desc()).all()
     return render_template('user.html',user=user,posts=posts)
+
 
 @main.route('/post/<int:id>',methods=['GET','POST'])
 def post(id):
@@ -109,7 +112,7 @@ def post(id):
                   error_out=False)
 
     comments=pagnation.items
-    return render_template('post.html',posts=[post],form=form,comments=comments,pagination=pagnation)
+    return render_template('post.html',post=post,form=form,comments=comments,pagination=pagnation)
 
 
 @main.route('/edit/<int:id>',methods=['GET','POST'])
@@ -265,3 +268,21 @@ def moderate_disable(id):
         comment.disabled=True
         db.session.add(comment)
     return redirect(url_for('.moderate',page=request.args.get('page',type=int)))
+
+
+@main.route('/delete_article/<int:id>')
+@login_required
+@permission_required(Permisson.DELETE_ARTICLE)
+def delete_article(id):
+    article=Post.query.get_or_404(id)
+    print(current_user)
+    if article:
+        if article.author!=current_user and current_user.can(Permisson.ADMINISTER):
+            abort(403)
+        db.session.delete(article)
+        flash('删除成功')
+    else:
+        flash('文章不存在')
+
+    return redirect(url_for('.index'))
+

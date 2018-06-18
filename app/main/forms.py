@@ -49,6 +49,7 @@ class EditProfileAdminForm(FlaskForm):
             raise ValidationError('用户已经注册')
 
 class PostForm(FlaskForm):
+    title=StringField('set a title for your article',validators=[DataRequired()])
     body=PageDownField("what's your mind",validators=[DataRequired()])
     submit=SubmitField('submit')
 

@@ -1,66 +1,128 @@
-{% extends "bootstrap/base.html" %}
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IceCola</title>
 {% block head %}
-{{ super() }}
-    <link href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
-    <link rel="shortcut icon" href="{{ url_for('static',filename='1_37.jpg') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename = 'favicon.ico') }}"
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/my_css.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/bootstrap.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/bootstrap-theme.css')}}" >
+    <link rel="shortcut icon" href="{{ url_for('static',filename='image/1_37.jpg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'image/favicon.ico') }}"
 type="image/x-icon">
 {% endblock %}
-{% block title %}Flasky{% endblock %}
 
-
+</head>
+<body>
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
-         <div class="container">
-             <div class="navbar-header">
-                 <button type="button" class="navbar-toggle"
-                  data-toggle="collapse" data-target=".navbar-collapse">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-</button>
-                 <a class="navbar-brand" href="/">Flasky</a>
-             </div>
+{#             <div class="navbar-header col-sm-offset-2">#}
+{#                 <a class="navbar-brand" href="/">首页</a>#}
+{#             </div>#}
              <div class="navbar-collapse collapse">
                  <ul class="nav navbar-nav">
-                     <li><a href="/">Home</a></li>
+                     <li><a href="/">首页</a></li>
                        {% if current_user.is_authenticated%}
                      <li><a href="{{ url_for('main.user',username=current_user.username) }}">Profile</a></li>
+                     <li><a href="{{ url_for('main.post_article') }}">写文章</a></li>
                      {%endif %}
-                 {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
+
+                     {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
                  <li><a href="{{ url_for('main.moderate') }}">修改评论</a> </li>
                  {% endif %}
                  </ul>
                  <ul class="navbar navbar-right">
                  {% if current_user.is_authenticated%}
-                     <li><a href="{{ url_for('auth.logout') }}">sign out</a> </li>
+                     <li><a href="{{ url_for('auth.logout') }}">注销</a> </li>
                      {% else %}
-                     <li><a href="{{ url_for('auth.login') }}">sign in </a></li>
+                     <li><a href="{{ url_for('auth.login') }}">登录</a></li>
                      {% endif %}
                  </ul>
              </div>
-         </div>
 </div>
+
 {% endblock %}
+
 {% block content %}
     <div class="container">
-{#    flash message#}
+{#    显示flash消息#}
 {% for mesage in get_flashed_messages()%}
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert" >&times;</button>
 {{ mesage }}
     </div>
     {% endfor %}
+        <div class="row">
+            <div class="col-md-8">
+
+                  {% block page_content %}
+                    {% endblock %}
+            </div>
+
+                        {% block sidebar %}
+    <div class="col-md-offset-1 col-md-3">
+
+<div class="side-bar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p> <em>樊佳亮 山东大学 2015级 软件工程专业 <br></em>擅长领域: python爬虫   python后台开发
+                <em>qq:995972493<br></em>
+                <em>wechat:18340071291</em>
+            </p>
+          </div>
+          <div class="side-bar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="side-bar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/Colaplusice">GitHub</a></li>
+              <li><a href="https://blog.csdn.net/fanjialiang2401">CSDN</a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100010410976941">Facebook</a></li>
+            </ol>
+          </div>
+                                        </div>
+                        {% endblock %}
+
+        </div>
 
 
+    </div>
 
-        {% block page_content %}{% endblock %} </div>
+{#<footer class="blog-footer">#}
+{#<p>樊佳亮的博客</p>#}
+{#<p><a href="#">返回顶部</a> </p>#}
+{#</footer>#}
+        {% endblock %}
+
+{% block footer %}
+<footer class="blog-footer">
+<p>樊佳亮的博客</p>
+<p><a href="#">返回顶部</a> </p>
+</footer>
 {% endblock %}
 
 {% block scripts %}
-{{ super() }}
-
+        <script src=" {{ url_for('static',filename='js/bootstrap.js') }}"></script>
+        <script src=" {{ url_for('static',filename='js/jquery.js') }}"></script>
     {{ moment.include_moment() }}
 {% endblock %}
+
+</body>
+</html>
