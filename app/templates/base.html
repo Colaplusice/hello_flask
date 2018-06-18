@@ -61,6 +61,7 @@ type="image/x-icon">
                   {% block page_content %}
                     {% endblock %}
             </div>
+<<<<<<< HEAD
 
                         {% block sidebar %}
     <div class="col-md-offset-1 col-md-3">
@@ -102,6 +103,49 @@ type="image/x-icon">
 
         </div>
 
+=======
+
+                        {% block sidebar %}
+    <div class="col-md-offset-1 col-md-3">
+
+<div class="side-bar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p> <em>樊佳亮 山东大学 2015级 软件工程专业 <br></em>擅长领域: python爬虫   python后台开发
+                <em>qq:995972493<br></em>
+                <em>wechat:18340071291</em>
+            </p>
+          </div>
+          <div class="side-bar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="side-bar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/Colaplusice">GitHub</a></li>
+              <li><a href="https://blog.csdn.net/fanjialiang2401">CSDN</a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100010410976941">Facebook</a></li>
+            </ol>
+          </div>
+                                        </div>
+                        {% endblock %}
+
+        </div>
+
+>>>>>>> 2afc4f3fa09b5ae641c4c9dc62612e391056ad01
 
     </div>
 
@@ -122,6 +166,8 @@ type="image/x-icon">
         <script src=" {{ url_for('static',filename='js/bootstrap.js') }}"></script>
         <script src=" {{ url_for('static',filename='js/jquery.js') }}"></script>
     {{ moment.include_moment() }}
+        {{moment.lang('zh-CN')}}
+
 {% endblock %}
 
 </body>
