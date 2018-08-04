@@ -17,8 +17,9 @@ def new_post():
 
     db.session.add(post)
     db.session.commit()
-    return jsonify(post.tojson(), 201, \
-                   {'location': url_for('api.get_post', id=post.id, _external=True)})
+    return jsonify(post.tojson(), 201,
+                   {'location': url_for('api.get_post', id=post.id,
+                                        _external=True)})
 
 
 # 更新现有资源

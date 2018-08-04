@@ -12,11 +12,14 @@ import json
 import redis
 import rq
 
+
 class Follow(db.Model):
     __tablename__ = 'follows'
 
-    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
@@ -33,8 +36,6 @@ class Message(db.Model):
 
     def __repr__(self):
         return '<Message{}>'.format(self.body)
-
-
 
 
 class Permisson:
@@ -114,8 +115,9 @@ class Post(db.Model):
                         'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
                         'h1', 'h2', 'h3', 'p']
 
-        target.body_html = bleach.linkify(bleach.clean(markdown(value, output_formate='html'),
-                                                       tags=allowed_tags, strip=True))
+        target.body_html = bleach.linkify(
+            bleach.clean(markdown(value, output_formate='html'),
+                         tags=allowed_tags, strip=True))
 
     # 转换为json资源
     def tojson(self):
@@ -124,7 +126,8 @@ class Post(db.Model):
             'body': self.body,
             'body_html': self.body_html,
             'timestamp': self.timestamp,
-            'author': url_for('api.get_user', id=self.author_id, _external=True),
+            'author': url_for('api.get_user', id=self.author_id,
+                              _external=True),
             'comment': url_for('api.get_comment', id=self.id, _external=True),
             'comment_count': self.comments.count()
         }
@@ -158,8 +161,9 @@ class Comment(db.Model):
         import bleach
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'code', 'em',
                         'i', 'strong']
-        target.body_html = bleach.linkify(bleach.clean(markdown(value, output_format='html'),
-                                                       tags=allowed_tags, strip=True))
+        target.body_html = bleach.linkify(
+            bleach.clean(markdown(value, output_format='html'),
+                         tags=allowed_tags, strip=True))
 
     def tojson(self):
         json_comment = {
@@ -202,18 +206,16 @@ class Task(db.Model):
 
 
 class Notification(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(128),index=True)
-    user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
-    timestamp=db.Column(db.Float,index=True,default=True)
-    payload_json=db.Column(db.Text)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    timestamp = db.Column(db.Float, index=True, default=True)
+    payload_json = db.Column(db.Text)
 
     def get_data(self):
         return json.loads(str(self.payload_json))
 
-
-
-
     pass
+
 
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)

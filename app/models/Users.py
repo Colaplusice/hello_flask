@@ -1,7 +1,7 @@
 # encoding=utf-8
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
-from models import *
+from . import *
 from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request, url_for
@@ -45,11 +45,15 @@ class User(UserMixin, db.Model):
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
 
     # 和message关联
-    messages_sent = db.relationship('Message', foreign_keys=[Message.sender_id], backref='author', lazy='dynamic')
-    messages_received = db.relationship('Message', foreign_keys=[Message.recipient_id], backref='recipient',
+    messages_sent = db.relationship('Message', foreign_keys=[Message.sender_id],
+                                    backref='author', lazy='dynamic')
+    messages_received = db.relationship('Message',
+                                        foreign_keys=[Message.recipient_id],
+                                        backref='recipient',
                                         lazy='dynamic')
 
-    notifications = db.relationship('Notification', backref='user', lazy='dynamic')
+    notifications = db.relationship('Notification', backref='user',
+                                    lazy='dynamic')
 
     last_message_read_time = db.Column(db.DateTime)
 
@@ -104,7 +108,8 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.email is not None and self.avatar_hash is None:
-            self.avatar_hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+            self.avatar_hash = hashlib.md5(
+                self.email.encode('utf-8')).hexdigest()
 
         # 配置role_id
         if not self.role:
@@ -240,7 +245,8 @@ class User(UserMixin, db.Model):
             'username': self.username,
             'member_since': self.member_since,
             'last_seen': self.last_seen,
-            'posts': url_for('api.get_user_followed_posts', id=self.id, _external=True),
+            'posts': url_for('api.get_user_followed_posts', id=self.id,
+                             _external=True),
             'post_count': self.posts.count()
         }
         return json_user
@@ -251,7 +257,8 @@ class User(UserMixin, db.Model):
     def lunch_task(self, name, description, *args, **kwargs):
         rq_job = current_app.task_queue.enqueue('app.tasks.' + name, self.id,
                                                 *args, **kwargs)
-        task = Task(id=rq_job.get_id(), name=name, description=description, user=self)
+        task = Task(id=rq_job.get_id(), name=name, description=description,
+                    user=self)
         db.session.add(task)
         return task
 
@@ -267,10 +274,12 @@ class User(UserMixin, db.Model):
 
         try:
             # 第一个参数是方法的路径 第二个参数用户名
-            rq_job = current_app.task_queue.enqueue('app.tasks.' + name, self.id,
+            rq_job = current_app.task_queue.enqueue('app.tasks.' + name,
+                                                    self.id,
                                                     *args, **kwargs)
             # 添加到数据库 id为任务队列对任务分配的id
-            task = Task(id=rq_job.get_id(), name=name, description=description, user=self)
+            task = Task(id=rq_job.get_id(), name=name, description=description,
+                        user=self)
             db.session.add(task)
             return 'success'
         except Exception as e:
@@ -279,6 +288,7 @@ class User(UserMixin, db.Model):
             return 'error'
 
         # 向数据库中更新通知 如果有重复的通知删除通知 name为通知的名称，data为数字?
+
     def add_notification(self, name, data):
         self.notifications.filter_by(name=name).delete()
         n = Notification(name=name, payload_json=json.dumps(data), user=self)
@@ -287,9 +297,9 @@ class User(UserMixin, db.Model):
 
     # 返回未阅读消息的数目
     def new_messages(self):
-        last_read_time = self.last_message_read_time or datetime(1900,1,1)
-        unread_messages_num=Message.query.filter_by(recipient=self).\
-            filter(Message.timestamp>last_read_time).count()
+        last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
+        unread_messages_num = Message.query.filter_by(recipient=self). \
+            filter(Message.timestamp > last_read_time).count()
         return unread_messages_num
 
     def __repr__(self):

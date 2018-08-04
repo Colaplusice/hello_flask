@@ -1,12 +1,13 @@
 # encoding=utf-8
 import os
 from app import create_app, db
-from app.models.Users import User
-from app.models.models import Role, Post, Task, Message, Notification
+from app.models import *
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 
 # 从环境变量中读取config否则设置为default
+from app.models.Users import User
+
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 COV = None
 if os.environ.get('FLASK_COVERAGE'):

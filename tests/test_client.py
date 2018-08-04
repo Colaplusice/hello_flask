@@ -34,7 +34,7 @@ class FlaskClientTestCase(unittest.TestCase):
         })
         self.assertTrue(response.status_code == 302)
 
-    # 使用新注册的用户登录
+        # 使用新注册的用户登录
         response = self.client.post(url_for('auth.login'), data={
             'email': 'wm@163.com',
             'password': 'cat',
@@ -44,21 +44,18 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertTrue(re.search('Hello,\swm!', data))
         self.assertTrue('You have not confirmed your account yet.' in data)
 
-    # 发送确认令牌
+        # 发送确认令牌
 
         user = User.query.filter_by(email='wm@163.com').first()
         token = user.gernerate_confirmation_token()
-        response = self.client.get(url_for('auth.confirm',token=token),
+        response = self.client.get(url_for('auth.confirm', token=token),
                                    follow_redirects=True)
         data = response.get_data(as_text=True)
         self.assertTrue('you have confirm your account' in data)
 
-    # 退出
-        response = self.client.get(url_for('auth.logout'),follow_redirects=True)
+        # 退出
+        response = self.client.get(
+            url_for('auth.logout'),
+            follow_redirects=True)
         data = response.get_data(as_text=True)
         self.assertTrue('你好~ 欢迎你' in data)
-
-
-
-
-
