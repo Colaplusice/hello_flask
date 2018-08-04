@@ -2,7 +2,7 @@ from flask import jsonify,request,g
 from . import api
 from .. import db
 from ..exceptions import ValidationError
-from app.models import Post
+from app.models.models import Post
 
 def badrequest(message):
     response=jsonify({'error':'bad request','message':message})

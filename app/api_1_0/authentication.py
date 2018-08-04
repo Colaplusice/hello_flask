@@ -3,7 +3,8 @@ from  flask_httpauth import HTTPBasicAuth
 from flask import g,jsonify
 from . import api
 from errors import unthorized,forbidden
-from ..models import AnonymousUser,User
+from ..models.models import AnonymousUser
+from ..models.Users import User
 #在这里初始化,而不是在app创建时
 
 auth=HTTPBasicAuth()

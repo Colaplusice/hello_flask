@@ -11,11 +11,14 @@
 
 </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
     {{ wtf.quick_form(form) }}
     <br>
     <p>新用户?</p>
+
 <a href="{{ url_for('auth.register') }}">点击这里注册</a>
+             <a class="btn" href="{{ url_for('auth.reset_pass') }}"> 忘记密码</a>
+
     </div>
 
 {% endblock %}

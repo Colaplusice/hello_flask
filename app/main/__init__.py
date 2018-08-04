@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from ..models import Permisson
+from ..models.models import Permisson
 main=Blueprint('main',__name__)
 
 from . import views,errors

@@ -60,6 +60,9 @@ button.group-button{
     color: green;
 
 }
+.p{
+    font-size: 15px;
+}
 
 /*profile*/
 .profile-thumbnail {
@@ -97,7 +100,7 @@ div.post-tabs {
 }
 div.post-headers{
     padding-right: 100px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 
 
@@ -138,6 +141,10 @@ div.post-content {
 }
 div.post-footer {
     text-align: right;
+}
+
+.admin_button{
+text-align: right;
 }
 
 /*comment*/

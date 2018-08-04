@@ -1,14 +1,15 @@
+#encoding=utf-8
 from flask_wtf import FlaskForm
 from wtforms import StringField,BooleanField,TextField,PasswordField,SubmitField,ValidationError
 from wtforms.validators import DataRequired,Length,Email,Regexp,EqualTo
-from app.models import User
+from app.models.Users import User
 class LoginForm(FlaskForm):
     email=StringField('email',validators=[DataRequired(),
                       Length(1,64),Email()])
 
     password=PasswordField('password',validators=[DataRequired()])
-    remeber_me=BooleanField('keep me logged in')
-    submit=SubmitField('Log in')
+    remeber_me=BooleanField('保持登录')
+    submit=SubmitField('登录')
 
 class RegisterForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), Length(1, 64),
@@ -29,3 +30,12 @@ class RegisterForm(FlaskForm):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('username have already registered')
 
+
+class ResetForm(FlaskForm):
+    email=StringField('邮箱',validators=[DataRequired(),Length(1,64),Email()])
+    submite=SubmitField('提交')
+
+class NewPassForm(FlaskForm):
+    password_1=PasswordField('密码',validators=[DataRequired(),EqualTo('password_2',message='密码必须相同')])
+    password_2=PasswordField('确认密码',validators=[DataRequired()])
+    submite=SubmitField('提交')

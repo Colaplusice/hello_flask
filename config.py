@@ -21,27 +21,30 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('name_1')
     MAIL_PASSWORD = os.environ.get('gpassword')
+    REDIS_URL=os.environ.get('REDIS_URL') or 'redis://'
     @staticmethod
     def init_app(app):
         pass
 
 
 class DevelopementConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABSE_URL') or \
-                              'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABSE_URL') \
+    #                           or 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    # 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
     DEBUG = True
 
 
 class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABSE_URL') or \
-                              'sqlite:///' + os.path.join(base_dir, 'data-tests.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABSE_URL')\
+                              or 'sqlite:///' + os.path.join(base_dir, 'data-tests.sqlite')
     WTF_CSRF_ENABLED = False
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-                              'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+                              # 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
 
 
 config = {

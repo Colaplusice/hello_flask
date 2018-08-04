@@ -2,6 +2,7 @@
 <div class="blog-post">
 <ul class="posts">
 {% for post in posts %}
+
 <li class="post">
 
 <div class="profile-thumbnail">
@@ -20,12 +21,12 @@
 {#    {{ post.body}}#}
 {#    {% endif %}#}
     {% if post.title %}
-                <a href="{{ url_for('.post',id=post.id) }}">{{ post.title }}</a>
+                <a href="{{ url_for('.post',id=post.id) }}"><h1>{{ post.title }}</h1> </a>
     {% endif %}
    </div>
 
     <div class="post-footer">
-        <a href="{{ url_for('.post',id=post.id) }}">
+        <a href="">
             <span class="label label-default">详细内容</span>
         </a>
 
@@ -45,10 +46,13 @@
         {% endif %}
 
 
+
     <a href="{{ url_for('.post',id=post.id) }}#comment">
     <span class="label label-primary">
+        {% if post.comments %}
         {{ post.comments.count() }}
         评论数
+        {% endif %}
     </span>
 </a>
         {% if current_user==post.author  or current_user.isAdministrator() %}
@@ -64,7 +68,6 @@
 </li>
 
 {% endfor %}
-
 
 </ul>
 </div>

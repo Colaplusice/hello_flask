@@ -1,7 +1,8 @@
 #encoding=utf-8
 from . import api
 from flask import jsonify,request,current_app,url_for
-from ..models import User,Post
+from ..models.models import Post
+from ..models.Users import User
 @api.route('/users/<int:id>')
 def get_user(id):
     user=User.query.get_or_404(id)

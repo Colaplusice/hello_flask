@@ -1,5 +1,5 @@
 from flask import jsonify
-from ..models import Comment
+from ..models.models import Comment
 from . import api
 
 @api.route('/comments/<int:id>')
