@@ -1,4 +1,5 @@
 from app import db
+from .models import Permisson
 
 
 # 角色
@@ -22,8 +23,9 @@ class Role(db.Model):
             'User': (Permisson.FOLLOW |
                      Permisson.COMMIT | Permisson.WRITE_ARTICLES, True),
             'Administrator': (0xff, False),
-            'Moderator': (Permisson.FOLLOW | Permisson.COMMIT | Permisson.WRITE_ARTICLES
-                          | Permisson.MODERATE_COMMENTS, False)
+            'Moderator': (
+            Permisson.FOLLOW | Permisson.COMMIT | Permisson.WRITE_ARTICLES
+            | Permisson.MODERATE_COMMENTS, False)
         }
         # 如果role角色不存在，才创建
         for r in roles:

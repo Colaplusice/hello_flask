@@ -12,7 +12,7 @@ def Generate_reset_password_token(email, expiration=3600):
 
 def verify_reset_password(token):
     try:
-        s=Serializer(secret_key)
+        s = Serializer(secret_key)
         data = s.loads(token)
         return (data['email'])
     except:

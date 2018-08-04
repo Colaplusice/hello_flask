@@ -1,11 +1,12 @@
 # encoding=utf-8
 from datetime import datetime
-from flask import render_template, jsonify, redirect, url_for, abort, flash, request, current_app, make_response
+from flask import render_template, jsonify, redirect, url_for, abort, flash, \
+    request, current_app, make_response
 from . import main
-from ..models.Users import User, Notification
-from ..models.models import Role, Comment, Message
+from ..models import *
+from ..models.Users import User
 from ..decorators import amdin_required, permission_required
-from .forms import NameForm, UserEditForm, EditProfileAdminForm, PostForm, CommentForm, MessageForm
+from . import forms
 from .. import db
 from flask_sqlalchemy import get_debug_queries
 from ..models.models import Permisson, Post
@@ -42,8 +43,9 @@ def moderate():
 
     comments = pagination.items
 
-    return render_template('moderate.html', comments=comments, pagination=pagination,
-                           page=page)
+    return render_template(
+        'moderate.html', comments=comments, pagination=pagination,
+        page=page)
 
 
 @main.after_app_request
@@ -52,17 +54,19 @@ def after_request(response):
         if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
             current_app.logger.warning(
                 '缓慢的语句:%s\n 参数:%s\n 持续时长:%fs\n,内容:%s\n'
-                % (query.statement, query.parameters, query.duration, query.context)
+                % (query.statement, query.parameters, query.duration,
+                   query.context)
             )
     return response
 
 
 @main.route('/post-article', methods=['GET', 'POST'])
 def post_article():
-    form = PostForm()
+    form = forms.PostForm()
     if current_user.can(Permisson.WRITE_ARTICLES) and \
             form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.body.data, author=current_user._get_current_object())
+        post = Post(title=form.title.data, body=form.body.data,
+                    author=current_user._get_current_object())
         # 发表文章
         # db.session.add(post)
         return redirect(url_for('main.post_article'))
@@ -71,7 +75,6 @@ def post_article():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    print request.url
     # print request.args['url']
     print(request.host)
     print(request.base_url)
@@ -109,9 +112,10 @@ def user(username):
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     post = Post.query.get_or_404(id)
-    form = CommentForm()
+    form = forms.CommentForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data, post=post, author=current_user._get_current_object())
+        comment = Comment(body=form.body.data, post=post,
+                          author=current_user._get_current_object())
         db.session.add(comment)
         flash('your comment has been published')
         return redirect(url_for('.post', id=post.id, page=-1))
@@ -124,7 +128,8 @@ def post(id):
                   error_out=False)
 
     comments = pagnation.items
-    return render_template('post.html', post=post, form=form, comments=comments, pagination=pagnation)
+    return render_template('post.html', post=post, form=form, comments=comments,
+                           pagination=pagnation)
 
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -134,7 +139,7 @@ def edit(id):
     if current_user != post.author and \
             not current_user.can(Permisson.ADMINISTER):
         abort(403)
-    form = PostForm()
+    form = forms.PostForm()
     if form.validate_on_submit():
         post.body = form.body.data
         db.session.add(post)
@@ -189,7 +194,6 @@ def followers(username):
 
     follows = [{'user': item.follower, 'timestamp': item.timestamp
                 } for item in pagination.items]
-
     return render_template('followers.html', user=user, title='Followers of'
                            , endpoint='.followers', pagination=pagination
                            , follows=follows)
@@ -204,20 +208,22 @@ def followed_by(username):
         return redirect(url_for('.index'))
 
     page = request.args.get('page', 1, type=int)
-    pagination = user.followed.paginate(page, per_page=current_app.config['FLASKY_USER_PER_PAGE'],
+    pagination = user.followed.paginate(page, per_page=current_app.config[
+        'FLASKY_USER_PER_PAGE'],
                                         error_out=False)
 
     followed = [{'user': item.followed, 'timestamp': item.timestamp}
                 for item in pagination.items]
 
-    return render_template('followers.html', user=user, title="Followed by", endpoint='.followed_by',
+    return render_template('followers.html', user=user, title="Followed by",
+                           endpoint='.followed_by',
                            pagination=pagination, follows=followed)
 
 
 @login_required
 @main.route('/edit-profile', methods=['GET', 'POST'])
 def edit_profile():
-    edit_form = UserEditForm()
+    edit_form = forms.UserEditForm()
     if edit_form.validate_on_submit():
         current_user.name = edit_form.name.data
         current_user.location = edit_form.location.data
@@ -238,7 +244,7 @@ def edit_profile():
 def edit_profile_admin(id):
     # 通过主键得到
     user = User.query.get_or_404(id)
-    form = EditProfileAdminForm(user)
+    form = forms.EditProfileAdminForm(user)
 
     if form.validate_on_submit():
         user.email = form.email.data
@@ -272,7 +278,8 @@ def moderate_enable(id):
         comment.disabled = False
         db.session.add(comment)
         # 将request传递过来的page参数再传给moderate方法
-    return redirect(url_for('.moderate', page=request.args.get('page', type=int)))
+    return redirect(
+        url_for('.moderate', page=request.args.get('page', type=int)))
 
 
 @main.route('/moderate/disable/<int:id>')
@@ -283,7 +290,8 @@ def moderate_disable(id):
     if comment and not comment.disabled:
         comment.disabled = True
         db.session.add(comment)
-    return redirect(url_for('.moderate', page=request.args.get('page', type=int)))
+    return redirect(
+        url_for('.moderate', page=request.args.get('page', type=int)))
 
 
 @main.route('/delete_article/<int:id>')
@@ -293,7 +301,8 @@ def delete_article(id):
     article = Post.query.get_or_404(id)
     print(current_user)
     if article:
-        if article.author != current_user and current_user.can(Permisson.ADMINISTER):
+        if article.author != current_user and current_user.can(
+                Permisson.ADMINISTER):
             abort(403)
         db.session.delete(article)
         flash('删除成功')
@@ -326,7 +335,7 @@ def send_message(recipient):
     receive_user = User.query.filter_by(username=recipient).first_or_404()
 
     # 会自动从request中加载MessageForm
-    form = MessageForm()
+    form = forms.MessageForm()
 
     if form.validate_on_submit():
         message = Message(author=current_user, recipient=receive_user,
@@ -368,7 +377,8 @@ def messages():
 def notifications():
     since = request.args.get('since', 0.0, type=float)
     # asc升序
-    notifications = current_user.notifications.filter_by(Notification.timestamp.asc())
+    notifications = current_user.notifications.filter_by(
+        Notification.timestamp.asc())
 
     return jsonify([{
         'name': n.name,

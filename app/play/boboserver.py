@@ -22,7 +22,7 @@ __all__ = (
     'Reload',
     'server',
     'static',
-    )
+)
 
 __metaclass__ = type
 
@@ -40,6 +40,7 @@ import wsgiref.simple_server
 
 mimetypes.init()
 
+
 def run_server(app, port):
     wsgiref.simple_server.make_server('', port, app).serve_forever()
 
@@ -47,12 +48,12 @@ def run_server(app, port):
 class Directory:
 
     def __init__(self, root, path=None):
-        self.root = os.path.abspath(root)+os.path.sep
+        self.root = os.path.abspath(root) + os.path.sep
         self.path = path or root
 
     @bobo.query('')
     def base(self, bobo_request):
-        return bobo.redirect(bobo_request.url+'/')
+        return bobo.redirect(bobo_request.url + '/')
 
     @bobo.query('/')
     def index(self):
@@ -79,7 +80,9 @@ class Directory:
         else:
             return File(path)
 
+
 bobo.scan_class(Directory)
+
 
 class File:
     def __init__(self, path):
@@ -98,12 +101,15 @@ class File:
 
         return response
 
+
 bobo.scan_class(File)
+
 
 def static(route, directory):
     """Create a resource that serves static files from a directory
     """
     return bobo.preroute(route, Directory(directory))
+
 
 class Reload:
     """Module-reload middleware
@@ -143,6 +149,7 @@ class Reload:
 
         return self.app(environ, start_response)
 
+
 class Debug:
     """Post-mortem debugging middleware
 
@@ -167,9 +174,11 @@ class Debug:
             pdb.post_mortem(sys.exc_info()[2])
             raise
 
+
 _mod_re = re.compile(
     "(^|>) *(\w[a-zA-Z_.]*)(:|$)"
-    ).search
+).search
+
 
 def server(args=None, Application=bobo.Application):
     """Bobo development server
@@ -184,7 +193,8 @@ def server(args=None, Application=bobo.Application):
     """
 
     if args is None:
-        import logging; logging.basicConfig()
+        import logging;
+        logging.basicConfig()
         args = sys.argv[1:]
 
     usage = "%prog [options] name=value ..."
@@ -247,7 +257,7 @@ def server(args=None, Application=bobo.Application):
 
     if options.configure:
         if (':' not in options.configure) and module_names:
-            options.configure = module_names[0]+':'+options.configure
+            options.configure = module_names[0] + ':' + options.configure
         app_options['bobo_configure'] = options.configure
 
     app = Application(app_options, bobo_resources='\n'.join(resources))
