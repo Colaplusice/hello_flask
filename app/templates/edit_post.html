@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %} Edit Post{% endblock %}
+
+
+{% block page_content %}
+
+<div class="page-header">
+    <h1>Edit Post</h1>
+</div>
+
+<div>
+
+ <form method="POST">
+    {{ form.hidden_tag() }}
+        <div class="form-group group-button">
+            {{ form.title.label }}
+            <br>
+                {{ form.title(cols=100,rows=1) }}
+        </div>
+    <div class='form-group'>
+    {{ form.body.label }}
+    {{ form.body(cols=100,rows=8) }}
+    </div>
+    {{  form.submit }}
+</form>
+{#    {{ wtf.quick_form(form) }}#}
+</div>
+
+    {% endblock %}
+
+{% block script %}
+
+{{ super() }}
+
+{{ pagedown.include_pagedown() }}
+
+{% endblock %}
+
+
+

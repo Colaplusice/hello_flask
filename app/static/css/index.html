@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="bootstrap-theme.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="my_css.css">
+</head>
+<body>
+
+<div class="navbar navbar-inverse" role="navigation">
+             <div class="navbar-header col-sm-offset-2">
+                 <a class="navbar-brand" href="/">首页</a>
+             </div>
+    <div class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                     <li><a href="/">Home</a></li>
+                     <li><a href="">Profile</a></li>
+
+                 <li><a href="{{ url_for('main.moderate') }}">修改评论</a> </li>
+                 </ul>
+                 <ul class="navbar navbar-right">
+
+                 </ul>
+    </div>
+
+</div>
+
+
+
+
+<div class="page-header">
+<img  class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+
+    <div class="profile-header">
+         <h1>{{ user.username }}</h1>
+<p>
+        <p>{{ user.about_me }} </p>
+        {% endif %}
+
+
+
+
+{% endif %}
+
+{% if user==current_user %}
+
+<a href="{{ url_for('.edit_profile')}}" class="btn-default">修改信息</a>
+
+{% endif %}
+{% if current_user.isAdministrator() %}
+<a class="btn btn-danger" href="{{ url_for('.edit_profile_admin',id=user.id) }}">修改信息</a>
+
+{% endif %}
+    </div>
+
+</div>
+
+    <h3>Post by {{ user.username }}</h3>
+    {% include '_posts.html' %}
+
+    {% if current_user.can(Permisson.FOLLOW) and user != current_user %}
+    {% if not current_user.is_following(user) %}
+    <a href="{{ url_for('.follow',username=user.username) }}" class="btn btn-primary">
+    关注</a>
+    {% else %}
+<a href="{{ url_for('.unfollow',username=user.username)}}" class="btn btn-default">取消关注</a>
+    {% endif %}
+    {% endif %}
+{#    查看关注username的人数#}
+<a href="{{ url_for('.followers',username=user.username) }}">关注者:
+<span class="badge"> {{ user.follower.count() - 1 }} </span>
+</a>
+{#    查看被username关注的人数#}
+    <a href="{{ url_for('.followed_by',username=user.username) }}">关注的人:
+<span class="badge"> {{ user.followed.count() - 1 }} </span>
+</a>
+{% if current_user.is_authenticated and user!=current_user and user.is_following(current_user) %}
+
+<span class="label label-default">Follows you</span>
+
+
+
+
+
+
+
+
+<footer class="blog-footer">
+<p>樊佳亮的博客</p>
+<p><a href="#">返回顶部</a> </p>
+</footer>
+</body>
+<script src="/Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/static/js/bootstrap.js"></script>
+</html>
