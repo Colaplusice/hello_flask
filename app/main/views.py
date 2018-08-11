@@ -1,16 +1,18 @@
 # encoding=utf-8
-from datetime import datetime
-from flask import render_template, jsonify, redirect, url_for, abort, flash, \
-    request, current_app, make_response
+import os
+
+from flask import render_template, jsonify, redirect, abort, flash, \
+    make_response
+from flask_login import login_required, current_user
+from flask_sqlalchemy import get_debug_queries
+
+from . import forms
 from . import main
+from .decorators import *
+from ..decorators import amdin_required, permission_required
 from ..models import *
 from ..models.Users import User
-from ..decorators import amdin_required, permission_required
-from . import forms
-from .. import db
-from flask_sqlalchemy import get_debug_queries
 from ..models.models import Permisson, Post
-from flask_login import login_required, current_user
 
 
 # 设置cookie为0 然后跳转到Index页面
@@ -72,8 +74,8 @@ def post_article():
         return redirect(url_for('main.post_article'))
     return render_template('post_article.html', form=form)
 
-
 @main.route('/', methods=['GET', 'POST'])
+@ clock
 def index():
     # print request.args['url']
     print(request.host)
@@ -94,10 +96,12 @@ def index():
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False
     )
-
-    print(pagination)
     posts = pagination.items
-    return render_template('index.html', posts=posts, pagination=pagination)
+    return render_template(
+        'index.html',
+        posts=posts,
+        pagination=pagination
+    )
 
 
 @main.route('/user/<username>')
@@ -145,7 +149,7 @@ def edit(id):
         db.session.add(post)
         flash('the post have been updated')
 
-        return redirect(url_for('.post', id=post.id))
+        return redirect(override_url_for('.post', id=post.id))
 
     form.body.data = post.body
     return render_template('edit_post.html', form=form)
@@ -387,4 +391,22 @@ def notifications():
     } for n in notifications
     ])
 
-    pass
+
+from hello_flask import app
+
+
+@app.context_processor
+def override_url_for():
+    print('override the url_for method')
+    return dict(url_for=dated_url_for)
+
+
+# 给values dict 新增加了个 timestamp
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = (os.path.join(app.root_path, endpoint, filename))
+            values['q'] = int(os.stat(file_path).st_atime)
+
+    return url_for(endpoint, **values)

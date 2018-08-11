@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask_bootstrap" />
     <content url="file://$MODULE_DIR$" />
-    <content url="file://$MODULE_DIR$/../../lib/python2.7/site-packages/flask_bootstrap" />
     <orderEntry type="jdk" jdkName="Python 3.6 (hello_flask)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
@@ -10,8 +10,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
+        <option value="$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask_bootstrap/templates" />
         <option value="$MODULE_DIR$/app/templates" />
-        <option value="$MODULE_DIR$/../../lib/python2.7/site-packages/flask_bootstrap/templates" />
       </list>
     </option>
   </component>

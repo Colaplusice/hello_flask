@@ -35,6 +35,11 @@
 .blog-sidebar{
 }
 
+.page-header{
+    padding-top: 10px;
+
+}
+
 .blog-footer{
     /*内框距离顶部的距离*/
     padding-top: 30px;

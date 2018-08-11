@@ -1,5 +1,6 @@
 from app import db
 from .models import Permisson
+from app import login_manager
 
 
 # 角色
