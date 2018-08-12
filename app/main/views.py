@@ -3,7 +3,6 @@ import os
 from flask import render_template, jsonify, redirect, abort, flash, \
     make_response, url_for, request, current_app
 from app import db
-from hello_flask import app
 from flask_login import login_required, current_user
 from . import forms
 from . import main
@@ -177,7 +176,7 @@ def edit(id):
         db.session.add(post)
         flash('the post have been updated')
 
-        return redirect(override_url_for('.post', id=post.id))
+        return redirect(url_for('.post', id=post.id))
 
     form.body.data = post.body
     return render_template('edit_post.html', form=form)
@@ -422,18 +421,14 @@ def notifications():
     ])
 
 
-@app.context_processor
-def override_url_for():
-    print('override the url_for method')
-    return dict(url_for=dated_url_for)
 
-
-# 给values dict 新增加了个 timestamp
-def dated_url_for(endpoint, **values):
-    if endpoint == 'static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = (os.path.join(app.root_path, endpoint, filename))
-            values['q'] = int(os.stat(file_path).st_atime)
-
-    return url_for(endpoint, **values)
+#
+# # 给values dict 新增加了个 timestamp
+# def dated_url_for(endpoint, **values):
+#     if endpoint == 'static':
+#         filename = values.get('filename', None)
+#         if filename:
+#             file_path = (os.path.join(app.root_path, endpoint, filename))
+#             values['q'] = int(os.stat(file_path).st_atime)
+#
+#     return url_for(endpoint, **values)

@@ -54,4 +54,7 @@ python hello_flask db upgrade
 
 增加gitignore文件
 
+启动  gunicorn 启动
+ 
+gunicorn -c gunicorn.py hello_flask:app
 

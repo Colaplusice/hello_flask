@@ -1,3 +1,9 @@
-import os
+s='/Users/fanjialiang2401/Desktop/flask/hello_flask/logs/acesslog.log'
 
-print(os.path.exists('.env'))
+import os
+if not os.path.exists(s):
+    with open(s,'w'):
+        pass
+
+else:
+    print('sd')
