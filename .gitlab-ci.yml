@@ -1,9 +1,9 @@
 stages:
   - test_all
-  - build_image
-  - deploy_integration
-  - deploy_staging
-  - deploy_production_stable
+#  - build_image
+#  - deploy_integration
+#  - deploy_staging
+#  - deploy_production_stable
 
 variables:
   MYSQL_DATABASE: hello_flask_test
@@ -12,9 +12,9 @@ variables:
 #  DOCKER_HOST: tcp://dockerd:2375
 #  IMAGE: registry.cn-hangzhou.aliyuncs.com/shanbayapp/${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
 
-before_script:
-  - IMAGE_TAG=${IMAGE}:${CI_COMMIT_SHA:0:8}
-  - SHELL_IMAGE_TAG=${IMAGE}-shell:${CI_COMMIT_SHA:0:8}
+#before_script:
+#  - IMAGE_TAG=${IMAGE}:${CI_COMMIT_SHA:0:8}
+#  - SHELL_IMAGE_TAG=${IMAGE}-shell:${CI_COMMIT_SHA:0:8}
 
 
 #========================================= Unit Testing ================================================
