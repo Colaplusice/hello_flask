@@ -73,7 +73,8 @@ class Application:
        This option can be used to:
 
        - Specify modules to be scanned for resources.
-       - Include specific resources, rather than all resources in given modules.
+       - Include specific resources, rather than all resources
+        in given modules.
        - Override the order of resources given in modules.
        - Override routes used for resources given in modules.
 
@@ -235,10 +236,9 @@ class Application:
             return self.not_found(request, method)
         except bbbbad_errors:
             raise
-        except Exception as exc:
+        except Exception:
             if (self.reraise_exceptions or
-                    request.environ.get("x-wsgiorg.throw_errors")
-            ):
+                    request.environ.get("x-wsgiorg.throw_errors")):
                 raise
             return self.exception(request, method, sys.exc_info())
 
@@ -790,7 +790,8 @@ def resource(route=None, method=('GET', 'POST', 'HEAD'),
              content_type=_default_content_type, check=None, order=None):
     """Create a resource
 
-    This function is used as a decorator to define a resource. It can be applied
+    This function is used as a decorator to define a resource.
+     It can be applied
     to any kind of callable, not just a function.
 
     Arguments:

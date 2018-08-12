@@ -1,8 +1,11 @@
 # encoding=utf-8
-from app import create_app, db
+from app import create_app
 from rq import get_current_job
 import sys
-from .models import *
+from .models.models import Task, Post
+from .models.Users import User
+from app import db
+
 import time
 
 app = create_app('default')

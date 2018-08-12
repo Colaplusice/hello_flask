@@ -6,6 +6,25 @@
 #### 供大家学习和使用
 
 ### 部署的方法
+## 安装包
+ pip install -U -r requirements/requirements -i https://mirrors.aliyun.com/pypi/simple
+ pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
+
+### 统一开发环境  
+是否用vagrant来统一下开发环境呢...  是否要用公司的vagrant 呢
+感觉不需要统一环境。。 但感觉还是需要....
+不然docker 怎么打包发布呢  先用docker来吧。
+
+
+
+
+
+## mysql用docker来部署
+
+运行mysql.sh  sh mysql.sh start
+ 
+
+
 
 数据库 写入环境变量
 在bashrc文件中
@@ -18,9 +37,15 @@ export password1='f15114826978f'
 export name_1='fjl2401@163.com'
 
 
-## 线上部署和本地同步
+## 线上部署和本地同步   
 数据库确保一致
 mysql 同步连接
+
+
+
+
+
+
 
 数据同步:
 python hello_flask db upgrade

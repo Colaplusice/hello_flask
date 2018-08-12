@@ -6,7 +6,7 @@ from ..models.Users import User
 from .. import db
 from flask_login import current_user
 from ..email import send_email
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import login_required, login_user, logout_user
 from ..utils import Generate_reset_password_token, verify_reset_password
 
@@ -84,7 +84,7 @@ def reset_pass():
     return render_template('auth/reset_password.html', form=form)
 
 
-##忘记密码的设置新密码
+# 忘记密码的设置新密码
 @auth.route('/change_pass/<username>', methods=['GET', 'POST'])
 def change_pass(username):
     form = NewPassForm()
@@ -151,7 +151,9 @@ def unconfirmed():
 @login_required
 def resend_confirmation():
     token = current_user.gernerate_confirmation_token()
-    send_email(current_user.email, 'Confirm your account', 'auth/email/confirm',
+    send_email(current_user.email,
+               'Confirm your account',
+               'auth/email/confirm',
                user=current_user, token=token)
     flash('a new mail have send to your account')
     return redirect(url_for('main.index'))

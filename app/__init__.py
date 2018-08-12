@@ -1,11 +1,11 @@
 # encoding=utf-8
-from flask_mail import Mail, Message
-from flask import Flask, render_template, redirect, url_for, session, flash
+from flask_mail import Mail
+from flask import Flask
 from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from config import config
+from configs import config
 from flask_pagedown import PageDown
 from redis import Redis
 import rq
@@ -52,17 +52,16 @@ def create_app(config_name):
         log_dir = os.path.join(basedir, 'logs')
         if not os.path.exists(log_dir):
             os.mkdir(log_dir)
-        file_handler = RotatingFileHandler(os.path.join(log_dir, 'hello_flask.log'),
-                                           maxBytes=10240, backupCount=10)
-        file_handler.setFormatter \
-            (logging.Formatter('%(asctime)s %(levelname)s: %'
-                               '(message)s[in %(pathname)s:%(lineno)d]'))
+        file_handler = RotatingFileHandler(
+            os.path.join(log_dir, 'hello_flask.log'),
+            maxBytes=10240, backupCount=10)
+        file_handler.setFormatter(
+            logging.Formatter('%(asctime)s %(levelname)s: %'
+                              '(message)s[in %(pathname)s:%(lineno)d]'))
         file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
         app.logger.setLevel(logging.INFO)
         app.logger.info('hello_flask start up')
-
-
 
     # 注册蓝本
     from .api_1_0 import api as api_1_0_blueprint

@@ -3,44 +3,45 @@
 {% block title %}
     <title>IceCola</title>
 {% endblock %}
-    {% block head %}
-        {{ super() }}
-        <link rel="stylesheet" type="text/css" href="/static/css/my_css.css?q=">
-        <link rel="shortcut icon" href="{{ url_for('static',filename='image/1_37.jpg') }}" type="image/x-icon">
-        <link rel="icon" href="{{ url_for('static', filename = 'image/favicon.ico') }}"
-              type="image/x-icon">
-    {% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/css/my_css.css?q=">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='image/1_37.jpg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'image/favicon.ico') }}"
+          type="image/x-icon">
+{% endblock %}
 
 <body>
 {% block navbar %}
     <nav class="navbar navbar-light bg-light">
-{# <div class="navbar" role="navigation">#}
-{#        <div class="navbar-collapse  collapse">#}
-            <ul class="nav navbar-collapse">
-                <li><a class="navbar-brand" href="/">首页</a></li>
-                {% if current_user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.post_article') }}">写文章</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信
-                        {% set new_messages = current_user.new_messages() %}
-                        <span id="message_count" class="badge" style="visibility: {% if new_messages %}
-                            visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
-                    </a></li>
-                                         <li class="nav-item"><a href="{{ url_for('main.export_posts') }}">导出你的文章</a></li>
-                {% endif %}
-                {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
-                    <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
-                {% endif %}
-                {% if current_user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
-                {% endif %}
-               <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-    </form>
-                        </ul>
+        {# <div class="navbar" role="navigation">#}
+        {#        <div class="navbar-collapse  collapse">#}
+        <ul class="nav navbar-collapse">
+            <li><a class="navbar-brand" href="/">首页</a></li>
+            {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link"
+                                        href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.post_article') }}">写文章</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信
+                    {% set new_messages = current_user.new_messages() %}
+                    <span id="message_count" class="badge" style="visibility: {% if new_messages %}
+                        visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
+                </a></li>
+                <li class="nav-item"><a href="{{ url_for('main.export_posts') }}">导出你的文章</a></li>
+            {% endif %}
+            {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
+                <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
+            {% endif %}
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </ul>
 
     </nav>
 
@@ -66,7 +67,7 @@
             {% endwith %}
         {% endif %}
         {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
+            <div class="offset-1 col-md-6 alert alert-warning">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{ message }}
             </div>
@@ -103,7 +104,7 @@
 
                     <div class="side-bar-module sidebar-module-inset">
                         <h4>About</h4>
-                        <p><em>樊佳亮 山东大学 2015级 软件工程专业 <br></em>擅长领域: python爬虫 python后台开发
+                        <p><em>樊佳亮 山东大学 2015级 软件工程专业 <br></em>个人flask学习项目。
                             <em>qq:995972493<br></em>
                             <em>wechat:18340071291</em>
                         </p>
@@ -151,6 +152,7 @@
     <footer class="blog-footer">
         <p>樊佳亮的博客</p>
         <p><a href="#">返回顶部</a></p>
+{#    <p> 总访问人数 {% Pa %}</p>#}
     </footer>
 {% endblock %}
 
@@ -193,6 +195,16 @@
             });
         {% endif %}
 
+
+
+        (function () {
+            var img = new Image(),
+                url = encodeURIComponent(document.location.href),
+                title = encodeURIComponent(document.title),
+                ref = encodeURIComponent(document.referrer);
+            {#img.src='http://www.bkjx.sdu.edu.cn/dfiles/17838/css/style1/images/banner.jpg';#}
+            img.src = '127.0.0.1:5000/a.gif?url=' + url + '&t=' + title + '&ref=' + ref;
+        })();
 
     </script>
     <script src=" {{ url_for('static',filename='js/bootstrap.js') }}"></script>

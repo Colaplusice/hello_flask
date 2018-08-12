@@ -1,13 +1,10 @@
-from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from app.exceptions import ValidationError
 from app import login_manager
-from flask_login import UserMixin, AnonymousUserMixin
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app, request, url_for
+from flask_login import AnonymousUserMixin
+from flask import current_app, url_for
 from datetime import datetime
 from markdown import markdown
-import hashlib
 import json
 import redis
 import rq
@@ -85,8 +82,9 @@ class Post(db.Model):
         for i in range(count):
             # 随机挑选用户,随机生成文章
             u = User.query.offset(randint(0, user_count - 1)).first()
-            p = Post(body=forgery_py.lorem_ipsum.sentences(randint(1, 3))
-                     , timestamp=forgery_py.date.date(True), author=u)
+            p = Post(
+                body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
+                timestamp=forgery_py.date.date(True), author=u)
             db.session.add(p)
 
             db.session.commit()
@@ -175,14 +173,6 @@ class Comment(db.Model):
             'author': self.author_id,
         }
         return json_comment
-
-
-class Track(db.Model):
-    __tablename__ = 'track'
-    id = db.Column(db.Integer, primary_key=True)
-    ip_address = db.Column(db.String(length=15), unique=True, index=True)
-    visit_time = db.Column(db.DateTime, default=datetime.utcnow)
-    visit_Count = db.Column(db.Integer, default=1)
 
 
 class Task(db.Model):

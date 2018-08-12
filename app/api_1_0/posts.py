@@ -4,7 +4,6 @@ from ..models.models import Post, Permisson
 from .. import db
 from .errors import forbidden
 from .decorators import permission_required
-from app.auth import auth
 from flask import request, g, jsonify, url_for, current_app
 
 
@@ -41,16 +40,15 @@ def edit_post(id):
 def get_posts():
     # 从请求中得到第几页的文章
     page = request.args.get('page', 1, type=int)
-    pagination = Post.query.paginate \
-        (page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-         error_out=False)
+    pagination = Post.query.paginate(
+        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+        error_out=False)
     print(pagination.total)
     posts = pagination.items
     prev = None
     # 返回前一页的url
     if pagination.has_prev:
         prev = url_for('api.get_posts', page=page - 1, _external=True)
-
     next = None
     if pagination.has_next:
         next = url_for('api.get_posts', page=page + 1, _external=True)
@@ -59,7 +57,6 @@ def get_posts():
                     'prev': prev,
                     'next': next,
                     'count': pagination.total
-                       ,
                     })
 
 

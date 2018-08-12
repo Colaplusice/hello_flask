@@ -1,13 +1,15 @@
 # encoding=utf-8
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import db
-from . import *
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import BadSignature
 from flask import current_app, request, url_for
 from datetime import datetime
 import hashlib
 import json
+from .Role import Role
+from app import db
+from .models import Message, Post, Follow, Task, Permisson, Notification
 
 
 # 用户
@@ -39,13 +41,15 @@ class User(UserMixin, db.Model):
                                backref=db.backref('follower', lazy='joined'),
                                lazy='dynamic', cascade='all,delete-orphan')
 
-    follower = db.relationship('Follow', foreign_keys=[Follow.follower_id],
+    follower = db.relationship('Follow',
+                               foreign_keys=[Follow.follower_id],
                                backref=db.backref('followed', lazy='joined'),
                                lazy='dynamic', cascade='all,delete-orphan')
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
 
     # 和message关联
-    messages_sent = db.relationship('Message', foreign_keys=[Message.sender_id],
+    messages_sent = db.relationship('Message',
+                                    foreign_keys=[Message.sender_id],
                                     backref='author', lazy='dynamic')
     messages_received = db.relationship('Message',
                                         foreign_keys=[Message.recipient_id],
@@ -142,7 +146,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
-        except:
+        except ValueError:
             return False
         if data.get('change_email') != self.id:
             return False
@@ -186,7 +190,7 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
-        except:
+        except BadSignature:
             return False
 
         if data.get('confirm') != self.id:
@@ -204,8 +208,8 @@ class User(UserMixin, db.Model):
             url = 'http://www.gravatar.com/avatar'
         hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
         return '{url}/{hash}?s={size}&d={default}&r={rating}' \
-            .format(url=url, hash=hash, size=size, default=default, rating
-        =rating)
+            .format(url=url, hash=hash, size=size, default=default,
+                    rating=rating)
 
     # 刷新访问时间
     def ping(self):
@@ -235,7 +239,7 @@ class User(UserMixin, db.Model):
         try:
             data = s.loads(token)
 
-        except:
+        except BadSignature:
             return None
         return User.query.get(data['id'])
 

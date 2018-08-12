@@ -1,18 +1,20 @@
 # encoding=utf-8
 import os
-
 from flask import render_template, jsonify, redirect, abort, flash, \
-    make_response
+    make_response, url_for, request, current_app
+from app import db
+from hello_flask import app
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
-
 from . import forms
 from . import main
-from .decorators import *
+import datetime
 from ..decorators import amdin_required, permission_required
-from ..models import *
+# from ..models import
+from ..models.Page_view import View_message, User_message
 from ..models.Users import User
-from ..models.models import Permisson, Post
+from ..models.Role import Role
+from ..models.models import Permisson, Post, Comment, Message, Notification
 
 
 # 设置cookie为0 然后跳转到Index页面
@@ -33,6 +35,24 @@ def show_followed():
     return resp
 
 
+@main.before_app_request
+def get_user_message():
+    if request.url_rule.endpoint != 'static':
+        view_data = {
+            'url': request.url,
+            'ip': request.remote_addr,
+            'referrer': request.referrer,
+            'req_method': request.method,
+            'end_point': request.url_rule.endpoint,
+            'user_agent': request.user_agent
+        }
+        user_data = {
+            'ip': request.remote_addr
+        }
+        User_message.create_or_update_from_request(user_data)
+        View_message.create_from_request(view_data)
+
+
 @main.route('/moderate')
 @login_required
 @permission_required(Permisson.MODERATE_COMMENTS)
@@ -40,8 +60,10 @@ def moderate():
     page = request.args.get('page', 1, type=int)
     # 提取一页评论 吧把分页对象也传入html
     pagination = Comment.query.order_by(Comment.timestamp.desc()) \
-        .paginate(page, per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
-                  error_out=False)
+        .paginate(page,
+                  per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
+                  error_out=False
+                  )
 
     comments = pagination.items
 
@@ -52,6 +74,7 @@ def moderate():
 
 @main.after_app_request
 def after_request(response):
+    print(response)
     for query in get_debug_queries():
         if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
             current_app.logger.warning(
@@ -70,18 +93,13 @@ def post_article():
         post = Post(title=form.title.data, body=form.body.data,
                     author=current_user._get_current_object())
         # 发表文章
-        # db.session.add(post)
+        db.session.add(post)
         return redirect(url_for('main.post_article'))
     return render_template('post_article.html', form=form)
 
+
 @main.route('/', methods=['GET', 'POST'])
-@ clock
 def index():
-    # print request.args['url']
-    print(request.host)
-    print(request.base_url)
-    print(request.user_agent)
-    print(request.referrer)
     page = request.args.get('page', 1, type=int)
     show_followed = False
     # 从cookie获得默认值
@@ -97,11 +115,13 @@ def index():
         error_out=False
     )
     posts = pagination.items
-    return render_template(
+    return_msg = render_template(
         'index.html',
         posts=posts,
         pagination=pagination
     )
+
+    return return_msg
 
 
 @main.route('/user/<username>')
@@ -128,12 +148,18 @@ def post(id):
         page = (post.comments.count() - 1) / \
                current_app.config['FLASKY_COMMENTS_PRE_PAGE'] + 1
     pagnation = post.comments.order_by(Comment.timestamp.asc()) \
-        .paginate(page, per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
-                  error_out=False)
+        .paginate(page,
+                  per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
+                  error_out=False
+                  )
 
     comments = pagnation.items
-    return render_template('post.html', post=post, form=form, comments=comments,
-                           pagination=pagnation)
+    return render_template('post.html',
+                           post=post,
+                           form=form,
+                           comments=comments,
+                           pagination=pagnation
+                           )
 
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -195,12 +221,13 @@ def followers(username):
         page, per_page=current_app.config['FLASKY_USER_PER_PAGE'],
         error_out=False
     )
-
     follows = [{'user': item.follower, 'timestamp': item.timestamp
                 } for item in pagination.items]
-    return render_template('followers.html', user=user, title='Followers of'
-                           , endpoint='.followers', pagination=pagination
-                           , follows=follows)
+    return render_template('followers.html',
+                           user=user, title='Followers of',
+                           endpoint='.followers',
+                           pagination=pagination,
+                           follows=follows)
 
 
 # username关注的用户
@@ -321,6 +348,7 @@ def delete_article(id):
 def export_posts():
     if current_user.get_task_in_progress('export_posts'):
         flash('已经有一个任务在运行了，请您等一下')
+        return redirect(url_for('main.user', username=current_user.username))
     else:
         # 添加到任务队列来完成，所以是异步的
         return_msg = current_user.launch_task('export_posts', '正在导出文章...')
@@ -379,7 +407,7 @@ def messages():
 @main.route('/notifications')
 @login_required
 def notifications():
-    since = request.args.get('since', 0.0, type=float)
+    # since = request.args.get('since', 0.0, type=float)
     # asc升序
     notifications = current_user.notifications.filter_by(
         Notification.timestamp.asc())
@@ -390,9 +418,6 @@ def notifications():
         'timestamp': n.timestamp
     } for n in notifications
     ])
-
-
-from hello_flask import app
 
 
 @app.context_processor

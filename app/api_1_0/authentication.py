@@ -39,12 +39,11 @@ def get_token():
         return unthorized('无效的证书')
 
     return jsonify({'token': g.current_user.
-                   generate_auth_token(expiration=3600)
-                       , 'expiration': 3600})
+                   generate_auth_token(expiration=3600),
+                    'expiration': 3600})
 
 
 # 用户认证
-
 @api.before_request
 @auth.login_required
 def before_request():

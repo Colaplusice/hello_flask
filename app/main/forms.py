@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, BooleanField, SelectField, \
     TextAreaField
 import wtforms.validators
 from flask_wtf import FlaskForm
-from ..models import User, Role
+from ..models.Users import User, Role
 from flask_pagedown.fields import PageDownField
 
 
@@ -59,7 +59,8 @@ class EditProfileAdminForm(FlaskForm):
     def validate_email(self, field):
         if field.data != self.user.email and \
                 User.query.filter_by(email=field.data).first():
-            raise wtforms.validators.ValidationError('email already registered')
+            raise wtforms.\
+                validators.ValidationError('email already registered')
 
     def validate_usename(self, field):
         if field.data != self.user.name and \

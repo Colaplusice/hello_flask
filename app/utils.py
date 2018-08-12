@@ -1,6 +1,7 @@
 # encoding=utf-8
 # from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import BadSignature
 
 secret_key = 'hard to gess string'
 
@@ -15,7 +16,7 @@ def verify_reset_password(token):
         s = Serializer(secret_key)
         data = s.loads(token)
         return (data['email'])
-    except:
+    except BadSignature:
         return None
 
 # token = Generate_reset_password_token('fjl2401')

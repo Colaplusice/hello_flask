@@ -1,8 +1,6 @@
-from flask import jsonify, request, g
+from flask import jsonify
 from . import api
-from .. import db
 from ..exceptions import ValidationError
-from app.models.models import Post
 
 
 def badrequest(message):
@@ -20,7 +18,8 @@ def forbidden(message):
 
 
 def unthorized(message):
-    response = jsonify({'error': 'unauthorized', 'message': message})
+    pass
+    # response = jsonify({'error': 'unauthorized', 'message': message})
 
 
 @api.errorhandler(ValidationError)
