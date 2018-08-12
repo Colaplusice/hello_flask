@@ -7,6 +7,11 @@ from .decorators import permission_required
 from flask import request, g, jsonify, url_for, current_app
 
 
+@api.route('/')
+def index():
+    return 'hello flask api'
+
+
 @api.route('/posts/', methods=['POST'])
 @permission_required(Permisson.WRITE_ARTICLES)
 # 接受客户端发过来的请求
@@ -59,9 +64,9 @@ def get_posts():
                     'count': pagination.total
                     })
 
-
-# 返回某一篇文章
-@api.route('/posts/<int:id>')
-def get_post(id):
-    post = Post.query.get_or_404(id)
-    return jsonify(post.tojson())
+#
+# # 返回某一篇文章
+# @api.route('/posts/<int:id>')
+# def get_post(id):
+#     post = Post.query.get_or_404(id)
+#     return jsonify(post.tojson())

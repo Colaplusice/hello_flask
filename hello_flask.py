@@ -1,7 +1,8 @@
 # encoding=utf-8
 import os
-from app import create_app, db
-from app.models import *
+from app import create_app
+from app.models.models import *
+from app.models.Role import Role
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 

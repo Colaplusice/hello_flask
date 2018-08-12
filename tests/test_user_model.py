@@ -1,9 +1,9 @@
 # encoding=utf-8
 import unittest
-from app.models import Role
-from app.models import User, Permisson, AnonymousUser
-from app.models import db
-from app import create_app
+from app.models.Users import User,Permisson
+from app.models.models import AnonymousUser
+from app.models.Role import Role
+from app import db, create_app
 
 
 class UserModelTestCase(unittest.TestCase):

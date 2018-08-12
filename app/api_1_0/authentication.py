@@ -47,6 +47,7 @@ def get_token():
 @api.before_request
 @auth.login_required
 def before_request():
+    print('-'*200)
     if not g.current_user.is_anonymous and \
             not g.current_user.confirmed:
         return forbidden("未认证的用户")

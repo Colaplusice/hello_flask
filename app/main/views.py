@@ -5,10 +5,9 @@ from flask import render_template, jsonify, redirect, abort, flash, \
 from app import db
 from hello_flask import app
 from flask_login import login_required, current_user
-from flask_sqlalchemy import get_debug_queries
 from . import forms
 from . import main
-import datetime
+from datetime import datetime
 from ..decorators import amdin_required, permission_required
 # from ..models import
 from ..models.Page_view import View_message, User_message
@@ -37,6 +36,8 @@ def show_followed():
 
 @main.before_app_request
 def get_user_message():
+    if not request.url_rule:
+        return
     if request.url_rule.endpoint != 'static':
         view_data = {
             'url': request.url,
@@ -49,8 +50,9 @@ def get_user_message():
         user_data = {
             'ip': request.remote_addr
         }
-        User_message.create_or_update_from_request(user_data)
-        View_message.create_from_request(view_data)
+        if view_data.get('user_agent'):
+            User_message.create_or_update_from_request(user_data)
+            View_message.create_from_request(view_data)
 
 
 @main.route('/moderate')
@@ -72,17 +74,17 @@ def moderate():
         page=page)
 
 
-@main.after_app_request
-def after_request(response):
-    print(response)
-    for query in get_debug_queries():
-        if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
-            current_app.logger.warning(
-                '缓慢的语句:%s\n 参数:%s\n 持续时长:%fs\n,内容:%s\n'
-                % (query.statement, query.parameters, query.duration,
-                   query.context)
-            )
-    return response
+# @main.after_app_request
+# def after_request(response):
+#     print(response)
+#     for query in get_debug_queries():
+#         if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+#             current_app.logger.warning(
+#                 '缓慢的语句:%s\n 参数:%s\n 持续时长:%fs\n,内容:%s\n'
+#                 % (query.statement, query.parameters, query.duration,
+#                    query.context)
+#             )
+#     return response
 
 
 @main.route('/post-article', methods=['GET', 'POST'])
@@ -384,7 +386,7 @@ def send_message(recipient):
 @main.route('/messages')
 @login_required
 def messages():
-    current_user.last_message_read_time = datetime.utcnow()
+    current_user.last_message_read_time = datetime.now()
     # 更新未读的消息数
     current_user.add_notification('未读的消息数', 0)
     db.session.commit()
