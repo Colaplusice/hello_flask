@@ -273,4 +273,4 @@ venv.bak/
 cov-report
 cover-report
 .qiniu_pythonsdk_hostscache.json
-s
+*.sql
