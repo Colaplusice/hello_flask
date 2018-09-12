@@ -1,3 +1,5 @@
-FROM mysql:5.7
+FROM mysql
+ADD env.sh /env.sh
+EXPOSE 22
+CMD ["ls"]
 
-ENV MYSQL_ALLOW_EMPTY_PASSWORD yes

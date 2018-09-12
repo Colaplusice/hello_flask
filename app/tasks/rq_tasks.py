@@ -2,8 +2,8 @@
 from app import create_app
 from rq import get_current_job
 import sys
-from .models.models import Task, Post
-from .models.Users import User
+from app.models  import Task, Post
+from app.models import User
 from app import db
 
 import time

@@ -7,7 +7,7 @@ class ProductionConfig(Config):
         Config.init_app(app)
 
         SQLALCHEMY_DATABASE_URI = 'mysql://root:newpass@111.231.82.45:3306/hello_flask?charset=utf8mb4'
-        # 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
+        # 'sqlit e:///' + os.path.join(base_dir, 'data.sqlite')
 
         # 把错误信息发送给管理员
         import logging

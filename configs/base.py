@@ -21,12 +21,12 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('name_1')
     MAIL_PASSWORD = os.environ.get('gpassword')
-    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://redis:6379'
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://redis:6378'
     CACHE_BACKEND = 'Redis'
     CACHE_PREFIX = 'hello_flask'
     CACHE_HOST = 'redis'
     CACHE_DB = 0
-    CACHE_PORT = 6379
+    CACHE_PORT = 6378
 
     LONG_CACHE_TTL = 24 * 60 * 60
     SHORT_CACHE_TTL = 10 * 60
@@ -44,4 +44,3 @@ var d=document,i=new Image,e=encodeURIComponent;
     DOMAIN = '127.0.0.1:5000'
     from  base64 import b64decode
     BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
-

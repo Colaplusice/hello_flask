@@ -58,3 +58,6 @@ python hello_flask db upgrade
  
 gunicorn -c gunicorn.py hello_flask:app
 
+celery worker 运行
+celery worker -A app.celery --loglevel=info
+celery worker -A celery_worker.celery --loglevel=info

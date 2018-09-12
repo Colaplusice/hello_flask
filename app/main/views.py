@@ -1,5 +1,4 @@
 # encoding=utf-8
-import os
 from flask import render_template, jsonify, redirect, abort, flash, \
     make_response, url_for, request, current_app
 from app import db
@@ -421,6 +420,9 @@ def notifications():
     ])
 
 
+@main.route('/task_queue')
+def tasks():
+    return render_template('tasks.html')
 
 #
 # # 给values dict 新增加了个 timestamp

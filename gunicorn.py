@@ -16,7 +16,7 @@ limit_request_field_size = 8190
 
 graceful_timeout = 5
 
-loglevel = 'info'
+loglevel = 'warning'
 
 if os.getenv('FLASK_ENV', 'development') == 'production':
     loglevel = 'warning'

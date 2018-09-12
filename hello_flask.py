@@ -5,7 +5,7 @@ from app.models.models import *
 from app.models.Role import Role
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
-
+from celery import Celery
 # 从环境变量中读取config否则设置为default
 from app.models.Users import User
 
@@ -75,4 +75,5 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
+    print(app.extensions)
     manager.run()
