@@ -1,59 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8383bc0-6afb-436c-9d02-63bab297ec77" name="Default" comment="Updated: 删除一些不重要文件">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/hello_flask.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements/req.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api_1_0/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api_1_0/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/authentication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api_1_0/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/decorators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api_1_0/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/errors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api_1_0/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/posts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/email.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/errors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Role.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Users.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/play/bobo.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/play/bobo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/play/boboserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/play/boboserver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/_macros.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/_macros.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/_post_content.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/_post_content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/track/close.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/track/close.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/track/play_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/track/play_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/begin_flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/begin_flask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello_flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello_flask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/play_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/play_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_model.py" afterDir="false" />
+    <list default="true" id="e8383bc0-6afb-436c-9d02-63bab297ec77" name="Default" comment="Updated: 删除">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/hello_flask.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/authentication.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/comments.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/errors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/posts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/users.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/email/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/email/confirm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/email/play_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/celery_extention.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/exceptions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/extensions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/flask_celery.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/decorators.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/errors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/sha_code" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Page_view.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Role.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Users.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/bobo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/boboserver.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/content_template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/my_css.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/image/1_37.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/image/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tasks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tasks/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tasks/rq_tasks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/500.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_comments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_macros.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_message_post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_post_content.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_posts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/email/confirm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/email/confirm.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/email/reset_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/email/reset_password.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/reset_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/set_newpass.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auth/unconfirmed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/edit_post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/edit_profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/followers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/messages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/moderate.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/play/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/post_article.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/send_messages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/tasks.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/close.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/down.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/play_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/begin_flask.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/celery_worker.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/command/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/command/hello_command.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/celery_config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/data-tests.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dev.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/production.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-dev.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-tests.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/env.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gunicorn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello_flask.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/00c88cf1b1c6_add_messages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/091342041f5f_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/12a2dab70622_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/2f8c0b0e3661_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/3f9f33e53cf6_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/4ce1880c0531_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/5b3cba63635d_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/5bd2be4991b8_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/5e819dd9ba48_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/678bfe9642ee_add_message.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/713e86ee90e8_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/7bd2dbb2fffd_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/888fece670ef_add_notifations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/ad569f3204d5_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/b86d0c281208_add_messages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/bc7e98fd8ebf_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/c2e792f67b3a_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/c495118a9587_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/e569e3e6bdd0_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/f2ca054efdfc_add_messages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/f57f82e51587_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/req.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/test_requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shell/play_1.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shell/play_2.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shell/setup.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shell/setup_mysql.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shell/setup_redis.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/play_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/play_2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_basic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_selenium.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_user_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/app___init___py.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/app_models_py.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/coverage_html.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/jquery.ba-throttle-debounce.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/jquery.hotkeys.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/jquery.isonscreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/jquery.tablesorter.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/keybd_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/keybd_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/status.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/coverage/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/ListPagniation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,6 +254,30 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1646376219">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Git file" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="gitignore" value="2" />
+          <entry key="txt" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Git file" value="2" />
+          <entry key="PLAIN_TEXT" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="hello_flask" />
@@ -126,8 +287,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hello_flask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1188">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="1166">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#17#26#0" expanded="true" />
               </folding>
@@ -138,8 +299,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+            <state relative-caret-position="308">
+              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,8 +311,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+            <state relative-caret-position="136">
+              <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -230,7 +394,6 @@
         <option value="$PROJECT_DIR$/app/templates/_posts.html" />
         <option value="$PROJECT_DIR$/command/hello_command.py" />
         <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/tests/test_user_model.py" />
         <option value="$PROJECT_DIR$/app/models/__init__.py" />
         <option value="$PROJECT_DIR$/app/api_1_0/authentication.py" />
@@ -269,6 +432,7 @@
         <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/app/main/decorators.py" />
         <option value="$PROJECT_DIR$/app/main/views.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -315,6 +479,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="reso&#9;ACTION&#9;Git.ResolveConflicts&#10;index&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/templates/index.html&#10;base&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/templates/base.html&#10;view&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;hell&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/hello_flask.py&#10;views&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;vie&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;flask/app&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app&#10;login_manager&#9;null&#9;null&#10;iew&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;error&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/api_1_0/errors.py&#10;test_clien&#9;null&#9;null&#10;test_bas&#9;null&#9;null&#10;test&#9;null&#9;null&#10;hello&#9;RUN_CONFIGURATION&#9;hello&#10;close&#9;null&#9;null&#10;inde&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/index.html&#10;task&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/tasks.py&#10;bas&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/base.html&#10;in&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/index.html&#10;post&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/_posts.html&#10;forms&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/forms.py&#10;for&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/lib/python2.7/site-packages/flask_wtf/form.py&#10;play&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/track/play_1.py&#10;pla&#9;null&#9;null&#10;model&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;form&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/forms.py&#10;user&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/user.html&#10;mode&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;auth&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/api_1_0/authentication.py&#10;models&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;comments&#9;null&#9;null&#10;users&#9;null&#9;null&#10;posts&#9;null&#9;null&#10;authe&#9;null&#9;null&#10;app/de&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/decorators.py&#10;dec&#9;null&#9;null&#10;init&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/__init__.py&#10;flask&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/hello_flask.py&#10;tas&#9;null&#9;null&#10;tasks&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/tasks.py&#10;conf&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/config.py&#10;vi&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/views.py&#10;VIEW&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/views.py&#10;co&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/_comments.html&#10;comment&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/_comments.html&#10;com&#9;FILE&#9;das://table:/69c662c/29487600-abf0-4195-b61b-808a0afae57d/main.comments&#10;moder&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/moderate.html&#10;v&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/main/views.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -547,7 +712,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533400884680</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated: 删除一些文件..&#10;Updated: 同步gitlab">
+      <created>1536980627884</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536980627884</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated: 删除">
+      <created>1536980916330</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536980916330</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -560,10 +739,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2082" y="22" width="1432" height="999" extended-state="0" />
+    <frame x="1551" y="22" width="1739" height="999" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49301398" visible="true" weight="0.22173913" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49301398" visible="true" weight="0.18138708" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.13842663" />
       <window_info id="Favorites" order="2" sideWeight="0.506986" side_tool="true" weight="0.21028744" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -575,8 +754,8 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.48638427" weight="0.32842416" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5204236" side_tool="true" weight="0.2735043" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.34756994" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.4795764" visible="true" weight="0.39527026" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.34684685" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4795764" visible="true" weight="0.39527026" />
       <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.48865354" weight="0.32621083" />
       <window_info anchor="bottom" id="Database Changes" order="12" weight="0.3298969" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.37138927" />
@@ -584,7 +763,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32853025" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.05869565" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.12863071" />
       <window_info anchor="right" id="Mongo Explorer" order="5" />
       <window_info anchor="right" id="PlantUML" order="6" />
     </layout>
@@ -615,6 +794,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -675,7 +864,9 @@
     <MESSAGE value="Updated:开始重构代码" />
     <MESSAGE value="Updated: flake8 代码规范化" />
     <MESSAGE value="Updated: 删除一些不重要文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated: 删除一些不重要文件" />
+    <MESSAGE value="Updated: 删除一些文件..&#10;Updated: 同步gitlab" />
+    <MESSAGE value="Updated: 删除" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated: 删除" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -816,13 +1007,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="110" column="21" lean-forward="true" selection-start-line="110" selection-start-column="21" selection-end-line="110" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt" />
     <entry file="file://$PROJECT_DIR$/app/templates/_macros.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -853,8 +1038,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello_flask.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="1166">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#17#26#0" expanded="true" />
           </folding>
@@ -918,13 +1103,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -960,10 +1138,20 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../../redis_in_action/redis-in-action/python/ch01_listing_source.py" />
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+        <state relative-caret-position="136">
+          <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
         </state>
       </provider>
     </entry>
