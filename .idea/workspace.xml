@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8383bc0-6afb-436c-9d02-63bab297ec77" name="Default" comment="Updated: 删除一些不重要文件">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/29487600-abf0-4195-b61b-808a0afae57d/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6ee2c444-a72f-4321-a6cf-300ac4a79625/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/77f2e67f-d419-4093-a149-f8c23de306fc/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/hello_flask.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements/req.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/authentication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_1_0/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_1_0/posts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Role.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Role.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Users.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/bobo.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/play/bobo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/play/boboserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/play/boboserver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_macros.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/_macros.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/_post_content.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/_post_content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/close.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/track/close.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/track/play_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/track/play_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/begin_flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/begin_flask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello_flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello_flask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/play_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/play_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_user_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user_model.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/hello_flask$views.coverage" NAME="views Coverage Results" MODIFIED="1534061281890" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/main" />
+    <SUITE FILE_PATH="coverage/hello_flask$gunicorn.coverage" NAME="gunicorn Coverage Results" MODIFIED="1534079301944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello_flask$play_2__1_.coverage" NAME="play_2 (1) Coverage Results" MODIFIED="1527213659483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/hello_flask$manage.coverage" NAME="manage Coverage Results" MODIFIED="1525521093833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello_flask$hello_flask__1_.coverage" NAME="hello_flask (1) Coverage Results" MODIFIED="1536544369598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello_flask$hello.coverage" NAME="hello Coverage Results" MODIFIED="1533398966959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello_flask$play_2.coverage" NAME="play_2 Coverage Results" MODIFIED="1536560197865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/hello_flask$hello_flask.coverage" NAME="hello_flask Coverage Results" MODIFIED="1533404204854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/hello_flask$utils.coverage" NAME="utils Coverage Results" MODIFIED="1530181624775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/hello_flask$play_1.coverage" NAME="play_1 Coverage Results" MODIFIED="1530626588803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/track" />
+    <SUITE FILE_PATH="coverage/hello_flask$bottle.coverage" NAME="bottle Coverage Results" MODIFIED="1530626848050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../lib/python2.7/site-packages" />
+    <SUITE FILE_PATH="coverage/hello_flask$email.coverage" NAME="email Coverage Results" MODIFIED="1525779687362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/hello_flask$down.coverage" NAME="down Coverage Results" MODIFIED="1529651105317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/track" />
+    <SUITE FILE_PATH="coverage/hello_flask$play_1__1_.coverage" NAME="play_1 (1) Coverage Results" MODIFIED="1530171971643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/auth/email" />
+    <SUITE FILE_PATH="coverage/hello_flask$play_1__2_.coverage" NAME="play_1 (2) Coverage Results" MODIFIED="1527214945940" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/hello_flask$utils__1_.coverage" NAME="utils (1) Coverage Results" MODIFIED="1533432332206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/main" />
+    <SUITE FILE_PATH="coverage/hello_flask$play.coverage" NAME="play Coverage Results" MODIFIED="1536560173183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-719569192">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gitignore" value="1" />
+          <entry key="py" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="hello_flask" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hello_flask.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1188">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+              <folding>
+                <element signature="e#17#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="47476">
+              <caret line="2187" column="19" selection-start-line="2187" selection-start-column="19" selection-end-line="2187" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>request</find>
+      <find>vali</find>
+      <find>for</find>
+      <find>forei</find>
+      <find>session</find>
+      <find>def index</find>
+      <find>pag</find>
+      <find>pagination</find>
+      <find>redir</find>
+      <find>article</find>
+      <find>post</find>
+      <find>get_flashed_messages</find>
+      <find>with</find>
+      <find>flash</find>
+      <find>login</find>
+      <find>ds_store</find>
+      <find>.idea</find>
+      <find>ds_st</find>
+      <find>.idear</find>
+      <find>login_manager</find>
+      <find>fut</find>
+      <find>futures==3.2.0</find>
+      <find>ap</find>
+      <find>url_for</find>
+      <find>navbar</find>
+      <find>page-header</find>
+      <find>@</find>
+      <find>url</find>
+      <find>over</find>
+      <find>index</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>unread_messages</replace>
+      <replace>未读的消息数</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/templates/auth/email/reset_password.html" />
+        <option value="$PROJECT_DIR$/app/templates/_message_post.html" />
+        <option value="$PROJECT_DIR$/app/templates/messages.html" />
+        <option value="$PROJECT_DIR$/app/templates/user.html" />
+        <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/app/models/User.py" />
+        <option value="$PROJECT_DIR$/app/main/__init__.py" />
+        <option value="$PROJECT_DIR$/hello.py" />
+        <option value="$PROJECT_DIR$/app/track/play_1.py" />
+        <option value="$PROJECT_DIR$/app/templates/_posts.html" />
+        <option value="$PROJECT_DIR$/command/hello_command.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/tests/test_user_model.py" />
+        <option value="$PROJECT_DIR$/app/models/__init__.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/authentication.py" />
+        <option value="$PROJECT_DIR$/tests/test_basic.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/errors.py" />
+        <option value="$PROJECT_DIR$/tests/test_client.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/comments.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/decorators.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/posts.py" />
+        <option value="$PROJECT_DIR$/app/api_1_0/users.py" />
+        <option value="$PROJECT_DIR$/app/auth/email/play_1.py" />
+        <option value="$PROJECT_DIR$/app/auth/__init__.py" />
+        <option value="$PROJECT_DIR$/app/auth/forms.py" />
+        <option value="$PROJECT_DIR$/app/auth/views.py" />
+        <option value="$PROJECT_DIR$/app/main/forms.py" />
+        <option value="$PROJECT_DIR$/app/models/models.py" />
+        <option value="$PROJECT_DIR$/app/models/Users.py" />
+        <option value="$PROJECT_DIR$/app/play/bobo.py" />
+        <option value="$PROJECT_DIR$/app/play/boboserver.py" />
+        <option value="$PROJECT_DIR$/app/track/close.py" />
+        <option value="$PROJECT_DIR$/app/track/down.py" />
+        <option value="$PROJECT_DIR$/app/decorators.py" />
+        <option value="$PROJECT_DIR$/app/email.py" />
+        <option value="$PROJECT_DIR$/app/exceptions.py" />
+        <option value="$PROJECT_DIR$/app/tasks.py" />
+        <option value="$PROJECT_DIR$/app/utils.py" />
+        <option value="$PROJECT_DIR$/hello_flask.py" />
+        <option value="$PROJECT_DIR$/app/models/Role.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/utils/ListPagniation.py" />
+        <option value="$PROJECT_DIR$/begin_flask.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/app/main/utils.py" />
+        <option value="$PROJECT_DIR$/app/static/css/my_css.css" />
+        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/templates/index.html" />
+        <option value="$PROJECT_DIR$/app/main/decorators.py" />
+        <option value="$PROJECT_DIR$/app/main/views.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1775" />
+    <option name="y" value="22" />
+    <option name="width" value="1739" />
+    <option name="height" value="999" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="hello_flask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hello_flask" type="47feb1d3:ProjectViewModuleNode" />
+            </path>
+            <path>
+              <item name="hello_flask" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hello_flask" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="hello_flask" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="reso&#9;ACTION&#9;Git.ResolveConflicts&#10;index&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/templates/index.html&#10;base&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/templates/base.html&#10;view&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;hell&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/hello_flask.py&#10;views&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;vie&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;flask/app&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app&#10;login_manager&#9;null&#9;null&#10;iew&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/main/views.py&#10;error&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/flask/hello_flask/app/api_1_0/errors.py&#10;test_clien&#9;null&#9;null&#10;test_bas&#9;null&#9;null&#10;test&#9;null&#9;null&#10;hello&#9;RUN_CONFIGURATION&#9;hello&#10;close&#9;null&#9;null&#10;inde&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/index.html&#10;task&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/tasks.py&#10;bas&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/base.html&#10;in&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/index.html&#10;post&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/_posts.html&#10;forms&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/forms.py&#10;for&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/lib/python2.7/site-packages/flask_wtf/form.py&#10;play&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/track/play_1.py&#10;pla&#9;null&#9;null&#10;model&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;form&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/forms.py&#10;user&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/templates/user.html&#10;mode&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;auth&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/api_1_0/authentication.py&#10;models&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/models/models.py&#10;comments&#9;null&#9;null&#10;users&#9;null&#9;null&#10;posts&#9;null&#9;null&#10;authe&#9;null&#9;null&#10;app/de&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/decorators.py&#10;dec&#9;null&#9;null&#10;init&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/__init__.py&#10;flask&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/hello_flask.py&#10;tas&#9;null&#9;null&#10;tasks&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/tasks.py&#10;conf&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/config.py&#10;vi&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/views.py&#10;VIEW&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/py_Flask/hello_flask/app/main/views.py&#10;co&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/_comments.html&#10;comment&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/_comments.html&#10;com&#9;FILE&#9;das://table:/69c662c/29487600-abf0-4195-b61b-808a0afae57d/main.comments&#10;moder&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/templates/moderate.html&#10;v&#9;FILE&#9;file:///Users/fanjialiang2401/Desktop/django_1/VENV_scrapy/hello_flask/app/main/views.py" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/models" />
+      <recent name="$PROJECT_DIR$/app/templates/auth/email" />
+      <recent name="$PROJECT_DIR$/app/static/css" />
+      <recent name="$PROJECT_DIR$/app/static/html" />
+      <recent name="$PROJECT_DIR$/app/static/image" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/static/js" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app/static" />
+      <recent name="$PROJECT_DIR$/app/static/css" />
+      <recent name="$PROJECT_DIR$/app/templates/play" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.utils (1)">
+    <configuration name="bottle" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../lib/python2.7/site-packages" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../lib/python2.7/site-packages/bottle.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hello" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hello.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hello_flask" type="PythonConfigurationType" factoryName="Python" singleton="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/begin_flask.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="play_1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/track" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/track/play_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/main/utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="hello_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.hello_flask" />
+      <item itemvalue="Python.play_1" />
+      <item itemvalue="Python.utils" />
+      <item itemvalue="Python.hello" />
+      <item itemvalue="Python.bottle" />
+      <item itemvalue="Python.utils (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.utils (1)" />
+        <item itemvalue="Python.hello" />
+        <item itemvalue="Python.bottle" />
+        <item itemvalue="Python.play_1" />
+        <item itemvalue="Python.utils" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8383bc0-6afb-436c-9d02-63bab297ec77" name="Default" comment="" />
+      <created>1523004943336</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1523004943336</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Updated:开始重构代码">
+      <created>1533397826103</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1533397826103</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated:开始重构代码">
+      <created>1533398431825</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1533398431825</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated:开始重构代码">
+      <created>1533398444779</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1533398444779</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated: flake8 代码规范化">
+      <created>1533400405392</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1533400405392</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated: 删除一些不重要文件">
+      <created>1533400884680</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1533400884680</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2082" y="22" width="1432" height="999" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49301398" visible="true" weight="0.22173913" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.13842663" />
+      <window_info id="Favorites" order="2" sideWeight="0.506986" side_tool="true" weight="0.21028744" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32853025" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966722" weight="0.33235726" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39617082" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.48638427" weight="0.32842416" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5204236" side_tool="true" weight="0.2735043" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.34756994" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.4795764" visible="true" weight="0.39527026" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.48865354" weight="0.32621083" />
+      <window_info anchor="bottom" id="Database Changes" order="12" weight="0.3298969" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.37138927" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32853025" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.05869565" />
+      <window_info anchor="right" id="Mongo Explorer" order="5" />
+      <window_info anchor="right" id="PlantUML" order="6" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13876967" />
+      <window_info id="Structure" order="1" weight="0.24964234" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32853025" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966722" weight="0.3319616" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39752406" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.514797" side_tool="true" weight="0.3933518" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32684284" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.48520303" visible="true" weight="0.46388888" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.37138927" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Mongo Explorer" order="3" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.21316166" />
+      <window_info anchor="right" id="SciView" order="5" weight="0.32853025" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection>
+                  <UserGroup>
+                    <option name="users">
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </option>
+                  </UserGroup>
+                  <UserGroup>
+                    <option name="users">
+                      <list>
+                        <option value="origin/Mac_branch" />
+                      </list>
+                    </option>
+                  </UserGroup>
+                </collection>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated:开始重构代码" />
+    <MESSAGE value="Updated: flake8 代码规范化" />
+    <MESSAGE value="Updated: 删除一些不重要文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated: 删除一些不重要文件" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/api_1_0/decorators.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api_1_0/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api_1_0/posts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-720">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api_1_0/users.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-395" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auth/email/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auth/email/play_1.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auth/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auth/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/errors.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1433">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/play/bobo.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/play/boboserver.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/track/close.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1499">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/track/down.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-91" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/email.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tasks.py" />
+    <entry file="file://$PROJECT_DIR$/app/utils.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/command/hello_command.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Users.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask_login/login_manager.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" column="10" selection-start-line="3" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Role.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="110" column="21" lean-forward="true" selection-start-line="110" selection-start-column="21" selection-end-line="110" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_macros.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/wtf.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/ListPagniation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.1/python_stubs/2017660424/_blake2.py" />
+    <entry file="file://$PROJECT_DIR$/app/main/sha_code">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hello_flask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#17#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.1/python_stubs/2017660424/posix.py" />
+    <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-174">
+          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="1409" column="1" selection-start-line="1409" selection-start-column="1" selection-end-line="1409" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47476">
+          <caret line="2187" column="19" selection-start-line="2187" selection-start-column="19" selection-end-line="2187" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anacoda/anaconda2/envs/hello_flask/lib/python3.6/site-packages/flask/helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-853">
+          <caret line="215" column="4" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1628">
+          <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/begin_flask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/my_css.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auth/views.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../redis_in_action/redis-in-action/python/ch01_listing_source.py" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
