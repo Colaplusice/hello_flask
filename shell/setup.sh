@@ -27,3 +27,5 @@ else  echo"false"
 exit $?
 fi
 
+./boot_python.sh
+

@@ -8,7 +8,7 @@ class Config:
     TZ = 'Asia/Shanghai'
     SECRET_KEY = 'hard to gess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[hello_flask]'
     FLASKY_MAIL_SENDER = 'fjl <fjl2401@163.com>'
     FLASKY_ADMIN = 'fjl2401@163.com'
     FLASKY_POSTS_PER_PAGE = 5
