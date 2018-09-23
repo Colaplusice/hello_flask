@@ -5,9 +5,8 @@ class ProductionConfig(Config):
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
-        SQLALCHEMY_DATABASE_URI = os.environ.get(
-            'DATABASE_URL') or 'mysql://root@localhost:3305/hello_flask?charset=utf8mb4'
-        DEBUG = False
+        SQLALCHEMY_DATABASE_URI ='mysql://root:newpass@localhost:3305/hello_flask?charset=utf8mb4'
+        DEBUG = True
 
         # = 'mysql://root:newpass@111.231.82.45:3306/hello_flask?charset=utf8mb4'
         # 'sqlit e:///' + os.path.join(base_dir, 'data.sqlite')

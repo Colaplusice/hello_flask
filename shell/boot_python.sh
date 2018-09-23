@@ -8,8 +8,12 @@ pip install --upgrade pip
 
 pip install -r ../requirements/requirements.txt
 
-export FLASK_CONFIG='production'
+#export FLASK_CONFIG='production'
 
+lsof -i:5000
+if [ $? -eq 0 ];then
+kill  `lsof -i:5000 | awk '{print $2}'`
+fi
 
 gunicorn -c ../gunicorn.py --chdir ../ -D hello_flask:app
 

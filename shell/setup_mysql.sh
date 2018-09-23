@@ -3,7 +3,7 @@
 USER_DIR="~"
 USER="root"
 PASS="newpass"
-HOST=127.0.0.1
+HOST='localhost'
 PORT=3305
 DB_NAME="hello_flask"
 
@@ -103,26 +103,28 @@ destroy() {
 }
 
 createdb() {
-  docker exec mysql mysql -h $HOST -u $USER  -e "create database $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+mysql -h $HOST -P $PORT  -u$USER -p$PASS <<EOF 2>/dev/null
+CREATE DATABASE $DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+EOF
+
+#  docker exec mysql mysql -h $HOST -p $PASS -u $USER  -e "create database $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 [ $? -eq 0 ] && echo Created DB SUCCESS! || echo DB already exist
 }
 
 #createdb(){
-#mysql -h $HOST -P $PORT  -u$USER -p$PASS <<EOF 2>/dev/null
-#CREATE DATABASE $DB_NAME;
-#EOF
-#
+
 #}
 
 # 导入sql数据
 dump_sql(){
 createdb $DB_NAME
 
-docker exec -i mysql mysql -h $HOST -uroot  hello_flask < $SQL_DIR
+#docker exec -i mysql mysql -h $HOST -p$PASS -uroot  hello_flask < $SQL_DIR
 
 #docker exec -i mysql mysql -uroot -h 127.0.0.1 hello_flask < $SQL_DIR
 
-#mysql -u$USER -P $PORT -h $HOST $DB_NAME < $SQL_DIR
+mysql -u$USER -p$PASS -h $HOST -P $PORT  $DB_NAME < $SQL_DIR
 if [[ $? == 0 ]]; then
 echo "导入数据成功"
 else

@@ -14,6 +14,8 @@
 #gunicorn -c gunicorn.py hello_flask:app
 ./setup_mysql.sh start
 
+chmod +x ./boot_python.sh
+
 if [[ $? == "0" ]]; then
     echo "success"
 else  echo"false"

@@ -56,4 +56,7 @@ celery worker -A celery_worker.celery --loglevel=info
 
 写好dockerfile 
  docker build -t microblog:latest .
-  docker build -t hello_flask . 
+  docker build -t hello_flask .
+  
+### 终极指令
+./
