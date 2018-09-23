@@ -3,21 +3,10 @@
 
 ### 博客的地址 [IceCola的博客](http://111.231.82.45)
 
-#### 供大家学习和使用
-
 ### 部署的方法
 ## 安装包
  pip install -U -r requirements/requirements -i https://mirrors.aliyun.com/pypi/simple
  pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
-
-### 统一开发环境  
-是否用vagrant来统一下开发环境呢...  是否要用公司的vagrant 呢
-感觉不需要统一环境。。 但感觉还是需要....
-不然docker 怎么打包发布呢  先用docker来吧。
-
-
-
-
 
 ## mysql用docker来部署
 
@@ -61,3 +50,10 @@ gunicorn -c gunicorn.py hello_flask:app
 celery worker 运行
 celery worker -A app.celery --loglevel=info
 celery worker -A celery_worker.celery --loglevel=info
+
+
+### 在docker中运行python
+
+写好dockerfile 
+ docker build -t microblog:latest .
+  docker build -t hello_flask . 

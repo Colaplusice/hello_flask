@@ -28,9 +28,6 @@ class View_message(db.Model):
         db.session.add(new_view)
         db.session.commit()
 
-    @property
-    def counts(self):
-        return View_message.counts
 
 
 class User_message(db.Model):

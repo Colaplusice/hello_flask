@@ -24,6 +24,8 @@ if os.getenv('FLASK_ENV', 'development') == 'production':
 proc_name = 'hello_flask'
 basedir = os.path.abspath(os.path.dirname(__file__))
 log_dir = os.path.join(basedir, 'logs')
+if not os.path.isdir(log_dir):
+    os.mkdir(log_dir)
 
 accesslog_path=os.path.join(log_dir,'acesslog.log')
 errorlog_path=os.path.join(log_dir,'errorlog.log')

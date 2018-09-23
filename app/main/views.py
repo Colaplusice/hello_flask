@@ -1,6 +1,6 @@
 # encoding=utf-8
 from flask import render_template, jsonify, redirect, abort, flash, \
-    make_response, url_for, request, current_app
+    make_response, url_for, request, current_app, Response
 from app import db
 from flask_login import login_required, current_user
 from . import forms
@@ -32,6 +32,7 @@ def show_followed():
     return resp
 
 
+# 每次请求前进行统计pv
 @main.before_app_request
 def get_user_message():
     if not request.url_rule:
@@ -423,6 +424,12 @@ def notifications():
 @main.route('/task_queue')
 def tasks():
     return render_template('tasks.html')
+
+
+@main.route('/all_visit')
+def all_visit():
+    all = View_message.query.count()
+    return Response(str(all))
 
 #
 # # 给values dict 新增加了个 timestamp
