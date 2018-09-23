@@ -6,7 +6,7 @@ source ../../venv/bin/activate
 
 pip install --upgrade pip
 
-pip install -r ../requirements/requirements.txt
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r ../requirements/requirements.txt
 
 #export FLASK_CONFIG='production'
 
