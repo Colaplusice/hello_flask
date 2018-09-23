@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,6 +31,8 @@ class Config:
 
     LONG_CACHE_TTL = 24 * 60 * 60
     SHORT_CACHE_TTL = 10 * 60
+
+    SEND_FILE_MAX_AGE_DEFAULT = timedelta(seconds=1)
 
     JAVASCRIPT = """
     alert('asd')  

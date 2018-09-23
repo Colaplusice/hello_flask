@@ -12,9 +12,18 @@
 #
 #
 #gunicorn -c gunicorn.py hello_flask:app
-./play_1.sh
+./setup_mysql.sh start
 
-[if "$?"=="1"] then
+if [[ $? == "0" ]]; then
     echo "success"
-[else] then
-echo"false"
+else  echo"false"
+exit $?
+fi
+
+./setup_redis.sh start
+if [[ $? == "0" ]]; then
+    echo "success"
+else  echo"false"
+exit $?
+fi
+

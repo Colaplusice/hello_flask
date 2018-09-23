@@ -5,7 +5,6 @@ from app.models.models import *
 from app.models.Role import Role
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
-from celery import Celery
 # 从环境变量中读取config否则设置为default
 from app.models.Users import User
 

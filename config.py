@@ -68,6 +68,7 @@ class ProductionConfig(Config):
         credentials = None
         secure = None
 
+
         if getattr(cls, 'MAIL_USERNAME', None) is not None:
             credentials = (cls.MAIL_USERNAME, cls.MAIL_PASSWORD)
             if getattr(cls, 'MAIL_USER_TLS', None):

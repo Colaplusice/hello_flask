@@ -3,16 +3,15 @@
 USER_DIR="~"
 USER="root"
 PASS="newpass"
-HOST="127.0.0.1"
-PORT="3305"
+HOST=127.0.0.1
+PORT=3305
 DB_NAME="hello_flask"
-DB_DATA=""
 
 CURRENT_DIR=$(pwd)
-BASE_DIR=(dirname $CURRENT_DIR)
-SQL_DIR="$BASE_DIR/hello_flask_2018-08-23.sql"
+BASE_DIR=($CURRENT_DIR)
+SQL_DIR="$BASE_DIR/hello_flask.sql"
 
-CurDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#CurDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # get host ip
 
@@ -69,18 +68,23 @@ start() {
   docker rm -v mysql 2>/dev/null
 
 
+#cat ${CURRENT_DIR}/conf/my.cnf
+
 # 电脑地址和 docker容器地址映射
   docker run -d --name mysql \
     -v ${CURRENT_DIR}/conf:/etc/mysql/conf.d \
     -v ${MyData}:/var/lib/mysql \
     -v ${MyLog}:/var/log/mysql \
-    -e MYSQL_ROOT_PASSWORD="$PASS" \
-    -p 3305:3306\
+    -e MYSQL_ROOT_PASSWORD=newpass \
+    -p 3305:3306 \
     --log-opt max-size=10m \
     --log-opt max-file=9 \
     mysql:5.6
 
   check_exec_success "$?" "start mysql container"
+  # 导入数据
+  sleep 3
+  dump_sql
 }
 
 stop() {
@@ -99,23 +103,32 @@ destroy() {
 }
 
 createdb() {
-  docker exec mysql mysql -u $USER -p$PASS -e "create database $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+  docker exec mysql mysql -h $HOST -u $USER  -e "create database $1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 [ $? -eq 0 ] && echo Created DB SUCCESS! || echo DB already exist
 }
 
-createdb(){
-mysql -h $HOST -P $PORT  -u$USER -p$PASS <<EOF 2>/dev/null
-CREATE DATABASE $DB_NAME;
-EOF
+#createdb(){
+#mysql -h $HOST -P $PORT  -u$USER -p$PASS <<EOF 2>/dev/null
+#CREATE DATABASE $DB_NAME;
+#EOF
+#
+#}
 
-}
-
+# 导入sql数据
 dump_sql(){
-db_name=$1
-sql_file=$2
+createdb $DB_NAME
 
+docker exec -i mysql mysql -h $HOST -uroot  hello_flask < $SQL_DIR
 
+#docker exec -i mysql mysql -uroot -h 127.0.0.1 hello_flask < $SQL_DIR
 
+#mysql -u$USER -P $PORT -h $HOST $DB_NAME < $SQL_DIR
+if [[ $? == 0 ]]; then
+echo "导入数据成功"
+else
+echo "导入数据失败，状态码为 $?"
+exit $?
+fi
 }
 
 
@@ -131,7 +144,7 @@ case "$1" in
     start
     ;;
   destroy) destroy ;;
-  dump_sql) dump_sql $1 $2;;
+  dump_sql) dump_sql ;;
   createdb) createdb $2;;
   *)
     echo "Usage:"
