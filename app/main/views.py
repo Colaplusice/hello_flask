@@ -1,16 +1,17 @@
-# encoding=utf-8
+import os
+from datetime import datetime
+
 from flask import render_template, jsonify, redirect, abort, flash, \
     make_response, url_for, request, current_app, Response
-from app import db
 from flask_login import login_required, current_user
+
+from app import db
 from . import forms
 from . import main
-from datetime import datetime
 from ..decorators import amdin_required, permission_required
-# from ..models import
 from ..models.Page_view import View_message, User_message
-from ..models.Users import User
 from ..models.Role import Role
+from ..models.Users import User
 from ..models.models import Permisson, Post, Comment, Message, Notification
 
 
@@ -431,13 +432,17 @@ def all_visit():
     all = View_message.query.count()
     return Response(str(all))
 
-#
-# # 给values dict 新增加了个 timestamp
-# def dated_url_for(endpoint, **values):
-#     if endpoint == 'static':
-#         filename = values.get('filename', None)
-#         if filename:
-#             file_path = (os.path.join(app.root_path, endpoint, filename))
-#             values['q'] = int(os.stat(file_path).st_atime)
-#
-#     return url_for(endpoint, **values)
+
+@main.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(current_app.root_path,
+                                     endpoint, filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)

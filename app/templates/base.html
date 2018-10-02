@@ -5,7 +5,7 @@
 {% endblock %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" type="text/css" href="/static/css/my_css.css">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static',filename='css/my_css.css') }}>
     <link rel="shortcut icon" href="{{ url_for('static',filename='image/1_37.jpg') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename = 'image/favicon.ico') }}"
           type="image/x-icon">
@@ -20,12 +20,12 @@
                 <li class="nav-item"><a class="nav-link"
                                         href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.post_article') }}">写文章</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信 </a></li>
+
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('main.tasks') }}">任务队列</a></li>
                 {% set new_messages = current_user.new_messages() %}
                 <span id="message_count" class="badge" style="visibility: {% if new_messages %}
                     visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
-                </a></li>
                 <li class="nav-item"><a href="{{ url_for('main.export_posts') }}">导出你的文章</a></li>
             {% endif %}
             {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
@@ -181,26 +181,7 @@
             });
         {% endif %}
 
-
-
-        (function () {
-            var img = new Image(),
-                url = encodeURIComponent(document.location.href),
-                title = encodeURIComponent(document.title),
-                ref = encodeURIComponent(document.referrer);
-            {#img.src='http://www.bkjx.sdu.edu.cn/dfiles/17838/css/style1/images/banner.jpg';#}
-            img.src = '127.0.0.1:5000/a.gif?url=' + url + '&t=' + title + '&ref=' + ref;
-        })();
-
-        $.when($.ready).then(function () {
-            alert('b本')
-            // Document is ready.
-        });
-
-
     </script>
-    <script src=" {{ url_for('static',filename='js/bootstrap.js') }}"></script>
-    <script src=" {{ url_for('static',filename='js/jquery.js') }}"></script>
     <script src=" {{ url_for('static',filename='js/my.js') }}"></script>
     {{ moment.include_moment() }}
     {{ moment.lang('zh-CN') }}

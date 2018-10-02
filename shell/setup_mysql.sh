@@ -30,8 +30,9 @@ fi
 
 
 # set data dir
-MyData=~/docker_data/mysql
+MyData=~/docker_mysql/mysql
 MyLog=~/docker_mysql/mysql_log
+
 
 
 check_non_empty() {
@@ -70,12 +71,13 @@ start() {
 
 #cat ${CURRENT_DIR}/conf/my.cnf
 
+
 # 电脑地址和 docker容器地址映射
   docker run -d --name mysql \
     -v ${CURRENT_DIR}/conf:/etc/mysql/conf.d \
     -v ${MyData}:/var/lib/mysql \
     -v ${MyLog}:/var/log/mysql \
-    -e MYSQL_ROOT_PASSWORD=newpass \
+    -e MYSQL_ROOT_PASSW ORD=newpass \
     -p 3305:3306 \
     --log-opt max-size=10m \
     --log-opt max-file=9 \

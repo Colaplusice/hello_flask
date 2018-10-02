@@ -29,7 +29,6 @@ class View_message(db.Model):
         db.session.commit()
 
 
-
 class User_message(db.Model):
     __tablename = 'user_message'
     id = db.Column(db.Integer, primary_key=True)

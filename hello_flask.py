@@ -8,7 +8,8 @@ from flask_migrate import Migrate, MigrateCommand
 # 从环境变量中读取config否则设置为default
 from app.models.Users import User
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+# app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app('development')
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
