@@ -37,36 +37,46 @@ class User(UserMixin, db.Model):
     # 最后访问日期
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
-    followed = db.relationship('Follow', foreign_keys=[Follow.followed_id],
-                               backref=db.backref('follower', lazy='joined'),
-                               lazy='dynamic', cascade='all,delete-orphan')
+    followed = db.relationship(
+        'Follow',
+        foreign_keys=[Follow.followed_id],
+        backref=db.backref('follower', lazy='joined'),
+        lazy='dynamic',
+        cascade='all,delete-orphan',
+    )
 
-    follower = db.relationship('Follow',
-                               foreign_keys=[Follow.follower_id],
-                               backref=db.backref('followed', lazy='joined'),
-                               lazy='dynamic', cascade='all,delete-orphan')
+    follower = db.relationship(
+        'Follow',
+        foreign_keys=[Follow.follower_id],
+        backref=db.backref('followed', lazy='joined'),
+        lazy='dynamic',
+        cascade='all,delete-orphan',
+    )
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
 
     # 和message关联
-    messages_sent = db.relationship('Message',
-                                    foreign_keys=[Message.sender_id],
-                                    backref='author', lazy='dynamic')
-    messages_received = db.relationship('Message',
-                                        foreign_keys=[Message.recipient_id],
-                                        backref='recipient',
-                                        lazy='dynamic')
+    messages_sent = db.relationship(
+        'Message', foreign_keys=[Message.sender_id], backref='author', lazy='dynamic'
+    )
+    messages_received = db.relationship(
+        'Message',
+        foreign_keys=[Message.recipient_id],
+        backref='recipient',
+        lazy='dynamic',
+    )
 
-    notifications = db.relationship('Notification', backref='user',
-                                    lazy='dynamic')
+    notifications = db.relationship('Notification', backref='user', lazy='dynamic')
 
     last_message_read_time = db.Column(db.DateTime)
 
     def new_message(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         # 返回从未看过的message
-        return Message.query.filter_by(recipient=self).filter(
-            Message.timestamp > last_read_time
-        ).count()
+        return (
+            Message.query.filter_by(recipient=self)
+            .filter(Message.timestamp > last_read_time)
+            .count()
+        )
 
     def follow(self, user):
         if not self.is_following(user):
@@ -90,8 +100,9 @@ class User(UserMixin, db.Model):
 
     @property
     def followed_posts(self):
-        return Post.query.join(Follow, Follow.followed_id == Post.author_id). \
-            filter(Follow.follower_id == self.id)
+        return Post.query.join(Follow, Follow.followed_id == Post.author_id).filter(
+            Follow.follower_id == self.id
+        )
 
     # 查看是否关注user用户
     def is_following(self, user):
@@ -105,28 +116,28 @@ class User(UserMixin, db.Model):
 
     # 生成令牌
     def generate_auth_token(self, expiration):
-        s = Serializer(current_app.config['SECRET_KEY'],
-                       expires_in=expiration)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
         return s.dumps({'id': self.id}).decode('ascii')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.email is not None and self.avatar_hash is None:
-            self.avatar_hash = hashlib.md5(
-                self.email.encode('utf-8')).hexdigest()
+            self.avatar_hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
 
         # 配置role_id
         if not self.role:
             if self.email == current_app.config['FLASKY_ADMIN']:
-                self.role = Role.query.filter_by(permissions=0xff).first()
+                self.role = Role.query.filter_by(permissions=0xFF).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
 
         # 可以在init时候再加一步，加上对自己的关注
 
     def can(self, permissions):
-        return self.role is not None \
-               and (self.role.permissions & permissions) == permissions
+        return (
+            self.role is not None
+            and (self.role.permissions & permissions) == permissions
+        )
 
     def isAdministrator(self):
         return self.can(Permisson.ADMINISTER)
@@ -168,16 +179,19 @@ class User(UserMixin, db.Model):
         from sqlalchemy.exc import IntegrityError
         from random import seed
         import forgery_py
+
         seed()
         for i in range(count):
-            u = User(email=forgery_py.internet.email_address(),
-                     username=forgery_py.internet.user_name(True),
-                     password=forgery_py.lorem_ipsum.word(),
-                     confirmed=True,
-                     name=forgery_py.name.full_name(),
-                     location=forgery_py.address.city(),
-                     about_me=forgery_py.lorem_ipsum.sentence(),
-                     member_since=forgery_py.date.date(True))
+            u = User(
+                email=forgery_py.internet.email_address(),
+                username=forgery_py.internet.user_name(True),
+                password=forgery_py.lorem_ipsum.word(),
+                confirmed=True,
+                name=forgery_py.name.full_name(),
+                location=forgery_py.address.city(),
+                about_me=forgery_py.lorem_ipsum.sentence(),
+                member_since=forgery_py.date.date(True),
+            )
             db.session.add(u)
             try:
                 db.session.commit()
@@ -207,9 +221,9 @@ class User(UserMixin, db.Model):
         else:
             url = 'http://www.gravatar.com/avatar'
         hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
-        return '{url}/{hash}?s={size}&d={default}&r={rating}' \
-            .format(url=url, hash=hash, size=size, default=default,
-                    rating=rating)
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating
+        )
 
     # 刷新访问时间
     def ping(self):
@@ -249,15 +263,13 @@ class User(UserMixin, db.Model):
             'username': self.username,
             'member_since': self.member_since,
             'last_seen': self.last_seen,
-            'posts': url_for('api.get_user_followed_posts', id=self.id,
-                             _external=True),
-            'post_count': self.posts.count()
+            'posts': url_for('api.get_user_followed_posts', id=self.id, _external=True),
+            'post_count': self.posts.count(),
         }
         return json_user
 
     def save_task(self, task_id):
-        task = Task(id=task_id, name='user task', description='',
-                    user=self)
+        task = Task(id=task_id, name='user task', description='', user=self)
         db.session.add(task)
 
     # 得到所有正在进行的任务
@@ -276,8 +288,11 @@ class User(UserMixin, db.Model):
     # 返回未阅读消息的数目
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
-        unread_messages_num = Message.query.filter_by(recipient=self). \
-            filter(Message.timestamp > last_read_time).count()
+        unread_messages_num = (
+            Message.query.filter_by(recipient=self)
+            .filter(Message.timestamp > last_read_time)
+            .count()
+        )
         return unread_messages_num
 
     def __repr__(self):

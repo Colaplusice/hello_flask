@@ -2,77 +2,90 @@
 
 
 {% block page_content %}
-<div class="page-header">
-<img  class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=128) }}">
+    <div class="page-header">
+        <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=128) }}">
 
-    <div class="profile-header">
-         <h1>{{ user.username }}</h1>
-    {% if user.name or user.location %}
-<p>
-{% if user.name %}{{ user.name }}<br> {% endif %}
-{% if user.location %} From<a href="http://maps.google.com/?q={{ user.location }}">
-    {{ user.location }}</a> <br> {% endif %}
+        <div class="profile-header">
+            <h1>{{ user.username }}</h1>
+            {% if user.name or user.location %}
+                <p>
+                    {% if user.name %}{{ user.name }}<br> {% endif %}
+                    {% if user.location %} From<a href="http://maps.google.com/?q={{ user.location }}">
+                        {{ user.location }}</a> <br> {% endif %}
 
-    {% if user.about_me  %}
-        <p>{{ user.about_me }} </p>
-        {% endif %}
-
-
+                    {% if user.about_me %}
+                        <p>{{ user.about_me }} </p>
+                    {% endif %}
 
 
-{% endif %}
 
-{% if user==current_user %}
 
-<a href="{{ url_for('.edit_profile')}}" class="btn-default">修改信息</a>
-    {% else %}
-    <a href="{{ url_for('.send_message',recipient=user.username) }}" class=" btn btn-success">私信</a>
-{% endif %}
-{% if current_user.isAdministrator() %}
-    <div class="post-footer">
-        <a class="btn btn-danger"href="{{ url_for('.edit_profile_admin',id=user.id) }}">修改信息</a>
+            {% endif %}
+
+            {% if user==current_user %}
+
+                <a href="{{ url_for('.edit_profile') }}" class="btn-default">修改信息</a>
+            {% else %}
+                <a href="{{ url_for('.send_message',recipient=user.username) }}" class=" btn btn-success">私信</a>
+            {% endif %}
+            {% if current_user.isAdministrator() %}
+                <div class="post-footer">
+                    <a class="btn btn-danger" href="{{ url_for('.edit_profile_admin',id=user.id) }}">修改信息</a>
+                </div>
+
+
+            {% endif %}
+            {% if current_user.is_authenticated %}
+                {% if not current_user.get_task_in_progress('export_posts') %}
+                    <p>
+                        <button class="btn btn-primary" id="start-export-post">
+                            导出你的文章
+                        </button>
+                    </p>
+                {% endif %}
+
+            {% endif %}
+
+
+        </div>
+
     </div>
-
-
-{% endif %}
-    {% if current_user.is_authenticated%}
-          {% if not current_user.get_task_in_progress('export_posts') %}
-    <p > <a class="btn btn-primary" href="{{ url_for('main.export_posts') }}">
-        导出你的文章
-    </a>
-    </p>
-    {% endif %}
-
-    {% endif %}
-
-
-    </div>
-
-</div>
 
     <h3>{{ user.username }}的文章</h3>
     {% include '_posts.html' %}
 
     <div class="user_follow">
-    {% if current_user.can(Permisson.FOLLOW) and user != current_user %}
-    {% if not current_user.is_following(user) %}
-    <a href="{{ url_for('.follow',username=user.username) }}" class="btn btn-primary">
-    关注</a>
-    {% else %}
-<a href="{{ url_for('.unfollow',username=user.username)}}" class="btn btn-default">取消关注</a>
-    {% endif %}
-    {% endif %}
-{#    查看关注username的人数#}
-<a href="{{ url_for('.followers',username=user.username) }}">关注者:
-<span class="badge"> {{ user.follower.count() - 1 }} </span>
-</a>
-{#    查看被username关注的人数#}
-    <a href="{{ url_for('.followed_by',username=user.username) }}">关注的人:
-<span class="badge"> {{ user.followed.count() - 1 }} </span>
-</a>
-{% if current_user.is_authenticated and user!=current_user and user.is_following(current_user) %}
-<span class="label label-default">Follows you</span>
-{% endif %}
-</div>
+        {% if current_user.can(Permisson.FOLLOW) and user != current_user %}
+            {% if not current_user.is_following(user) %}
+                <a href="{{ url_for('.follow',username=user.username) }}" class="btn btn-primary">
+                    关注</a>
+            {% else %}
+                <a href="{{ url_for('.unfollow',username=user.username) }}" class="btn btn-default">取消关注</a>
+            {% endif %}
+        {% endif %}
+        {#    查看关注username的人数#}
+        <a href="{{ url_for('.followers',username=user.username) }}">关注者:
+            <span class="badge"> {{ user.follower.count() - 1 }} </span>
+        </a>
+        {#    查看被username关注的人数#}
+        <a href="{{ url_for('.followed_by',username=user.username) }}">关注的人:
+            <span class="badge"> {{ user.followed.count() - 1 }} </span>
+        </a>
+        {% if current_user.is_authenticated and user!=current_user and user.is_following(current_user) %}
+            <span class="label label-default">Follows you</span>
+        {% endif %}
+    </div>
 
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+     <script>
+
+        $(function () {
+            $('#start-export-post').click(
+                start_export_post
+            )
+
+        });
+    </script>
 {% endblock %}

@@ -393,9 +393,6 @@ def export_posts():
     # if current_user.get_task_in_progress('export_posts'):
     #     flash('已经有一个任务在运行了，请您等一下')
     #     return redirect(url_for('main.user', username=current_user.username))
-    # else:
-    # 添加到任务队列来完成，所以是异步的
-    # return_msg = export_async_posts.delay(current_user.id)
     task = export_async_posts.apply_async(args=[current_user.id])
     current_user.save_task(task.id)
     # return_msg = current_user.launch_task('export_posts', '正在导出文章...')
@@ -411,6 +408,12 @@ def export_posts():
         {'Location': url_for('.get_export_progress_status', task_id=task.id)},
     )
     # return redirect(url_for('main.user', username=current_user.username))
+
+
+@main.route('/export_posts_view')
+@login_required
+def export_posts_view():
+    return render_template('user.html',user=current_user)
 
 
 @main.route('/send_message/<recipient>', methods=['GET', 'POST'])

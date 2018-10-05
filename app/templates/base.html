@@ -26,7 +26,7 @@
                 {% set new_messages = current_user.new_messages() %}
                 <span id="message_count" class="badge" style="visibility: {% if new_messages %}
                     visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
-                <li class="nav-item"><a href="{{ url_for('main.export_posts') }}">导出你的文章</a></li>
+                <li class="nav-item"><a href="{{ url_for('main.export_posts_view') }}">导出你的文章</a></li>
             {% endif %}
             {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
                 <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
@@ -51,17 +51,18 @@
 {% block content %}
     <div class="container-fluid">
         {% if current_user.is_authenticated %}
-            {% with tasks=current_user.get_tasks_in_progress() %}
-                {#{% if  %}#}
-                {% for task in tasks %}
-                    <a> dasdasd</a>
-                    <div class="alert alert-success" role="alert">
-                        {{ task.description }}
-                        <span id="{{ task.id }}-progress">0</span>%
-                    </div>
-                {% endfor %}
-                {#    {% endif %}#}
-            {% endwith %}
+            {#            {% with tasks=current_user.get_tasks_in_progress() %}#}
+            {#{% if  %}#}
+            {#                {% for task in tasks %}#}
+            <div class="offset-1 col-md-6 col-sm-12">
+            <div class="alert alert-success" id="progress_bar" hidden role="alert">
+                导出进度：
+                {#                        {{ task.description }}#}
+                <span id="task-progress">0</span>%
+            </div>
+            {#                {% endfor %}#}
+            {#                    {% endif %}#}
+            {#            {% endwith %}#}
         {% endif %}
         {% for message in get_flashed_messages() %}
             <div class="offset-1 col-md-6 alert alert-warning">
@@ -69,19 +70,17 @@
                 {{ message }}
             </div>
         {% endfor %}
-
+        </div>
 
         <div class="row">
             <div class="offset-1 col-md-6">
                 {% block page_content %}
-                    {#                    <div class="container">#}
                     {% if current_user.is_authenticated %}
                         {% with tasks=current_user.get_tasks_in_progress() %}
                             {% if tasks %}
                                 {% for task in tasks %}
                                     <div class="alert alert-success" role="alert">
                                         {{ task.description }}
-
                                         <span id="{{ task.id }}-progress"> {{ task.get_progress() }} </span>
                                     </div>
                                 {% endfor %}
@@ -90,7 +89,6 @@
                             {% endif %}
 
                         {% endwith %}
-                        {#                    </div>#}
                     {% endif %}
                 {% endblock %}
             </div>
@@ -147,7 +145,13 @@
 
     <script>
         function set_task_progress(task_id, progress) {
-            $('#' + task_id + '-progress').text(progress);
+            $('#progress_bar').removeAttr("hidden");
+            $('#task-progress').text(progress);
+            if (progress === 100) {
+                alert('导出成功！');
+                $('#progress_bar').attr("hidden", 1);
+
+            }
         }
 
         {#更新id 为message的 的值和css#}
@@ -193,8 +197,8 @@
             $.getJSON(status_url, function (data) {
                 percent = parseInt(data['current'] * 100 / data['total']);
                 {# update progress #}
-                 var task_id=status_url.split('/');
-                set_task_progress(task_id[task_id.length-1],percent);
+                var task_id = status_url.split('/');
+                set_task_progress(task_id[task_id.length - 1], percent);
                 {#alert(percent);#}
                 $('#progress_label').text(percent);
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {

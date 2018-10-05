@@ -48,7 +48,7 @@ def export_async_posts(self, *args):
             }
         )
         i += 1
-        time.sleep(1)
+        time.sleep(5)
     return {'current': total_post, 'total': total_post, 'status': 'Task completed!'}
 
 
