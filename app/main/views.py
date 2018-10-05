@@ -40,7 +40,7 @@ def get_user_message():
         return
     if request.url_rule.endpoint != 'static':
         view_data = {
-            'url': request.url,
+            'url': request.url[:255],
             'ip': request.remote_addr,
             'referrer': request.referrer,
             'req_method': request.method,

@@ -183,7 +183,7 @@ class Task(db.Model):
     complete = db.Column(db.Boolean, default=False)
 
     # 取出job
-    def get_rq_job(self):
+    def get_redis_queue_job(self):
         try:
             rq_job = rq.job.Job.fetch(self.id, connection=current_app.redis)
         except(redis.exceptions.RedisError, rq.exceptions.NoSuchJobError):

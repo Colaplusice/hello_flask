@@ -13,7 +13,7 @@ from app import celery
 def send_async_email(msg):
     """Background task to send an email with Flask-Mail."""
     # send the email
-    app=current_app._get_current_object()
+    app = current_app._get_current_object()
     with app.app_context():
         mail.send(msg)
 
@@ -101,5 +101,5 @@ def taskstatus(task_id):
 @play.route('/longtask', methods=['POST'])
 def longtask():
     task = long_task.apply_async()
-    return jsonify({}), 202, {'Location': url_for('taskstatus',
+    return jsonify({}), 202, {'Location': url_for('.taskstatus',
                                                   task_id=task.id)}

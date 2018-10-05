@@ -4,7 +4,7 @@ from datetime import timedelta
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['pickle']
+CELERY_ACCEPT_CONTENT = ['pickle','json']
 
 # 任务调度 没十分钟跑次
 CELERYBEAT_SCHEDULE = {

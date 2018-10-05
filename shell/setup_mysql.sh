@@ -77,7 +77,7 @@ start() {
     -v ${CURRENT_DIR}/conf:/etc/mysql/conf.d \
     -v ${MyData}:/var/lib/mysql \
     -v ${MyLog}:/var/log/mysql \
-    -e MYSQL_ROOT_PASSW ORD=newpass \
+    -e MYSQL_ROOT_PASSWORD=newpass \
     -p 3305:3306 \
     --log-opt max-size=10m \
     --log-opt max-file=9 \

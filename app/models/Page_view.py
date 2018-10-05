@@ -6,7 +6,7 @@ class View_message(db.Model):
     __tablename__ = 'view_message'
     id = db.Column(db.Integer, primary_key=True)
     # 请求url
-    url = db.Column(db.String(64))
+    url = db.Column(db.String(256))
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
     # 用户请求的 ip地址
     ip = db.Column(db.String(16), db.ForeignKey('user_message.user_ip')

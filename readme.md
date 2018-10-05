@@ -37,7 +37,8 @@ mysql 同步连接
 
 
 数据同步:
-python hello_flask db upgrade
+python hello_flask.py db migrate
+python hello_flask.py db upgrade
 
 ## 重构
 
