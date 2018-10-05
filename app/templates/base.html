@@ -53,12 +53,13 @@
         {% if current_user.is_authenticated %}
             {% with tasks=current_user.get_tasks_in_progress() %}
                 {#{% if  %}#}
-                {#    {% for task in tasks %}#}
-                {#        <div class="alert alert-success" role="alert">#}
-                {#        {{ task.description }}#}
-                {#    <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%#}
-                {#        </div>#}
-                {#    {% endfor %}#}
+                {% for task in tasks %}
+                    <a> dasdasd</a>
+                    <div class="alert alert-success" role="alert">
+                        {{ task.description }}
+                        <span id="{{ task.id }}-progress">0</span>%
+                    </div>
+                {% endfor %}
                 {#    {% endif %}#}
             {% endwith %}
         {% endif %}
@@ -182,6 +183,50 @@
         {% endif %}
 
     </script>
+
+
+
+
+    <script>
+
+        function update_progress(status_url) {
+            $.getJSON(status_url, function (data) {
+                percent = parseInt(data['current'] * 100 / data['total']);
+                {# update progress #}
+                 var task_id=status_url.split('/');
+                set_task_progress(task_id[task_id.length-1],percent);
+                {#alert(percent);#}
+                $('#progress_label').text(percent);
+                if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                    {#alert(data['state'])#}
+                }
+                else {
+                    // rerun in 2 seconds
+                    setTimeout(function () {
+                        update_progress(status_url);
+                    }, 2000);
+                }
+            });
+        }
+
+        function start_export_post() {
+            // send ajax POST request to start background job
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for('main.export_posts') }}',
+                success: function (data, status, request) {
+                    status_url = request.getResponseHeader('Location');
+                    update_progress(status_url);
+                },
+                error: function () {
+                    alert('Unexpected error');
+                }
+            });
+        }
+
+
+    </script>
+
     {{ super() }}
     <script src=" {{ url_for('static',filename='js/my.js') }}"></script>
     {{ moment.include_moment() }}

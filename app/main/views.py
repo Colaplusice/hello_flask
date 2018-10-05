@@ -1,8 +1,18 @@
 import os
 from datetime import datetime
 
-from flask import render_template, jsonify, redirect, abort, flash, \
-    make_response, url_for, request, current_app, Response
+from flask import (
+    render_template,
+    jsonify,
+    redirect,
+    abort,
+    flash,
+    make_response,
+    url_for,
+    request,
+    current_app,
+    Response,
+)
 from flask_login import login_required, current_user
 
 from app import db
@@ -12,7 +22,8 @@ from ..decorators import amdin_required, permission_required
 from ..models.Page_view import View_message, User_message
 from ..models.Role import Role
 from ..models.Users import User
-from ..models.models import Permisson, Post, Comment, Message, Notification
+from ..models.models import Permisson, Post, Comment, Message, Notification, Task
+from ..celery_tasks import export_async_posts, change_task_status
 
 
 # 设置cookie为0 然后跳转到Index页面
@@ -45,11 +56,9 @@ def get_user_message():
             'referrer': request.referrer,
             'req_method': request.method,
             'end_point': request.url_rule.endpoint,
-            'user_agent': request.user_agent
+            'user_agent': request.user_agent,
         }
-        user_data = {
-            'ip': request.remote_addr
-        }
+        user_data = {'ip': request.remote_addr}
         if view_data.get('user_agent'):
             User_message.create_or_update_from_request(user_data)
             View_message.create_from_request(view_data)
@@ -60,18 +69,15 @@ def get_user_message():
 @permission_required(Permisson.MODERATE_COMMENTS)
 def moderate():
     page = request.args.get('page', 1, type=int)
-    # 提取一页评论 吧把分页对象也传入html
-    pagination = Comment.query.order_by(Comment.timestamp.desc()) \
-        .paginate(page,
-                  per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
-                  error_out=False
-                  )
+    pagination = Comment.query.order_by(Comment.timestamp.desc()).paginate(
+        page, per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'], error_out=False
+    )
 
     comments = pagination.items
 
     return render_template(
-        'moderate.html', comments=comments, pagination=pagination,
-        page=page)
+        'moderate.html', comments=comments, pagination=pagination, page=page
+    )
 
 
 # @main.after_app_request
@@ -90,10 +96,12 @@ def moderate():
 @main.route('/post-article', methods=['GET', 'POST'])
 def post_article():
     form = forms.PostForm()
-    if current_user.can(Permisson.WRITE_ARTICLES) and \
-            form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.body.data,
-                    author=current_user._get_current_object())
+    if current_user.can(Permisson.WRITE_ARTICLES) and form.validate_on_submit():
+        post = Post(
+            title=form.title.data,
+            body=form.body.data,
+            author=current_user._get_current_object(),
+        )
         # 发表文章
         db.session.add(post)
         return redirect(url_for('main.post_article'))
@@ -113,15 +121,10 @@ def index():
     else:
         query = Post.query
     pagination = query.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-        error_out=False
+        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False
     )
     posts = pagination.items
-    return_msg = render_template(
-        'index.html',
-        posts=posts,
-        pagination=pagination
-    )
+    return_msg = render_template('index.html', posts=posts, pagination=pagination)
 
     return return_msg
 
@@ -140,36 +143,32 @@ def post(id):
     post = Post.query.get_or_404(id)
     form = forms.CommentForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data, post=post,
-                          author=current_user._get_current_object())
+        comment = Comment(
+            body=form.body.data, post=post, author=current_user._get_current_object()
+        )
         db.session.add(comment)
         flash('your comment has been published')
         return redirect(url_for('.post', id=post.id, page=-1))
     page = request.args.get('page', 1, type=int)
     if page == -1:
-        page = (post.comments.count() - 1) / \
-               current_app.config['FLASKY_COMMENTS_PRE_PAGE'] + 1
-    pagnation = post.comments.order_by(Comment.timestamp.asc()) \
-        .paginate(page,
-                  per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'],
-                  error_out=False
-                  )
+        page = (post.comments.count() - 1) / current_app.config[
+            'FLASKY_COMMENTS_PRE_PAGE'
+        ] + 1
+    pagnation = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['FLASKY_COMMENTS_PRE_PAGE'], error_out=False
+    )
 
     comments = pagnation.items
-    return render_template('post.html',
-                           post=post,
-                           form=form,
-                           comments=comments,
-                           pagination=pagnation
-                           )
+    return render_template(
+        'post.html', post=post, form=form, comments=comments, pagination=pagnation
+    )
 
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):
     post = Post.query.get_or_404(id)
-    if current_user != post.author and \
-            not current_user.can(Permisson.ADMINISTER):
+    if current_user != post.author and not current_user.can(Permisson.ADMINISTER):
         abort(403)
     form = forms.PostForm()
     if form.validate_on_submit():
@@ -220,16 +219,20 @@ def followers(username):
     page = request.args.get('page', 1, type=int)
 
     pagination = user.follower.paginate(
-        page, per_page=current_app.config['FLASKY_USER_PER_PAGE'],
-        error_out=False
+        page, per_page=current_app.config['FLASKY_USER_PER_PAGE'], error_out=False
     )
-    follows = [{'user': item.follower, 'timestamp': item.timestamp
-                } for item in pagination.items]
-    return render_template('followers.html',
-                           user=user, title='Followers of',
-                           endpoint='.followers',
-                           pagination=pagination,
-                           follows=follows)
+    follows = [
+        {'user': item.follower, 'timestamp': item.timestamp}
+        for item in pagination.items
+    ]
+    return render_template(
+        'followers.html',
+        user=user,
+        title='Followers of',
+        endpoint='.followers',
+        pagination=pagination,
+        follows=follows,
+    )
 
 
 # username关注的用户
@@ -241,16 +244,23 @@ def followed_by(username):
         return redirect(url_for('.index'))
 
     page = request.args.get('page', 1, type=int)
-    pagination = user.followed.paginate(page, per_page=current_app.config[
-        'FLASKY_USER_PER_PAGE'],
-                                        error_out=False)
+    pagination = user.followed.paginate(
+        page, per_page=current_app.config['FLASKY_USER_PER_PAGE'], error_out=False
+    )
 
-    followed = [{'user': item.followed, 'timestamp': item.timestamp}
-                for item in pagination.items]
+    followed = [
+        {'user': item.followed, 'timestamp': item.timestamp}
+        for item in pagination.items
+    ]
 
-    return render_template('followers.html', user=user, title="Followed by",
-                           endpoint='.followed_by',
-                           pagination=pagination, follows=followed)
+    return render_template(
+        'followers.html',
+        user=user,
+        title="Followed by",
+        endpoint='.followed_by',
+        pagination=pagination,
+        follows=followed,
+    )
 
 
 @login_required
@@ -311,8 +321,7 @@ def moderate_enable(id):
         comment.disabled = False
         db.session.add(comment)
         # 将request传递过来的page参数再传给moderate方法
-    return redirect(
-        url_for('.moderate', page=request.args.get('page', type=int)))
+    return redirect(url_for('.moderate', page=request.args.get('page', type=int)))
 
 
 @main.route('/moderate/disable/<int:id>')
@@ -323,8 +332,7 @@ def moderate_disable(id):
     if comment and not comment.disabled:
         comment.disabled = True
         db.session.add(comment)
-    return redirect(
-        url_for('.moderate', page=request.args.get('page', type=int)))
+    return redirect(url_for('.moderate', page=request.args.get('page', type=int)))
 
 
 @main.route('/delete_article/<int:id>')
@@ -334,8 +342,7 @@ def delete_article(id):
     article = Post.query.get_or_404(id)
     print(current_user)
     if article:
-        if article.author != current_user and current_user.can(
-                Permisson.ADMINISTER):
+        if article.author != current_user and current_user.can(Permisson.ADMINISTER):
             abort(403)
         db.session.delete(article)
         flash('删除成功')
@@ -345,21 +352,65 @@ def delete_article(id):
     return redirect(url_for('.index'))
 
 
-@main.route('/export_posts')
+@main.route('/status/<task_id>')
+def get_export_progress_status(task_id):
+    task = export_async_posts.AsyncResult(task_id)
+    if task.state == 'PENDING':
+        response = {
+            'state': task.state,
+            'current': 0,
+            'total': 1,
+            'status': 'Pending...',
+        }
+    elif task.state != 'FAILURE':
+        response = {
+            'state': task.state,
+            'current': task.info.get('current', 0),
+            'total': task.info.get('total', 1),
+            'status': task.info.get('status', ''),
+        }
+        if 'result' in task.info:
+            print('*' * 30)
+            response['result'] = task.info['result']
+
+        if response['status'] == 'Task completed!':
+            change_task_status.delay(task_id)
+    else:
+        # something went wrong in the background job
+        response = {
+            'state': task.state,
+            'current': 1,
+            'total': 1,
+            'status': str(task.info),  # this is the exception raised
+        }
+
+    return jsonify(response)
+
+
+@main.route('/export_posts', methods=['GET', 'POST'])
 @login_required
 def export_posts():
-    if current_user.get_task_in_progress('export_posts'):
-        flash('已经有一个任务在运行了，请您等一下')
-        return redirect(url_for('main.user', username=current_user.username))
-    else:
-        # 添加到任务队列来完成，所以是异步的
-        return_msg = current_user.launch_task('export_posts', '正在导出文章...')
-        if return_msg == 'success':
-            flash('文章正在导出，请稍等')
-            db.session.commit()
-        else:
-            flash('导出发生了错误..请联系管理员')
-        return redirect(url_for('main.user', username=current_user.username))
+    # if current_user.get_task_in_progress('export_posts'):
+    #     flash('已经有一个任务在运行了，请您等一下')
+    #     return redirect(url_for('main.user', username=current_user.username))
+    # else:
+    # 添加到任务队列来完成，所以是异步的
+    # return_msg = export_async_posts.delay(current_user.id)
+    task = export_async_posts.apply_async(args=[current_user.id])
+    current_user.save_task(task.id)
+    # return_msg = current_user.launch_task('export_posts', '正在导出文章...')
+    # if return_msg == 'success':
+    #     flash('文章正在导出，请稍等')
+    # 发送邮件
+    # db.session.commit()
+    # else:
+    #     flash('导出发生了错误..请联系管理员')
+    return (
+        jsonify({}),
+        202,
+        {'Location': url_for('.get_export_progress_status', task_id=task.id)},
+    )
+    # return redirect(url_for('main.user', username=current_user.username))
 
 
 @main.route('/send_message/<recipient>', methods=['GET', 'POST'])
@@ -367,20 +418,19 @@ def export_posts():
 # 唯一username
 def send_message(recipient):
     receive_user = User.query.filter_by(username=recipient).first_or_404()
-
-    # 会自动从request中加载MessageForm
     form = forms.MessageForm()
 
     if form.validate_on_submit():
-        message = Message(author=current_user, recipient=receive_user,
-                          body=form.message.data)
-        # 将new_messages函数的返回值传递给add_notification方法 是一个数字
+        message = Message(
+            author=current_user, recipient=receive_user, body=form.message.data
+        )
         receive_user.add_notification('未读的消息数', receive_user.new_messages())
         db.session.add(message)
         db.session.commit()
         flash('你的消息已经发送给了{}'.format(receive_user.username))
-    return render_template('send_messages.html', title='发送消息',
-                           form=form, recipient=recipient)
+    return render_template(
+        'send_messages.html', title='发送消息', form=form, recipient=recipient
+    )
 
 
 @main.route('/messages')
@@ -392,17 +442,19 @@ def messages():
     db.session.commit()
     page = request.args.get('page', 1, type=int)
     messages = current_user.messages_received.order_by(
-        Message.timestamp.desc()).paginate(
-        page, current_app.config['FLASKY_USER_PER_PAGE'], False
+        Message.timestamp.desc()
+    ).paginate(page, current_app.config['FLASKY_USER_PER_PAGE'], False)
+    next_url = (
+        url_for('.messages', page=messages.next_num) if messages.has_next else None
     )
-    next_url = url_for('.messages', page=messages.next_num) \
-        if messages.has_next else None
 
-    pre_url = url_for('.messages', page=messages.prev_num) \
-        if messages.has_prev else None
+    pre_url = (
+        url_for('.messages', page=messages.prev_num) if messages.has_prev else None
+    )
 
-    return render_template('messages.html', messages=messages.items,
-                           next_url=next_url, pre_url=pre_url)
+    return render_template(
+        'messages.html', messages=messages.items, next_url=next_url, pre_url=pre_url
+    )
 
 
 # 某个时间点以后的通知 时间包含在请求中
@@ -411,15 +463,14 @@ def messages():
 def notifications():
     # since = request.args.get('since', 0.0, type=float)
     # asc升序
-    notifications = current_user.notifications.filter_by(
-        Notification.timestamp.asc())
+    notifications = current_user.notifications.filter_by(Notification.timestamp.asc())
 
-    return jsonify([{
-        'name': n.name,
-        'data': n.get_data(),
-        'timestamp': n.timestamp
-    } for n in notifications
-    ])
+    return jsonify(
+        [
+            {'name': n.name, 'data': n.get_data(), 'timestamp': n.timestamp}
+            for n in notifications
+        ]
+    )
 
 
 @main.route('/task_queue')
@@ -442,7 +493,6 @@ def dated_url_for(endpoint, **values):
     if endpoint == 'static':
         filename = values.get('filename', None)
         if filename:
-            file_path = os.path.join(current_app.root_path,
-                                     endpoint, filename)
+            file_path = os.path.join(current_app.root_path, endpoint, filename)
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)

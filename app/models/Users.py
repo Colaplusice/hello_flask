@@ -255,16 +255,10 @@ class User(UserMixin, db.Model):
         }
         return json_user
 
-        # 提交任务
-        # self 指代的数这个user对象
-
-    def lunch_task(self, name, description, *args, **kwargs):
-        rq_job = current_app.task_queue.enqueue('app.tasks.' + name, self.id,
-                                                *args, **kwargs)
-        task = Task(id=rq_job.get_id(), name=name, description=description,
+    def save_task(self, task_id):
+        task = Task(id=task_id, name='user task', description='',
                     user=self)
         db.session.add(task)
-        return task
 
     # 得到所有正在进行的任务
     def get_tasks_in_progress(self):
@@ -272,26 +266,6 @@ class User(UserMixin, db.Model):
 
     def get_task_in_progress(self, name):
         return Task.query.filter_by(user=self, name=name, complete=False).all()
-
-    # 运行任务
-    def launch_task(self, name, description, *args, **kwargs):
-
-        try:
-            # 第一个参数是方法的路径 第二个参数用户名
-            rq_job = current_app.task_queue.enqueue('app.tasks.' + name,
-                                                    self.id,
-                                                    *args, **kwargs)
-            # 添加到数据库 id为任务队列对任务分配的id
-            task = Task(id=rq_job.get_id(), name=name, description=description,
-                        user=self)
-            db.session.add(task)
-            return 'success'
-        except Exception as e:
-            db.session.rollback()
-            print(e.args)
-            return 'error'
-
-        # 向数据库中更新通知 如果有重复的通知删除通知 name为通知的名称，data为数字?
 
     def add_notification(self, name, data):
         self.notifications.filter_by(name=name).delete()

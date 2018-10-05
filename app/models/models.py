@@ -190,10 +190,6 @@ class Task(db.Model):
             return None
         return rq_job
 
-    def get_progress(self):
-        job = self.get_rq_job()
-        return job.meta.get('progress', 0) if job is not None else 100
-
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)

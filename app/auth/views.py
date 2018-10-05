@@ -5,7 +5,7 @@ from .forms import LoginForm, RegisterForm, ResetForm, NewPassForm
 from ..models.Users import User
 from .. import db
 from flask_login import current_user
-from ..email import send_email
+from ..celery_tasks import send_email
 # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import login_required, login_user, logout_user
 from ..utils import Generate_reset_password_token, verify_reset_password
@@ -32,7 +32,6 @@ def logout():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print(form)
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remeber_me.data)
@@ -57,9 +56,9 @@ def register():
             db.session.add(user)
             db.session.commit()
             token = user.gernerate_confirmation_token()
-            send_email(user.email, 'Confirm your account',
-                       'auth/email/confirm', user=user, token=token
-                       )
+            send_email.delay(user.email, 'Confirm your account',
+                             'auth/email/confirm', user=user, token=token
+                             )
             flash('A confirm email have send to your account')
             return redirect(url_for('main.index'))
     return render_template('auth/register.html', form=form)
@@ -76,7 +75,7 @@ def reset_pass():
             flash('邮箱未注册')
             return redirect(url_for('auth.login'))
         token = Generate_reset_password_token(email=email)
-        send_email(email, '重置密码', template='auth/email/reset_password',
+        send_email.delay(email, '重置密码', template='auth/email/reset_password',
                    token=token)
         flash('一封邮件已经发送到您的账户上，请点击邮件确认')
         return redirect(url_for('main.index'))
@@ -151,9 +150,9 @@ def unconfirmed():
 @login_required
 def resend_confirmation():
     token = current_user.gernerate_confirmation_token()
-    send_email(current_user.email,
+    send_email.delay(current_user.email,
                'Confirm your account',
                'auth/email/confirm',
                user=current_user, token=token)
-    flash('a new mail have send to your account')
+    flash('邮件已发送到你的账户')
     return redirect(url_for('main.index'))
