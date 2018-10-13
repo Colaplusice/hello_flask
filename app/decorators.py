@@ -8,6 +8,7 @@ from .models.models import Permisson
 
 # 装饰器必须是管理员
 
+
 def permission_required(permission):
     def decorator(f):
         @wraps(f)

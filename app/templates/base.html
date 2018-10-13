@@ -202,7 +202,6 @@
                 {#alert(percent);#}
                 $('#progress_label').text(percent);
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                    {#alert(data['state'])#}
                 }
                 else {
                     // rerun in 2 seconds
@@ -214,7 +213,6 @@
         }
 
         function start_export_post() {
-            // send ajax POST request to start background job
             $.ajax({
                 type: 'POST',
                 url: '{{ url_for('main.export_posts') }}',

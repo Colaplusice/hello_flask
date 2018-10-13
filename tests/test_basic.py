@@ -7,7 +7,7 @@ from app import create_app, db
 class BasicTest(unittest.TestCase):
     # 创建测试环境
     def setUp(self):
-        self.app = create_app('testing')
+        self.app = create_app("testing")
         self.app_context = self.app.app_context()
         self.app_context.push()
 
@@ -26,4 +26,4 @@ class BasicTest(unittest.TestCase):
         # 测试在配置环境中运行
 
     def test_app_is_testing(self):
-        self.assertTrue(current_app.config['TESTING'])
+        self.assertTrue(current_app.config["TESTING"])

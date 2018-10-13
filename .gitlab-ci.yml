@@ -31,7 +31,7 @@ test_all:
 
   script:
 #    - flake8 app commands tests
-    - python hello_flask.py test
+    - python manage.py test
 
 
 #========================================== Build Image =================================================

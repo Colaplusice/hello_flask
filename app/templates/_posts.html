@@ -5,25 +5,29 @@
             <li class="post">
 
                 <div class="profile-thumbnail">
-                    {#                    <a href="{{ url_for('.user',username=post.author.username) }}">user</a>#}
                     <img class="img-rounded profile-thumbnail" src="{{ post.author.gravatar(size=60) }}">
                 </div>
                 <div class="post-content">
                     <div class="post-date"> {{ moment(post.timestamp).fromNow() }}</div>
                     <div class="post-author">
+                        {% if current_user.is_authenticated %}
+                            <span class="user_popup">
                         <a href="{{ url_for('.user',username=post.author.username) }}">{{ post.author.username }}</a>
-                    </div>
-                    <div class="post-body">
-                        {#            {% if post.body_html %}#}
-                        {#     {{ post.body_html|safe}}#}
-                        {#    {% else %}#}
-                        {#    {{ post.body}}#}
-                        {#    {% endif %}#}
-                        {% if post.title %}
-                            <a class="post-title" href="{{ url_for('.post',id=post.id) }}"> {{ post.title }}</a>
+                        </span>
+                        {% else %}
+                            <a href="{{ url_for('.user',username=post.author.username) }}">{{ post.author.username }}
+                            </a>
+
+
                         {% endif %}
 
-                    <p class="post-timestamp"> 发表时间: {{ post.timestamp }}</p>
+                    </div>
+                    <div class="post-body">
+                        {% if post.title %}
+                            <a class="post-title" href="{{ url_for('main.post',id=post.id) }}"> {{ post.title }}</a>
+                        {% endif %}
+
+                        <p class="post-timestamp"> 发表时间: {{ post.timestamp }}</p>
                     </div>
 
                     <div class="post-footer">

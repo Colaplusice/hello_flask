@@ -41,10 +41,6 @@
                     </div>
                 </div>
             </li>
-            <li class="active" id="">
-                <button id="start-export-post">导出文章</button>
-            </li>
-{#        <li class="active"> <p id="progress_label">内容是 </p> </li>#}
         </ul>
     </div>
     {% include '_posts.html' %}
@@ -59,15 +55,6 @@
 
 {% block scripts %}
     {{ super() }}
-    <script>
-
-        $(function () {
-            $('#start-export-post').click(
-                start_export_post
-            )
-
-        });
-    </script>
 
     {{ pagedown.include_pagedown() }}
 {% endblock %}

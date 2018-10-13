@@ -1,0 +1,31 @@
+<table class="table table-hover">
+    <tr>
+        <td style="border: 0px;">
+            <img src="{{ user.gravatar(64) }}" alt="">
+        </td>
+        <td>
+            {% if user.username %}
+                <a href="{{ url_for('main.user',username=username) }}">{{ user.username }}</a>
+
+                <small>
+                    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                    {#                {% if user.last_seen %}#}
+                    {#                <p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('lll') }}</p>#}
+                    {#                {% endif %}#}
+                    {#                <p>{{ _('%(count)d followers', count=user.followers.count()) }}, {{ _('%(count)d following', count=user.followed.count()) }}</p>#}
+                    {% if user != current_user %}
+                        {% if not current_user.is_following(user) %}
+                            <a href="{{ url_for('main.follow', username=user.username) }}">{{ '关注' }}</a>
+                        {% else %}
+                            <a href="{{ url_for('main.unfollow', username=user.username) }}">{{ '取关' }}</a>
+                        {% endif %}
+                    {% endif %}
+                </small>
+            {% endif %}
+
+        </td>
+
+    </tr>
+
+
+</table>

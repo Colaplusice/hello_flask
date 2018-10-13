@@ -3,21 +3,29 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature
 
-secret_key = 'hard to gess string'
+secret_key = "hard to gess string"
 
 
 def Generate_reset_password_token(email, expiration=3600):
     s = Serializer(secret_key, expires_in=expiration)
-    return s.dumps({'email': email})
+    return s.dumps({"email": email})
 
 
 def verify_reset_password(token):
     try:
         s = Serializer(secret_key)
         data = s.loads(token)
-        return (data['email'])
+        return data["email"]
     except BadSignature:
         return None
+
+
+class SerializeMixin:
+    def to_dict(self):
+        d = {}
+        for column in self.__table__.columns:
+            d[column.name] = str(getattr(self, column.name))
+            return d
 
 
 # def make_celery(app):

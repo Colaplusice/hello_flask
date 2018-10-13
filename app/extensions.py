@@ -14,6 +14,5 @@ db = SQLAlchemy()
 pagedown = PageDown()
 login_manager = LoginManager()
 bootstrap = Bootstrap()
-cache = Cache(config={'CACHE_TYPE': 'simple'})
-celery=Celery(__name__)
-
+cache = Cache(config={"CACHE_TYPE": "simple"})
+celery = Celery(__name__)
