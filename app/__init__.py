@@ -1,16 +1,19 @@
-from flask import Flask
-from redis import Redis
-from app.extensions import *
-
 # import rq
 # import logging
 # from logging.handlers import RotatingFileHandler
-import os
+
+from flask import Flask
+from redis import Redis
+
+from app.extensions import *
+from configs import config
 
 dir_name = os.path.dirname(__file__)
 
 login_manager.session_protection = "strong"
 login_manager.login_view = "auth.login"
+
+flask_env=Flask_env()
 
 
 def update_celery(app, celery):
@@ -31,6 +34,8 @@ def update_celery(app, celery):
 def create_app(config_name=os.environ.get("FLASK_ENV")):
     app = Flask(__name__)
     # print('app name is {}'.format(app.name))
+
+    flask_env.init_app(app)
     app.config.from_pyfile("../configs/celery_config.py")
     app.config.from_object(config[config_name])
     bootstrap.init_app(app)

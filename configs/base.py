@@ -6,11 +6,8 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     TZ = "Asia/Shanghai"
-    SECRET_KEY = "hard to gess string"
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    FLASKY_MAIL_SUBJECT_PREFIX = "[hello_flask]"
-    FLASKY_MAIL_SENDER = "fjl <fjl2401@163.com>"
-    FLASKY_ADMIN = "fjl2401@163.com"
+
     FLASKY_POSTS_PER_PAGE = 5
     FLASKY_USER_PER_PAGE = 10
     FLASKY_COMMENTS_PRE_PAGE = 5
