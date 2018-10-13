@@ -48,7 +48,7 @@ $(function () {
                 xhr = null;
             }
             else {
-                elem.popover('destroy');
+                elem.popover('hide');
             }
         }
     );
