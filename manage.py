@@ -3,6 +3,7 @@ import os
 from app import create_app
 from app.models.models import *
 from app.models.role import Role
+from app.models.users import Message
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 

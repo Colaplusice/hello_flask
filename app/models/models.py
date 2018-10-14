@@ -12,6 +12,7 @@ from markdown import markdown
 from app import db
 from app import login_manager
 from app.exceptions import ValidationError
+from app.utils import SearchableMixin
 
 
 class Follow(db.Model):
@@ -24,11 +25,11 @@ class Follow(db.Model):
 
 class Permisson:
     FOLLOW = 0x01
-    COMMIT = 0X02
-    WRITE_ARTICLES = 0X04
-    MODERATE_COMMENTS = 0X08
-    ADMINISTER = 0X80
-    DELETE_ARTICLE = 0X04
+    COMMIT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENTS = 0x08
+    ADMINISTER = 0x80
+    DELETE_ARTICLE = 0x04
 
 
 # 匿名用户
@@ -43,8 +44,9 @@ class AnonymousUser(AnonymousUserMixin):
 login_manager.anonymous_user = AnonymousUser
 
 
-class Post(db.Model):
+class Post(SearchableMixin,db.Model):
     __tablename__ = "posts"
+    __searchable__ = ['body']
 
     title = db.Column(db.Text)
     id = db.Column(db.Integer, primary_key=True)
@@ -69,9 +71,9 @@ class Post(db.Model):
             u = User.query.offset(randint(0, user_count - 1)).first()
             p = Post(
                 body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
-                timestamp=forgery_py.date.date(True),
-                author=u,
-            )
+                timestamp=forgery_py.date.date(True),author=u
+                     )
+
             db.session.add(p)
 
             db.session.commit()
@@ -125,7 +127,7 @@ class Post(db.Model):
         )
 
     # 转换为json资源
-    def tojson(self):
+    def to_json(self):
         json_post = {
             "url": url_for("api.get_post", _external=True, id=self.id),
             "body": self.body,
@@ -147,6 +149,8 @@ class Post(db.Model):
 
 
 db.event.listen(Post.body, "set", Post.on_changed_body)
+db.event.listen(db.session,'before_commit',SearchableMixin.before_commit)
+db.event.listen(db.session,'after_commit',SearchableMixin.after_commit)
 
 
 class Comment(db.Model):

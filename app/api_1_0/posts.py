@@ -22,7 +22,7 @@ def new_post():
     db.session.add(post)
     db.session.commit()
     return jsonify(
-        post.tojson(),
+        post.to_json(),
         201,
         {"location": url_for("api.get_post", id=post.id, _external=True)},
     )
@@ -38,7 +38,7 @@ def edit_post(id):
     post.body = request.json.get("body", post.body)
     db.session.add(post)
     # 将post对象包装为json 再返回去
-    return jsonify(post.tojson())
+    return jsonify(post.to_json())
 
 
 # 处理get请求
@@ -47,7 +47,7 @@ def get_posts():
     # 从请求中得到第几页的文章
     page = request.args.get("page", 1, type=int)
     pagination = Post.query.paginate(
-        page, per_page=current_app.config["FLASKY_POSTS_PER_PAGE"], error_out=False
+        page, per_page=current_app.config["POSTS_PER_PAGE"], error_out=False
     )
     print(pagination.total)
     posts = pagination.items
@@ -61,7 +61,7 @@ def get_posts():
 
     return jsonify(
         {
-            "posts": [post.tojson() for post in posts],
+            "posts": [post.to_json() for post in posts],
             "prev": prev,
             "next": next,
             "count": pagination.total,
@@ -74,4 +74,4 @@ def get_posts():
 # @api.route('/posts/<int:id>')
 # def get_post(id):
 #     post = Post.query.get_or_404(id)
-#     return jsonify(post.tojson())
+#     return jsonify(post.to_json())

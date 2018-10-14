@@ -4,6 +4,7 @@
 
 from flask import Flask
 from redis import Redis
+from elasticsearch import Elasticsearch
 
 from app.extensions import *
 from configs import config
@@ -49,12 +50,15 @@ def create_app(config_name=os.environ.get("FLASK_ENV")):
     # app.task_queue = rq.Queue('hello_flask-tasks', connection=app.redis)
     app.config.from_pyfile("../configs/celery_config.py")
     update_celery(app, celery)
-    from .main import main as main_blueprint
 
+    app.elasticsearch=Elasticsearch([app.config['ELASTICSEARCH_URL']])\
+    if app.config['ELASTICSEARCH_URL'] else None
+
+
+    from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
-
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
     # error
     #
@@ -77,11 +81,8 @@ def create_app(config_name=os.environ.get("FLASK_ENV")):
 
     # 注册蓝本
     from .api_1_0 import api as api_1_0_blueprint
-
     app.register_blueprint(api_1_0_blueprint, url_prefix="/api/")
 
     from .play import play as play_blueprint
-
     app.register_blueprint(play_blueprint, url_prefix="/play/")
-
     return app

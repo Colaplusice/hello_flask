@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import (
     render_template,
     jsonify,
@@ -7,6 +9,7 @@ from flask import (
     url_for,
     request,
     current_app,
+    g,
 )
 from flask_login import login_required, current_user
 
@@ -16,6 +19,8 @@ from .. import main
 from ...celery_tasks import export_async_posts
 from ...decorators import permission_required
 from ...models import Permisson, Post, Comment
+from app.main.forms import SearchForm
+from app.utils import ListPagination
 
 
 @main.route("/post/<int:id>", methods=["GET", "POST"])
@@ -149,3 +154,34 @@ def export_posts():
 @login_required
 def export_posts_view():
     return render_template("user.html", user=current_user)
+
+
+@main.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+        g.search_form = SearchForm()
+
+
+@main.route('/search')
+@login_required
+def search():
+    if not g.search_form.validate():
+        return redirect(url_for('main.index'))
+    page = request.args.get('page', type=int, default=1)
+    print(page)
+    per_page = current_app.config['POSTS_PER_PAGE']
+    posts, total = Post.search(g.search_form.q.data, page, per_page)
+    next_url = (
+        url_for('main.search', q=g.search_form.q.data, page=page + 1)
+        if total > per_page * page
+        else None
+    )
+    prev_url = (
+        url_for('main.search', q=g.search_form.q.data, page=page - 1)
+        if page > 1 else None
+    )
+    return render_template(
+        'search.html', title='搜索', posts=posts, next_url=next_url, pre_url=prev_url
+    )

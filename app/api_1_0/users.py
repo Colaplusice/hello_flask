@@ -8,7 +8,7 @@ from ..models.users import User
 @api.route("/users/<int:id>")
 def get_user(id):
     user = User.query.get_or_404(id)
-    return jsonify(user.tojson())
+    return jsonify(user.to_json())
 
 
 # 用户关注的所有文章
@@ -17,7 +17,7 @@ def get_user_followed_posts(id):
     user = User.query.get_or_404(id)
     page = request.args.get("page", 1, type=int)
     pagination = user.followed_posts.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config["FLASKY_POSTS_PER_PAGE"], error_out=False
+        page, per_page=current_app.config["POSTS_PER_PAGE"], error_out=False
     )
     posts = pagination.items
     prev = None
@@ -34,7 +34,7 @@ def get_user_followed_posts(id):
 
     return jsonify(
         {
-            "posts": [post.tojson() for post in posts],
+            "posts": [post.to_json() for post in posts],
             "prev": prev,
             "next": next,
             "count": pagination.total,

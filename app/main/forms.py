@@ -1,9 +1,10 @@
-# encoding=utf-8
-from wtforms import StringField, SubmitField, BooleanField, SelectField, TextAreaField
 import wtforms.validators
-from flask_wtf import FlaskForm
-from ..models.users import User, Role
+from flask import request
 from flask_pagedown.fields import PageDownField
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, BooleanField, SelectField, TextAreaField
+
+from ..models.users import User, Role
 
 
 class NameForm(FlaskForm):
@@ -98,3 +99,15 @@ class MessageForm(FlaskForm):
         ],
     )
     submit = SubmitField("提交")
+
+
+class SearchForm(FlaskForm):
+    q = StringField('搜索', validators=[wtforms.validators.DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'csrf_enabled' not in kwargs:
+            kwargs['csrf_enabled'] = False
+
+        super(SearchForm, self).__init__(*args, **kwargs)
