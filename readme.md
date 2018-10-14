@@ -8,22 +8,22 @@
  pip install -U -r requirements/requirements -i https://mirrors.aliyun.com/pypi/simple
  pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
+
+在根目录下创建.env文件，然后配置flask config信息，添加到.gitignore（FLASK_DEBUG不能在.env中配置）
+### example:
+FLASK_ENV=development
+ELASTICSEARCH_URL=http://localhost:9200
+DB_PASSWORD=123456
+
+
+
+
 ## mysql用docker来部署
 
 运行mysql.sh  sh mysql.sh start
  
 
 
-
-数据库 写入环境变量
-在bashrc文件中
-source ~/.bashrc
-export DATABASE_URL='mysql://root:newpass@111.231.82.45:3306/hello_flask?charset=utf8mb4'
-export FLASK_CONFIG='production'
-export gname='fjl2401'
-export gpassword='f15114826978f'
-export password1='f15114826978f'
-export name_1='fjl2401@163.com'
 
 
 ## 线上部署和本地同步   

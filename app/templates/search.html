@@ -3,9 +3,9 @@
 
 
 {% block page_content %}
-{% include '_posts.html' %}
+    {% include '_posts.html' %}
 
-     <nav aria-label="...">
+    <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
