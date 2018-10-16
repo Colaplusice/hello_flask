@@ -11,6 +11,7 @@
 
 在根目录下创建.env文件，然后配置flask config信息，添加到.gitignore（FLASK_DEBUG不能在.env中配置）
 ### example:
+
 FLASK_ENV=development
 ELASTICSEARCH_URL=http://localhost:9200
 DB_PASSWORD=123456

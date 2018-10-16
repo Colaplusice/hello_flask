@@ -43,11 +43,11 @@ var d=document,i=new Image,e=encodeURIComponent;
     )
     # import socket
     # DOMAIN = socket.gethostbyname(socket.gethostname())
-    DOMAIN = "127.0.0.1:5000"
+    # DOMAIN = "baidu.com"
     from base64 import b64decode
 
     BEACON = b64decode("R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
-    SERVER_NAME = "127.0.0.1:5000"
+    # SERVER_NAME = "localhost"
 
     def init_app(self, app):
         pass
