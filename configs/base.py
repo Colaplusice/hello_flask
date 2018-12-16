@@ -8,6 +8,7 @@ class Config:
     TZ = "Asia/Shanghai"
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
+    DB_HOST = os.environ.get("DB_HOST", 'localhost')
     POSTS_PER_PAGE = 5
     FLASKY_USER_PER_PAGE = 10
     FLASKY_COMMENTS_PRE_PAGE = 5
@@ -20,11 +21,12 @@ class Config:
     MAIL_USERNAME = os.environ.get("name_1")
     MAIL_PASSWORD = os.environ.get("gpassword")
     REDIS_URL = os.environ.get("REDIS_URL") or "redis://redis:6379"
+
     CACHE_BACKEND = "Redis"
     CACHE_PREFIX = "hello_flask"
     CACHE_HOST = "redis"
     CACHE_DB = 0
-    CACHE_PORT = 6378
+    CACHE_PORT = 6379
 
     LONG_CACHE_TTL = 24 * 60 * 60
     SHORT_CACHE_TTL = 10 * 60
@@ -47,6 +49,7 @@ var d=document,i=new Image,e=encodeURIComponent;
     from base64 import b64decode
 
     BEACON = b64decode("R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
+
     # SERVER_NAME = "localhost"
 
     def init_app(self, app):

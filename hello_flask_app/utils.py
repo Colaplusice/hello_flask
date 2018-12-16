@@ -1,7 +1,7 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature
-from app.search import add_to_index, query_index, remove_from_index
-from app.extensions import db
+from hello_flask_app.search import add_to_index, query_index, remove_from_index
+from hello_flask_app.extensions import db
 
 
 class SearchableMixin:
@@ -73,14 +73,14 @@ class SerializeMixin:
             return d
 
 
-# def make_celery(app):
-#     celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
-#     celery.conf.update(app.config)
+# def make_celery(hello_flask_app):
+#     celery = Celery(hello_flask_app.import_name, broker=hello_flask_app.config['CELERY_BROKER_URL'])
+#     celery.conf.update(hello_flask_app.config)
 #     TaskBase = celery.Task
 #     class ContextTask(TaskBase):
 #         abstract = True
 #         def __call__(self, *args, **kwargs):
-#             with app.app_context():
+#             with hello_flask_app.app_context():
 #                 return TaskBase.__call__(self, *args, **kwargs)
 #     celery.Task = ContextTask
 #     return celery

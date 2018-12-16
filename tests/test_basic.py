@@ -1,7 +1,7 @@
 # encoding=utf-8
 import unittest
 from flask import current_app
-from app import create_app, db
+from hello_flask_app import create_app, db
 
 
 class BasicTest(unittest.TestCase):

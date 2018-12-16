@@ -13,14 +13,14 @@ from flask import (
 )
 from flask_login import login_required, current_user
 
-from app import db
-from app.celery_tasks import export_async_posts, change_task_status
-from app.decorators import amdin_required, permission_required
-from app.main import main
-from app.main.forms import UserEditForm, EditProfileAdminForm, MessageForm
-from app.models.role import Role
-from app.models.users import User,Message
-from app.models.models import Permisson, Post, Comment, Notification
+from hello_flask_app import db
+from hello_flask_app.celery_tasks import export_async_posts, change_task_status
+from hello_flask_app.decorators import amdin_required, permission_required
+from hello_flask_app.main import main
+from hello_flask_app.main.forms import UserEditForm, EditProfileAdminForm, MessageForm
+from hello_flask_app.models.role import Role
+from hello_flask_app.models.users import User,Message
+from hello_flask_app.models.models import Permisson, Post, Comment, Notification
 
 
 # 设置cookie为0 然后跳转到Index页面

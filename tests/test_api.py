@@ -1,8 +1,8 @@
 import unittest
 from base64 import b64encode
-from app.models.users import User, Role
+from hello_flask_app.models.users import User, Role
 from flask import url_for
-from app import db, create_app
+from hello_flask_app import db, create_app
 import json
 
 

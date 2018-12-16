@@ -1,10 +1,10 @@
 # encoding=utf-8
-from app import create_app
+from hello_flask_app import create_app
 from rq import get_current_job
 import sys
-from app.models import Task, Post
-from app.models import User
-from app import db
+from hello_flask_app.models import Task, Post
+from hello_flask_app.models import User
+from hello_flask_app import db
 
 import time
 

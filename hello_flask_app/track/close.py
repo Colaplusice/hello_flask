@@ -2,7 +2,7 @@
 # from base64 import b64decode
 # import datetime
 # import json
-# from flask import app
+# from flask import hello_flask_app
 # import os
 # from flask_sqlalchemy import SQLAlchemy
 # from urlparse import parse_qsl, urlparse
@@ -17,12 +17,12 @@
 #     'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
 #
 # database = SQLAlchemy()
-# # Store the database file in the app directory.
+# # Store the database file in the hello_flask_app directory.
 # APP_DIR = os.path.dirname(__file__)
 # DATABASE_NAME = 'sqlite:///' + os.path.join(APP_DIR, 'data.sqlite')
 #
 # DOMAIN = 'http://127.0.0.1:5000'  # TODO: change me.
-# app.config['sd'] = DATABASE_NAME
+# hello_flask_app.config['sd'] = DATABASE_NAME
 #
 # # Simple JavaScript which will be included and executed on the client-side.
 # JAVASCRIPT = """(function(){
@@ -35,8 +35,8 @@
 # DEBUG = bool(os.environ.get('DEBUG'))
 # SECRET_KEY = 'secret - change me'  # TODO: change me.
 #
-# app = Flask(__name__)
-# app.config.from_object(__name__)
+# hello_flask_app = Flask(__name__)
+# hello_flask_app.config.from_object(__name__)
 #
 #
 # # database = BerkeleyDatabase(DATABASE_NAME)  # or SqliteDatabase(DATABASE_NAME)
@@ -82,7 +82,7 @@
 #             params=params)
 #
 #
-# @app.route('/a.gif')
+# @hello_flask_app.route('/a.gif')
 # def analyze():
 #     if not request.args.get('url'):
 #         abort(404)
@@ -90,27 +90,27 @@
 #     with database.transaction():
 #         PageView.create_from_request()
 #
-#     response = Response(app.config['BEACON'], mimetype='image/gif')
+#     response = Response(hello_flask_app.config['BEACON'], mimetype='image/gif')
 #     response.headers['Cache-Control'] = 'private, no-cache'
 #     return response
 #
 #
-# @app.route('/a.js')
+# @hello_flask_app.route('/a.js')
 # def script():
 #     return Response(
-#         app.config['JAVASCRIPT'] % (app.config['DOMAIN']),
+#         hello_flask_app.config['JAVASCRIPT'] % (hello_flask_app.config['DOMAIN']),
 #         mimetype='text/javascript')
 #
 #
-# @app.errorhandler(404)
+# @hello_flask_app.errorhandler(404)
 # def not_found(e):
 #     return Response('Not found.')
 #
 #
 # if __name__ == '__main__':
 #     database.create_tables([PageView], safe=True)
-#     app.run()  # Use Flask's builtin WSGI server.
+#     hello_flask_app.run()  # Use Flask's builtin WSGI server.
 #     # Or for gevent,
 #     # from gevent.wsgi import WSGIServer
-#     # WSGIServer(('', 5000), app).serve_forever()
+#     # WSGIServer(('', 5000), hello_flask_app).serve_forever()
 #     database.close()

@@ -6,7 +6,9 @@ class ProductionConfig(Config):
     def init_app(cls, app):
         Config.init_app(app)
         base_dir = os.path.abspath(os.path.dirname(__file__))
-        SQLALCHEMY_DATABASE_URI ='mysql://root:newpass@localhost:3306/hello_flask?charset=utf8mb4'
+        SQLALCHEMY_DATABASE_URI = (
+            "mysql://root:newpass@localhost:3306/hello_flask?charset=utf8mb4"
+        )
         DEBUG = True
 
         # = 'mysql://root:newpass@111.231.82.45:3306/hello_flask?charset=utf8mb4'

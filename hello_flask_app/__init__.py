@@ -1,20 +1,27 @@
 # import rq
 # import logging
 # from logging.handlers import RotatingFileHandler
-
+import os
 from flask import Flask
 from redis import Redis
 from elasticsearch import Elasticsearch
 
-from app.extensions import *
+from hello_flask_app.extensions import (
+    celery,
+    # flask_env,
+    pagedown,
+    bootstrap,
+    login_manager,
+    mail,
+    moment,
+    db,
+)
 from configs import config
 
 dir_name = os.path.dirname(__file__)
 
 login_manager.session_protection = "strong"
 login_manager.login_view = "auth.login"
-
-flask_env=Flask_env()
 
 
 def update_celery(app, celery):
@@ -34,8 +41,6 @@ def update_celery(app, celery):
 # 工厂函数
 def create_app(config_name=os.environ.get("FLASK_ENV")):
     app = Flask(__name__)
-    # print('app name is {}'.format(app.name))
-
     flask_env.init_app(app)
     app.config.from_pyfile("../configs/celery_config.py")
     app.config.from_object(config[config_name])
@@ -47,23 +52,27 @@ def create_app(config_name=os.environ.get("FLASK_ENV")):
     pagedown.init_app(app)
     app.redis = Redis.from_url(app.config["REDIS_URL"])
     # 提交任务的队列
-    # app.task_queue = rq.Queue('hello_flask-tasks', connection=app.redis)
+    # hello_flask_app.task_queue = rq.Queue('hello_flask-tasks', connection=hello_flask_app.redis)
     app.config.from_pyfile("../configs/celery_config.py")
     update_celery(app, celery)
 
-    app.elasticsearch=Elasticsearch([app.config['ELASTICSEARCH_URL']])\
-    if app.config['ELASTICSEARCH_URL'] else None
-
+    app.elasticsearch = (
+        Elasticsearch([app.config["ELASTICSEARCH_URL"]])
+        if app.config["ELASTICSEARCH_URL"]
+        else None
+    )
 
     from .main import main as main_blueprint
+
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
+
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
     # error
     #
     # # 配置log 在非debug情形下
-    # if not app.debug:
+    # if not hello_flask_app.debug:
     #     basedir = os.path.abspath(os.path.dirname(__file__))
     #     log_dir = os.path.join(basedir, 'logs')
     #     if not os.path.exists(log_dir):
@@ -75,11 +84,9 @@ def create_app(config_name=os.environ.get("FLASK_ENV")):
     #         logging.Formatter('%(asctime)s %(levelname)s: %'
     #                           '(message)s[in %(pathname)s:%(lineno)d]'))
     #     file_handler.setLevel(logging.INFO)
-    #     app.logger.addHandler(file_handler)
-    #     app.logger.setLevel(logging.INFO)
-    #     app.logger.info('hello_flask start up')
-
-    # 注册蓝本
+    #     hello_flask_app.logger.addHandler(file_handler)
+    #     hello_flask_app.logger.setLevel(logging.INFO)
+    #     hello_flask_app.logger.info('hello_flask start up')
     from .api_1_0 import api as api_1_0_blueprint
     app.register_blueprint(api_1_0_blueprint, url_prefix="/api/")
 

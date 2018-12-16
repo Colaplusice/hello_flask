@@ -30,7 +30,7 @@ test_all:
     - pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
   script:
-#    - flake8 app commands tests
+#    - flake8 hello_flask_app commands tests
     - python manage.py test
 
 
@@ -70,9 +70,9 @@ test_all:
 #  environment:
 #    name: integration
 #  script:
-#    - kubectl -n douya set image deploy/fenneyes-api "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-shell "app=${SHELL_IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-api "hello_flask_app=${IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-celery "hello_flask_app=${IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-shell "hello_flask_app=${SHELL_IMAGE_TAG}" --record
 #
 #deploy_staging:
 #  stage: deploy_staging
@@ -85,8 +85,8 @@ test_all:
 #  environment:
 #    name: staging
 #  script:
-#    - kubectl -n douya-staging set image deploy/fenneyes-api "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya-staging set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
+#    - kubectl -n douya-staging set image deploy/fenneyes-api "hello_flask_app=${IMAGE_TAG}" --record
+#    - kubectl -n douya-staging set image deploy/fenneyes-celery "hello_flask_app=${IMAGE_TAG}" --record
 #
 #deploy_production_stable:
 #  stage: deploy_production_stable
@@ -98,7 +98,7 @@ test_all:
 #  environment:
 #    name: production
 #  script:
-#    - kubectl -n douya set image deploy/fenneyes-api-stable "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-shell "app=${SHELL_IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-api-stable "hello_flask_app=${IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-celery "hello_flask_app=${IMAGE_TAG}" --record
+#    - kubectl -n douya set image deploy/fenneyes-shell "hello_flask_app=${SHELL_IMAGE_TAG}" --record
 #

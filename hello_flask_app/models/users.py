@@ -9,7 +9,7 @@ from itsdangerous import BadSignature
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db
+from hello_flask_app import db
 from .models import Post, Follow, Task, Permisson, Notification
 from .role import Role
 from ..utils import SerializeMixin

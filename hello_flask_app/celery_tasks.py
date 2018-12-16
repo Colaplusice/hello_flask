@@ -1,10 +1,10 @@
 # encoding=utf-8
 from flask import jsonify
-from app.extensions import celery
+from hello_flask_app.extensions import celery
 from .models import *
 import time
 from . import mail
-from app.main import main
+from hello_flask_app.main import main
 from flask_mail import Message
 from flask import current_app, render_template
 

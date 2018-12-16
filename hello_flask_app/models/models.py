@@ -9,10 +9,10 @@ from flask import current_app, url_for
 from flask_login import AnonymousUserMixin
 from markdown import markdown
 
-from app import db
-from app import login_manager
-from app.exceptions import ValidationError
-from app.utils import SearchableMixin
+from hello_flask_app import db
+from hello_flask_app import login_manager
+from hello_flask_app.exceptions import ValidationError
+from hello_flask_app.utils import SearchableMixin
 
 
 class Follow(db.Model):

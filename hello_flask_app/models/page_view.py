@@ -1,4 +1,4 @@
-from app import db
+from hello_flask_app import db
 from datetime import datetime
 
 
