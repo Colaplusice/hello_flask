@@ -1,12 +1,12 @@
 import pytest
 
 import os
-from hello_flask_app import create_app, db
+from app import create_app, db
 
 
 def pytest_sessionstart(session):
     os.environ["FLASK_ENV"] = "testing"
-    from hello_flask_app import create_app
+    from app import create_app
 
     create_app()
 

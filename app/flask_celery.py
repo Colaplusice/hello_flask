@@ -176,7 +176,7 @@ def _select_manager(backend_name):
 
 
 class _CeleryState(object):
-    """Remember the configuration for the (celery, hello_flask_app) tuple. Modeled from SQLAlchemy."""
+    """Remember the configuration for the (celery, app) tuple. Modeled from SQLAlchemy."""
 
     def __init__(self, celery, app):
         self.celery = celery
@@ -199,27 +199,27 @@ class Celery(CeleryClass):
     """
 
     def __init__(self, app=None):
-        """If hello_flask_app argument provided then initialize celery using application config values.
-        If no hello_flask_app argument provided you should do initialization later with init_app method.
+        """If app argument provided then initialize celery using application config values.
+        If no app argument provided you should do initialization later with init_app method.
         :param app: Flask application instance.
         """
         self.original_register_app = (
             _state._register_app
-        )  # Backup Celery hello_flask_app registration function.
+        )  # Backup Celery app registration function.
         _state._register_app = (
             lambda _: None
-        )  # Upon Celery hello_flask_app registration attempt, do nothing.
+        )  # Upon Celery app registration attempt, do nothing.
         super(Celery, self).__init__()
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app):
-        """Actual method to read celery settings from hello_flask_app configuration and initialize the celery instance.
+        """Actual method to read celery settings from app configuration and initialize the celery instance.
         :param app: Flask application instance.
         """
         _state._register_app = (
             self.original_register_app
-        )  # Restore Celery hello_flask_app registration function.
+        )  # Restore Celery app registration function.
         if not hasattr(app, "extensions"):
             app.extensions = dict()
         if "celery" in app.extensions:
@@ -238,7 +238,7 @@ class Celery(CeleryClass):
         self.conf.update(app.config)
         task_base = self.Task
 
-        # Add Flask hello_flask_app context to celery instance.
+        # Add Flask app context to celery instance.
         class ContextTask(task_base):
             def __call__(self, *_args, **_kwargs):
                 with app.app_context():

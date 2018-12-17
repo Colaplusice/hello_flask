@@ -11,7 +11,7 @@
 #sh ./setup_mysql.sh create
 #
 #
-#gunicorn -c gunicorn.py hello_flask:hello_flask_app
+#gunicorn -c gunicorn.py hello_flask:app
 ./setup_mysql.sh start
 
 chmod +x ./boot_python.sh

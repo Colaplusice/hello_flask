@@ -19,14 +19,14 @@ celery = Celery(__name__)
 
 
 # class Flask_env:
-#     def __init__(self, hello_flask_app=None):
-#         self.hello_flask_app = hello_flask_app
-#         if hello_flask_app:
-#             self.init_app(hello_flask_app)
+#     def __init__(self, app=None):
+#         self.app = app
+#         if app:
+#             self.init_app(app)
 #
-#     def init_app(self, hello_flask_app):
-#         if self.hello_flask_app is None:
-#             self.hello_flask_app = hello_flask_app
+#     def init_app(self, app):
+#         if self.app is None:
+#             self.app = app
 #         env_file = os.path.join(os.getcwd(), ".env")
 #         if not env_file:
 #             raise FileNotFoundError(".env file not found")
@@ -49,15 +49,15 @@ celery = Celery(__name__)
 #                     line = line.split(" ")[1]
 #                 config_list = line.split("=")
 #                 key, value = config_list[0], config_list[1]
-#                 if self.hello_flask_app.config.get(key):
+#                 if self.app.config.get(key):
 #                     print(
 #                         "overwrite an exist key : {} {} ---> {}".format(
-#                             key, self.hello_flask_app.config[key], value
+#                             key, self.app.config[key], value
 #                         )
 #                     )
 #                 if value.isdigit():
 #                     value = int(value)
-#                 self.hello_flask_app.config[key] = value
+#                 self.app.config[key] = value
 #
 #
 # flask_env = Flask_env()

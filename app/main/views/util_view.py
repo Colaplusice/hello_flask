@@ -2,7 +2,7 @@ import os
 
 from flask import url_for, request, current_app, Response
 
-from hello_flask_app.models import View_message, User_message
+from app.models import View_message, User_message
 from .. import main
 
 

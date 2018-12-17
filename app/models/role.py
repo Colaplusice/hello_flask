@@ -1,6 +1,6 @@
-from hello_flask_app import db
+from app import db
 from .models import Permisson
-from hello_flask_app import login_manager
+from app import login_manager
 
 
 # 角色

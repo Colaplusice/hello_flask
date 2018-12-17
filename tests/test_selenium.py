@@ -1,9 +1,9 @@
 # from selenium import webdriver
 # import unittest
 # import threading
-# from hello_flask_app import create_app
-# from hello_flask_app import db
-# from hello_flask_app.models import Role,User,Post
+# from app import create_app
+# from app import db
+# from app.models import Role,User,Post
 # class SeleniumTestCase(unittest.TestCase):
 #     client=None
 #
@@ -14,8 +14,8 @@
 #         except:
 #             pass
 #         if cls.client:
-#             cls.hello_flask_app=create_app('Testing')
-#             cls.app_context=cls.hello_flask_app.app_context()
+#             cls.app=create_app('Testing')
+#             cls.app_context=cls.app.app_context()
 #             cls.app_context.push()
 #
 #         #forbid log
@@ -42,7 +42,7 @@
 #         db.session.commit()
 #
 #
-#         threading.Thread(target=cls.hello_flask_app.run).start()
+#         threading.Thread(target=cls.app.run).start()
 #
 #
 #

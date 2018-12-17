@@ -1,11 +1,11 @@
 from . import play
 from flask import request, jsonify, url_for, render_template, session, redirect, flash
-from hello_flask_app import mail
+from app import mail
 from flask_mail import Message
 import random
 import time
 from flask import current_app
-from hello_flask_app import celery
+from app import celery
 
 
 @celery.task

@@ -1,22 +1,22 @@
 # encoding=utf-8
 import os
-from hello_flask_app import create_app
-from hello_flask_app.models.models import *
-from hello_flask_app.models.role import Role
-from hello_flask_app.models.users import Message
+from app import create_app
+from app.models.models import *
+from app.models.role import Role
+from app.models.users import Message
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 
 # 从环境变量中读取config否则设置为default
-from hello_flask_app.models.users import User
+from app.models.users import User
 
-# hello_flask_app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+# app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 app = create_app("development")
 COV = None
 if os.environ.get("FLASK_COVERAGE"):
     import coverage
 
-    COV = coverage.coverage(branch=True, include="hello_flask_app/*")
+    COV = coverage.coverage(branch=True, include="app/*")
     COV.start()
 
 manager = Manager(app)
@@ -61,7 +61,7 @@ def profile(length=25, profile_dir=None):
 @manager.command
 def deploy():
     from flask_migrate import upgrade
-    from hello_flask_app.models.users import Role, User
+    from app.models.users import Role, User
 
     upgrade()
 
@@ -73,7 +73,7 @@ def deploy():
 
 def make_shell_context():
     dicts = {
-        "hello_flask_app": app,
+        "app": app,
         "db": db,
         "User": User,
         "Role": Role,

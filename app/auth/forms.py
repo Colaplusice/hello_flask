@@ -8,7 +8,7 @@ from wtforms import (
     ValidationError,
 )
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
-from hello_flask_app.models.users import User
+from app.models.users import User
 
 
 class LoginForm(FlaskForm):

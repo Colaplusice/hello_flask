@@ -13,14 +13,14 @@ from flask import (
 )
 from flask_login import login_required, current_user
 
-from hello_flask_app import db
+from app import db
 from .. import forms
 from .. import main
 from ...celery_tasks import export_async_posts
 from ...decorators import permission_required
 from ...models import Permisson, Post, Comment
-from hello_flask_app.main.forms import SearchForm
-from hello_flask_app.utils import ListPagination
+from app.main.forms import SearchForm
+from app.utils import ListPagination
 
 
 @main.route("/post/<int:id>", methods=["GET", "POST"])

@@ -2,9 +2,9 @@
 import unittest
 import re
 from flask import url_for
-from hello_flask_app import create_app, db
-from hello_flask_app.models.users import User
-from hello_flask_app.models.role import Role
+from app import create_app, db
+from app.models.users import User
+from app.models.role import Role
 
 
 class FlaskClientTestCase(unittest.TestCase):

@@ -6,9 +6,12 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     TZ = "Asia/Shanghai"
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SECRET_KEY = 'hard to gess string'
 
-    DB_HOST = os.environ.get("DB_HOST", 'localhost')
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    ELASTICSEARCH_URL = "localhost:9200"
+
+    DB_HOST = os.environ.get("DB_HOST", "localhost")
     POSTS_PER_PAGE = 5
     FLASKY_USER_PER_PAGE = 10
     FLASKY_COMMENTS_PRE_PAGE = 5

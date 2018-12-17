@@ -1,9 +1,9 @@
 # encoding=utf-8
 import unittest
-from hello_flask_app.models.users import User, Permisson
-from hello_flask_app.models.models import AnonymousUser
-from hello_flask_app.models.role import Role
-from hello_flask_app import db, create_app
+from app.models.users import User, Permisson
+from app.models.models import AnonymousUser
+from app.models.role import Role
+from app import db, create_app
 
 
 class UserModelTestCase(unittest.TestCase):

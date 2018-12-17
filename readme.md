@@ -17,6 +17,7 @@
 FLASK_ENV=development
 ELASTICSEARCH_URL=http://localhost:9200
 DB_PASSWORD=123456
+FLASK_RUN_PORT=8000
 
 ## mysql用docker来部署
 
