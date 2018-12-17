@@ -4,7 +4,7 @@ services:
      image: mysql:5.7
      volumes:
 #       - db_data:/var/lib/mysql
-       - /Users/fjl2401/Documents/Python/python_code/flask_project/hello_flask/hello_flask.sql:/docker-entrypoint-initdb.d/hello_flask.sql
+       - ./hello_flask.sql:/docker-entrypoint-initdb.d/hello_flask.sql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: newpass
