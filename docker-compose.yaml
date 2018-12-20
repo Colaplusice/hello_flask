@@ -3,14 +3,18 @@ services:
    db:
      image: mysql:5.7
      volumes:
-#       - db_data:/var/lib/mysql
-       - ./hello_flask.sql:/docker-entrypoint-initdb.d/hello_flask.sql
+#        - /data/mysql/data:/var/lib/mysql
+        - db_data:/var/lib/mysql
+        - ./hello_flask.sql:/data/hello_flask.sql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: newpass
        MYSQL_DATABASE: hello_flask
+     command: bash -c "mysql -uroot -pnewpass hello_flask < /data/hello_flask.sql"
    redis:
      image: redis:4.0
+     volumes:
+       - /data/redis/data:/data
      restart: always
    hello_flask:
      depends_on:
@@ -23,6 +27,6 @@ services:
      environment:
         DB_HOST: db
         REDIS_HOST: redis
-
-#volumes:
-#    db_data:
+volumes:
+    db_data:
+#    redis_data:

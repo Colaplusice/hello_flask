@@ -1,4 +1,3 @@
-# encoding=utf-8
 from . import api
 from flask import jsonify, request, current_app, url_for
 from ..models.models import Post

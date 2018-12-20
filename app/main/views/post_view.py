@@ -20,7 +20,6 @@ from ...celery_tasks import export_async_posts
 from ...decorators import permission_required
 from ...models import Permisson, Post, Comment
 from app.main.forms import SearchForm
-from app.utils import ListPagination
 
 
 @main.route("/post/<int:id>", methods=["GET", "POST"])
