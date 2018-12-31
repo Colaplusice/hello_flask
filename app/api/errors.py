@@ -3,7 +3,7 @@ from . import api
 from ..exceptions import ValidationError
 
 
-def badrequest(message):
+def bad_request(message):
     response = jsonify({"error": "bad request", "message": message})
     response.status_code = 400
 
@@ -17,11 +17,11 @@ def forbidden(message):
     return response
 
 
-def unthorized(message):
+def unauthorized(message):
     pass
     # response = jsonify({'error': 'unauthorized', 'message': message})
 
 
 @api.errorhandler(ValidationError)
 def validation_error(e):
-    return badrequest(e.args[0])
+    return bad_request(e.args[0])

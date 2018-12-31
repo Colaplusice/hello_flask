@@ -28,12 +28,12 @@ def query_index(index, query, page, per_page):
         index=index,
         doc_type=index,
         body={
-            'query': {'multi_match': {'query': query, 'fields': ['*']}},
-            'from': (page - 1) * per_page,
-            'size': per_page,
+            "query": {"multi_match": {"query": query, "fields": ["*"]}},
+            "from": (page - 1) * per_page,
+            "size": per_page,
         },
     )
 
-    ids = [int(hit['_id']) for hit in search['hits']['hits']]
+    ids = [int(hit["_id"]) for hit in search["hits"]["hits"]]
 
-    return ids, search['hits']['total']
+    return ids, search["hits"]["total"]

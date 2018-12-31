@@ -23,7 +23,7 @@ class Follow(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class Permisson:
+class Permission:
     FOLLOW = 0x01
     COMMIT = 0x02
     WRITE_ARTICLES = 0x04
@@ -37,16 +37,16 @@ class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
         return False
 
-    def isAdministrator(self):
+    def is_administrator(self):
         return False
 
 
 login_manager.anonymous_user = AnonymousUser
 
 
-class Post(SearchableMixin,db.Model):
+class Post(SearchableMixin, db.Model):
     __tablename__ = "posts"
-    __searchable__ = ['body']
+    __searchable__ = ["body"]
 
     title = db.Column(db.Text)
     id = db.Column(db.Integer, primary_key=True)
@@ -71,11 +71,10 @@ class Post(SearchableMixin,db.Model):
             u = User.query.offset(randint(0, user_count - 1)).first()
             p = Post(
                 body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
-                timestamp=forgery_py.date.date(True),author=u
-                     )
-
+                timestamp=forgery_py.date.date(True),
+                author=u,
+            )
             db.session.add(p)
-
             db.session.commit()
             print("生成成功!%d" % i)
 
@@ -139,7 +138,6 @@ class Post(SearchableMixin,db.Model):
         }
         return json_post
 
-    # 不需要创建用户或者对象实例
     @staticmethod
     def from_json(json_post):
         body = json_post.get("body")
@@ -149,8 +147,8 @@ class Post(SearchableMixin,db.Model):
 
 
 db.event.listen(Post.body, "set", Post.on_changed_body)
-db.event.listen(db.session,'before_commit',SearchableMixin.before_commit)
-db.event.listen(db.session,'after_commit',SearchableMixin.after_commit)
+db.event.listen(db.session, "before_commit", SearchableMixin.before_commit)
+db.event.listen(db.session, "after_commit", SearchableMixin.after_commit)
 
 
 class Comment(db.Model):
@@ -175,7 +173,7 @@ class Comment(db.Model):
             )
         )
 
-    def tojson(self):
+    def to_json(self):
         json_comment = {
             "url": url_for("api.get_comment", id=self.id, _external=True),
             "post": url_for("api.get_post", id=self.post_id, _external=True),
@@ -212,8 +210,6 @@ class Notification(db.Model):
 
     def get_data(self):
         return json.loads(str(self.payload_json))
-
-    pass
 
 
 db.event.listen(Comment.body, "set", Comment.on_changed_body)

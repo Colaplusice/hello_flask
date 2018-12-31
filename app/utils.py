@@ -23,22 +23,22 @@ class SearchableMixin:
     @classmethod
     def before_commit(cls, session):
         session._changes = {
-            'add': list(session.new),
-            'update': list(session.dirty),
-            'delete': list(session.deleted),
+            "add": list(session.new),
+            "update": list(session.dirty),
+            "delete": list(session.deleted),
         }
 
     @classmethod
     def after_commit(cls, session):
-        for obj in session._changes['add']:
+        for obj in session._changes["add"]:
             if isinstance(obj, SearchableMixin):
                 add_to_index(index=obj.__tablename__, model=obj)
 
-        for obj in session._changes['update']:
+        for obj in session._changes["update"]:
             if isinstance(obj, SearchableMixin):
                 add_to_index(index=obj.__tablename__, model=obj)
 
-        for obj in session._changes['delete']:
+        for obj in session._changes["delete"]:
             remove_from_index(index=obj.__tablename__, model=obj)
 
     # set index for all data
@@ -48,7 +48,7 @@ class SearchableMixin:
             add_to_index(cls.__tablename__, obj)
 
 
-secret_key = 'hard to gess string'
+secret_key = "hard to gess string"
 
 
 def Generate_reset_password_token(email, expiration=3600):

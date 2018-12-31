@@ -19,8 +19,8 @@ from app.decorators import amdin_required, permission_required
 from app.main import main
 from app.main.forms import UserEditForm, EditProfileAdminForm, MessageForm
 from app.models.role import Role
-from app.models.users import User,Message
-from app.models.models import Permisson, Post, Comment, Notification
+from app.models.users import User, Message
+from app.models.models import Permission, Post, Comment, Notification
 
 
 # 设置cookie为0 然后跳转到Index页面
@@ -87,7 +87,7 @@ def unfollow(username):
 # 关注user用户
 @main.route("/follow/<username>")
 @login_required
-@permission_required(Permisson.FOLLOW)
+@permission_required(Permission.FOLLOW)
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
@@ -210,7 +210,7 @@ def edit_profile_admin(id):
 
 @main.route("/moderate/disable/<int:id>")
 @login_required
-@permission_required(Permisson.MODERATE_COMMENTS)
+@permission_required(Permission.MODERATE_COMMENTS)
 def moderate_disable(id):
     comment = Comment.query.get_or_404(id)
     if comment and not comment.disabled:

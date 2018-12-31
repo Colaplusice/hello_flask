@@ -1,7 +1,18 @@
 from . import api
 from flask import jsonify, request, current_app, url_for
-from ..models.models import Post
-from ..models.users import User
+from flask.views import MethodView
+from app.models.users import User, Role
+from app.models.models import Post
+
+
+class RoleView(MethodView):
+    def get(self):
+        roles = Role.query.all()
+        result = [role.to_dict() for role in roles]
+        return jsonify(result)
+
+    def post(self):
+        pass
 
 
 @api.route("/users/<int:id>")

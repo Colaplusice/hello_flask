@@ -1,9 +1,7 @@
 <div class="blog-post">
     <ul class="posts">
         {% for post in posts %}
-
             <li class="post">
-
                 <div class="profile-thumbnail">
                     <img class="img-rounded profile-thumbnail" src="{{ post.author.gravatar(size=60) }}">
                 </div>
@@ -17,58 +15,42 @@
                         {% else %}
                             <a href="{{ url_for('.user',username=post.author.username) }}">{{ post.author.username }}
                             </a>
-
-
                         {% endif %}
-
                     </div>
                     <div class="post-body">
                         {% if post.title %}
                             <a class="post-title" href="{{ url_for('main.post',id=post.id) }}"> {{ post.title }}</a>
                         {% endif %}
-
                         <p class="post-timestamp"> 发表时间: {{ post.timestamp }}</p>
                     </div>
-
                     <div class="post-footer">
                         {% if current_user==post.author %}
-
                             <a href="{{ url_for('.edit',id=post.id) }}">
                                 <span class="badge badge-light ">编辑</span>
-
                             </a>
-
-                        {% elif current_user.isAdministrator() %}
+                        {% elif current_user.is_administrator() %}
                             <a href="{{ url_for('.edit',id=post.id) }}">
         <span class="badge badge-danger">
             编辑 [admin]
         </span>
                             </a>
                         {% endif %}
-
-
-
                         <a href="{{ url_for('.post',id=post.id) }}#comment">
     <span class="label label-primary">
         {% if post.comments %}
-
             <span class="badge-info">   {{ post.comments.count() }} 评论数</span>
         {% endif %}
     </span>
                         </a>
-                        {% if current_user==post.author  or current_user.isAdministrator() %}
+                        {% if current_user==post.author  or current_user.is_administrator() %}
                             <a href="{{ url_for('.delete_article',id=post.id) }}">
                                 <span class="badge badge-danger">删除</span>
 
                             </a>
                         {% endif %}
                     </div>
-
-
                 </div>
             </li>
-
         {% endfor %}
-
     </ul>
 </div>

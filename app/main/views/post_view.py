@@ -14,11 +14,11 @@ from flask import (
 from flask_login import login_required, current_user
 
 from app import db
-from .. import forms
-from .. import main
-from ...celery_tasks import export_async_posts
-from ...decorators import permission_required
-from ...models import Permisson, Post, Comment
+from app.main import forms
+from app.main import main
+from app.celery_tasks import export_async_posts
+from app.decorators import permission_required
+from app.models.models import Permission, Post, Comment
 from app.main.forms import SearchForm
 
 
@@ -52,7 +52,7 @@ def post(id):
 @login_required
 def edit(id):
     post = Post.query.get_or_404(id)
-    if current_user != post.author and not current_user.can(Permisson.ADMINISTER):
+    if current_user != post.author and not current_user.can(Permission.ADMINISTER):
         abort(403)
     form = forms.PostForm()
     if form.validate_on_submit():
@@ -68,12 +68,12 @@ def edit(id):
 
 @main.route("/delete_article/<int:id>")
 @login_required
-@permission_required(Permisson.DELETE_ARTICLE)
+@permission_required(Permission.DELETE_ARTICLE)
 def delete_article(id):
     article = Post.query.get_or_404(id)
     print(current_user)
     if article:
-        if article.author != current_user and current_user.can(Permisson.ADMINISTER):
+        if article.author != current_user and current_user.can(Permission.ADMINISTER):
             abort(403)
         db.session.delete(article)
         flash("删除成功")
@@ -85,7 +85,7 @@ def delete_article(id):
 
 @main.route("/moderate")
 @login_required
-@permission_required(Permisson.MODERATE_COMMENTS)
+@permission_required(Permission.MODERATE_COMMENTS)
 def moderate():
     page = request.args.get("page", 1, type=int)
     pagination = Comment.query.order_by(Comment.timestamp.desc()).paginate(
@@ -102,7 +102,7 @@ def moderate():
 @main.route("/post-article", methods=["GET", "POST"])
 def post_article():
     form = forms.PostForm()
-    if current_user.can(Permisson.WRITE_ARTICLES) and form.validate_on_submit():
+    if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
         post = Post(
             title=form.title.data,
             body=form.body.data,
@@ -116,7 +116,7 @@ def post_article():
 
 @main.route("/moderate/enable/<int:id>")
 @login_required
-@permission_required(Permisson.MODERATE_COMMENTS)
+@permission_required(Permission.MODERATE_COMMENTS)
 def moderate_enable(id):
     comment = Comment.query.get_or_404(id)
     if comment and comment.disabled:
@@ -163,24 +163,25 @@ def before_request():
         g.search_form = SearchForm()
 
 
-@main.route('/search')
+@main.route("/search")
 @login_required
 def search():
     if not g.search_form.validate():
-        return redirect(url_for('main.index'))
-    page = request.args.get('page', type=int, default=1)
+        return redirect(url_for("main.index"))
+    page = request.args.get("page", type=int, default=1)
     print(page)
-    per_page = current_app.config['POSTS_PER_PAGE']
+    per_page = current_app.config["POSTS_PER_PAGE"]
     posts, total = Post.search(g.search_form.q.data, page, per_page)
     next_url = (
-        url_for('main.search', q=g.search_form.q.data, page=page + 1)
+        url_for("main.search", q=g.search_form.q.data, page=page + 1)
         if total > per_page * page
         else None
     )
     prev_url = (
-        url_for('main.search', q=g.search_form.q.data, page=page - 1)
-        if page > 1 else None
+        url_for("main.search", q=g.search_form.q.data, page=page - 1)
+        if page > 1
+        else None
     )
     return render_template(
-        'search.html', title='搜索', posts=posts, next_url=next_url, pre_url=prev_url
+        "search.html", title="搜索", posts=posts, next_url=next_url, pre_url=prev_url
     )

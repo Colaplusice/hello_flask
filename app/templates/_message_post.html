@@ -25,14 +25,14 @@
     </div>
     <div class="post-footer">
         {% if current_user==post.author %}
-            {% elif current_user.isAdministrator() %}
+            {% elif current_user.is_administrator() %}
     <a href="{{ url_for('.edit',id=post.id) }}">
         <span class="label label-danger">
             edit [admin]
         </span>
     </a>
         {% endif %}
-        {% if current_user==post.author  or current_user.isAdministrator() %}
+        {% if current_user==post.author  or current_user.is_administrator() %}
     <a href="{{ url_for('.delete_article',id=post.id) }}">
         <span class="label label-danger">删除</span>
 

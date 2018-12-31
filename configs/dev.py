@@ -10,5 +10,4 @@ class DevelopementConfig(Config):
     SQLALCHEMY_DATABASE_URI = "mysql://root:newpass@{}:3306/hello_flask?charset=utf8mb4".format(
         Config.DB_HOST
     )
-    # 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
     DEBUG = True

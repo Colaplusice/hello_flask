@@ -1,4 +1,3 @@
-# encoding=utf-8
 import hashlib
 import json
 from datetime import datetime
@@ -10,7 +9,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
-from .models import Post, Follow, Task, Permisson, Notification
+from .models import Post, Follow, Task, Permission, Notification
 from .role import Role
 from ..utils import SerializeMixin
 
@@ -157,10 +156,10 @@ class User(UserMixin, db.Model, SerializeMixin):
             and (self.role.permissions & permissions) == permissions
         )
 
-    def isAdministrator(self):
-        return self.can(Permisson.ADMINISTER)
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
 
-    def gernerate_confirmation_token(self, expiration=3600):
+    def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config["SECRET_KEY"], expiration)
         return s.dumps({"confirm": self.id})
 
@@ -179,7 +178,6 @@ class User(UserMixin, db.Model, SerializeMixin):
         new_email = data.get("new_email")
         if new_email is None:
             return False
-        # 如果更改的邮箱已经存在
         if self.query.filter_by(email=new_email).first() is not None:
             return False
         self.email = new_email
@@ -261,7 +259,6 @@ class User(UserMixin, db.Model, SerializeMixin):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    # rest api 使用token登录认证
     @staticmethod
     def verify_auth_token(token):
         s = Serializer(current_app.config["SECRET_KEY"])
@@ -272,7 +269,7 @@ class User(UserMixin, db.Model, SerializeMixin):
             return None
         return User.query.get(data["id"])
 
-    def tojson(self):
+    def to_json(self):
         json_user = {
             "url": url_for("api.get_post", id=self.id, _external=True),
             "username": self.username,

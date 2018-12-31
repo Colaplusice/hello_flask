@@ -6,7 +6,7 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     TZ = "Asia/Shanghai"
-    SECRET_KEY = 'hard to gess string'
+    SECRET_KEY = "hard to gess string"
 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     ELASTICSEARCH_URL = "localhost:9200"

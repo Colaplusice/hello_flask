@@ -60,7 +60,7 @@ def register():
             )
             db.session.add(user)
             db.session.commit()
-            token = user.gernerate_confirmation_token()
+            token = user.generate_confirmation_token()
             send_email.delay(
                 user.email,
                 "Confirm your account",
@@ -161,7 +161,7 @@ def unconfirmed():
 @auth.route("/confirm")
 @login_required
 def resend_confirmation():
-    token = current_user.gernerate_confirmation_token()
+    token = current_user.generate_confirmation_token()
     send_email.delay(
         current_user.email,
         "Confirm your account",

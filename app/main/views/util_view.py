@@ -2,11 +2,11 @@ import os
 
 from flask import url_for, request, current_app, Response
 
-from app.models import View_message, User_message
+from app.models.page_view import View_message, User_message
 from .. import main
 
 
-# 每次请求前进行统计pv
+# 统计pv
 @main.before_app_request
 def get_user_message():
     if not request.url_rule:

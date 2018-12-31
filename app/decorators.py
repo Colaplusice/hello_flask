@@ -3,7 +3,7 @@
 from functools import wraps
 from flask import abort
 from flask_login import current_user
-from .models.models import Permisson
+from .models.models import Permission
 
 
 # 装饰器必须是管理员
@@ -23,4 +23,4 @@ def permission_required(permission):
 
 
 def amdin_required(f):
-    return permission_required(Permisson.ADMINISTER)(f)
+    return permission_required(Permission.ADMINISTER)(f)

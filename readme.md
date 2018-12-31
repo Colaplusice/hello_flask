@@ -51,7 +51,12 @@ celery worker -A celery_worker.celery --loglevel=info
 建立docker_compose file
 
   
+## 上线计划
+
+- 第一次上线需要向数据库导入数据，决定通过 shell来导入，docker只进行文件映射
+- 通过 gunicorn 运行app
+- 架设 nginx 反向代理
 
 ### 终极指令
 
-./
+./boot.sh

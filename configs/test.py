@@ -5,7 +5,7 @@ import os
 
 class TestConfig(Config):
     TESTING = True
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABSE_URL') \
-    #                           or 'sqlite:///' + os.path.join(base_dir,
-    #                                                          'data-tests.sqlite')
+    SQLALCHEMY_DATABASE_URI = "mysql://root:newpass@{}:3306/hello_flask_test?charset=utf8mb4".format(
+        Config.DB_HOST
+    )
     WTF_CSRF_ENABLED = False

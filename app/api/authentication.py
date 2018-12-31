@@ -1,12 +1,10 @@
 # encoding=utf-8
 from flask_httpauth import HTTPBasicAuth
 from flask import g, jsonify
-from . import api
-from .errors import unthorized, forbidden
-from ..models.models import AnonymousUser
-from ..models.users import User
-
-# 在这里初始化,而不是在app创建时
+from app import api
+from app.api.errors import unauthorized, forbidden
+from app.models.models import AnonymousUser
+from app.models.users import User
 
 auth = HTTPBasicAuth()
 
@@ -31,12 +29,10 @@ def verify_password(email_or_token, password):
     return user.verify_password(password)
 
 
-# 认证令牌发送给客户端
 @api.route("/token")
 def get_token():
-    # 匿名用户或者是使用令牌的用户
     if g.current_user.is_anonymous or g.token_used:
-        return unthorized("无效的证书")
+        return unauthorized("无效的证书")
 
     return jsonify(
         {
@@ -57,4 +53,4 @@ def before_request():
 
 @auth.error_handler
 def auth_error():
-    return unthorized("无效的证书")
+    return unauthorized("无效的证书")
