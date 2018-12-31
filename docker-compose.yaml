@@ -1,7 +1,7 @@
 version: '3'
 services:
    db:
-     build: .
+     image: mysql:5.7
      volumes:
         - /data/mysql/data:/var/lib/mysql
         - db_data:/var/lib/mysql
@@ -20,6 +20,7 @@ services:
        - db
        - redis
      image: hello_flask:latest
+#     build: .
      ports:
        - "5000:5000"
      restart: always
