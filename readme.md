@@ -59,4 +59,4 @@ celery worker -A celery_worker.celery --loglevel=info
 
 ### 终极指令
 
-./boot.sh
+./manage.sh run
