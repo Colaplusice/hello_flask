@@ -19,8 +19,8 @@ services:
      depends_on:
        - db
        - redis
-     image: hello_flask:latest
-#     build: .
+#     image: hello_flask:latest
+     build: .
      ports:
        - "5000:5000"
      restart: always
