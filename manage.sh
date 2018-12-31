@@ -13,6 +13,7 @@ setup_mysql(){
         exit $?
     fi
 }
+
 import_data(){
 docker exec -i hello_flask_db_1 mysql -uroot -pnewpass  hello_flask < hello_flask.sql
 }
@@ -23,16 +24,25 @@ setup_redis(){
     else  echo"false"
         exit $?
     fi
-    
+
 }
 
 create_db(){
     echo create database "$1" CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci | mysql -u "$MYSQL_USERNAME" -p"$MYSQL_PASSWORD"
 }
 
+# run docker-compose after run you should run ./manage.sh import_data to mysql
 run(){
     docker-compose up
-    import_data
+}
+
+
+destroy(){
+sudo chmod 777 /data
+rm -rf /data/mysql
+rm -rf /data/redis
+
+
 }
 action=$1
 shift
@@ -43,6 +53,9 @@ case $action in
     ;;
     import_data) import_data
     ;;
+    destroy) destroy
+    ;;
+
     *) echo default
     ;;
 esac
