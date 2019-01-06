@@ -4,6 +4,7 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx/
     ports:
       - 80:80
     depends_on:
