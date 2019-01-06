@@ -1,32 +1,32 @@
 version: '3'
 services:
-   db:
-     image: mysql:5.7
-     volumes:
-        - /data/mysql/data:/var/lib/mysql
-        - db_data:/var/lib/mysql
-        - ./hello_flask.sql:/data/hello_flask.sql
-     restart: always
-     environment:
-       MYSQL_ROOT_PASSWORD: newpass
-       MYSQL_DATABASE: hello_flask
-   redis:
-     image: redis:4.0
-     volumes:
-       - /data/redis/data:/data
-     restart: always
-   hello_flask:
-     depends_on:
-       - db
-       - redis
-#     image: hello_flask:latest
-     build: .
-     ports:
-       - "5000:5000"
-     restart: always
-     environment:
-        DB_HOST: db
-        REDIS_HOST: redis
+  db:
+    image: mysql:5.7
+    volumes:
+    - /data/mysql/data:/var/lib/mysql
+    - db_data:/var/lib/mysql
+    - ./hello_flask.sql:/data/hello_flask.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: newpass
+      MYSQL_DATABASE: hello_flask
+  redis:
+    image: redis:4.0
+    volumes:
+    - /data/redis/data:/data
+    restart: always
+  hello_flask:
+    depends_on:
+    - db
+    - redis
+    #     image: hello_flask:latest
+    build: .
+    ports:
+    - "5000:5000"
+    restart: always
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
 volumes:
-    db_data:
+  db_data:
 #    redis_data:
