@@ -1,11 +1,19 @@
 version: '3'
 services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - hello_flask
   db:
     image: mysql:5.7
     volumes:
-    - /data/mysql/data:/var/lib/mysql
-    - db_data:/var/lib/mysql
-    - ./hello_flask.sql:/data/hello_flask.sql
+      - /data/mysql/data:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./hello_flask.sql:/data/hello_flask.sql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: newpass
@@ -13,16 +21,16 @@ services:
   redis:
     image: redis:4.0
     volumes:
-    - /data/redis/data:/data
+      - /data/redis/data:/data
     restart: always
   hello_flask:
     depends_on:
-    - db
-    - redis
+      - db
+      - redis
     #     image: hello_flask:latest
     build: .
-    ports:
-    - "5000:5000"
+#    ports:
+#      - 5000:5000
     restart: always
     environment:
       DB_HOST: db

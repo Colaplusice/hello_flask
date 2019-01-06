@@ -56,6 +56,6 @@ case $action in
     destroy) destroy
     ;;
 
-    *) echo default
+    *) echo "usage: ./manage.sh create_db |run |import_data |destroy "
     ;;
 esac

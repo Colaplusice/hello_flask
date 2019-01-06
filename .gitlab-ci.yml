@@ -1,104 +1,21 @@
 stages:
   - test_all
-#  - build_image
-#  - deploy_integration
-#  - deploy_staging
-#  - deploy_production_stable
-
 variables:
   MYSQL_DATABASE: hello_flask_test
   MYSQL_ROOT_PASSWORD: newpass
   FLASK_ENV: testing
-#  DOCKER_HOST: tcp://dockerd:2375
-#  IMAGE: registry.cn-hangzhou.aliyuncs.com/shanbayapp/${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
 
-#before_script:
-#  - IMAGE_TAG=${IMAGE}:${CI_COMMIT_SHA:0:8}
-#  - SHELL_IMAGE_TAG=${IMAGE}-shell:${CI_COMMIT_SHA:0:8}
-
-
-#========================================= Unit Testing ================================================
 test_all:
   stage: test_all
-#  services:
-    - name: mysql:5.6
-      alias: mysql
-#    - name: redis:4
-#      alias: redis
+    #  services:
+           - name: mysql:5.6
+           alias: mysql
+  #    - name: redis:4
+  #      alias: redis
   before_script:
     - pip install -U -r requirements/requirements.txt -i https://mirrors.aliyun.com/pypi/simple
     - pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
   script:
-#    - flake8 app commands tests
+    #    - flake8 app commands tests
     - python manage.py test
-
-
-#========================================== Build Image =================================================
-#build_image:
-#  stage: build_image
-#  only:
-#    - develop
-#    - master
-#  tags:
-#    - build
-#  script:
-#    - docker build -t ${IMAGE_TAG} -f Dockerfile .
-#    - docker push ${IMAGE_TAG}
-#
-#build_shell_image:
-#  stage: build_image
-#  only:
-#    - develop
-#    - master
-#  tags:
-#    - build
-#  script:
-#    - docker build -t ${SHELL_IMAGE_TAG} -f Dockerfile-shell .
-#    - docker push ${SHELL_IMAGE_TAG}
-
-#========================================== Deploy Testing =================================================
-#deploy_integration:
-#  stage: deploy_integration
-#  only:
-#    - develop
-#    - master
-#  when: manual
-#  tags:
-#    - deploy-integration
-#    https://git.17bdc.com/help/ci/environments
-#  environment:
-#    name: integration
-#  script:
-#    - kubectl -n douya set image deploy/fenneyes-api "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-shell "app=${SHELL_IMAGE_TAG}" --record
-#
-#deploy_staging:
-#  stage: deploy_staging
-#  only:
-#    - develop
-#    - master
-#  when: manual
-#  tags:
-#    - deploy-production
-#  environment:
-#    name: staging
-#  script:
-#    - kubectl -n douya-staging set image deploy/fenneyes-api "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya-staging set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
-#
-#deploy_production_stable:
-#  stage: deploy_production_stable
-#  only:
-#    - master
-#  when: manual
-#  tags:
-#    - deploy-production
-#  environment:
-#    name: production
-#  script:
-#    - kubectl -n douya set image deploy/fenneyes-api-stable "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-celery "app=${IMAGE_TAG}" --record
-#    - kubectl -n douya set image deploy/fenneyes-shell "app=${SHELL_IMAGE_TAG}" --record
-#
