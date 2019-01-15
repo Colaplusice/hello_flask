@@ -51,9 +51,11 @@ def create_app(config_name=None):
     )
 
     from .main import main as main_blueprint
+
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
+
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
     # error
     #
@@ -74,8 +76,11 @@ def create_app(config_name=None):
     #     app.logger.setLevel(logging.INFO)
     #     app.logger.info('hello_flask start up')
     from .api import api as api_blueprint
-    app.register_blueprint(api_blueprint, url_prefix='/api')
+
+    app.register_blueprint(api_blueprint, url_prefix="/api")
 
     from .play import play as play_blueprint
-    app.register_blueprint(play_blueprint, url_prefix='/play')
+
+    app.register_blueprint(play_blueprint, url_prefix="/play")
+    app.app_context().push()
     return app
