@@ -61,9 +61,7 @@ class Post(SearchableMixin, db.Model):
     @staticmethod
     def generate_fake(count=100):
         from .users import User
-
         seed()
-
         user_count = User.query.count()
 
         for i in range(count):
@@ -146,9 +144,9 @@ class Post(SearchableMixin, db.Model):
         return Post(body=body)
 
 
-db.event.listen(Post.body, "set", Post.on_changed_body)
-db.event.listen(db.session, "before_commit", SearchableMixin.before_commit)
-db.event.listen(db.session, "after_commit", SearchableMixin.after_commit)
+# db.event.listen(Post.body, "set", Post.on_changed_body)
+# db.event.listen(db.session, "before_commit", SearchableMixin.before_commit)
+# db.event.listen(db.session, "after_commit", SearchableMixin.after_commit)
 
 
 class Comment(db.Model):

@@ -14,12 +14,12 @@ from flask import (
 from flask_login import login_required, current_user
 
 from app import db
-from app.main import forms
-from app.main import main
 from app.celery_tasks import export_async_posts
 from app.decorators import permission_required
-from app.models.models import Permission, Post, Comment
+from app.main import forms
+from app.main import main
 from app.main.forms import SearchForm
+from app.models.models import Permission, Post, Comment
 
 
 @main.route("/post/<int:id>", methods=["GET", "POST"])

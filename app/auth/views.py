@@ -1,14 +1,14 @@
 # encoding=utf-8
 from flask import render_template, redirect, request, url_for, flash
-from . import auth
-from .forms import LoginForm, RegisterForm, ResetForm, NewPassForm
-from ..models.users import User
-from .. import db
 from flask_login import current_user
-from ..celery_tasks import send_email
 
 # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask_login import login_required, login_user, logout_user
+from extentions.flask_login import login_required, login_user, logout_user
+from . import auth
+from .forms import LoginForm, RegisterForm, ResetForm, NewPassForm
+from .. import db
+from ..celery_tasks import send_email
+from ..models.users import User
 from ..utils import Generate_reset_password_token, verify_reset_password
 
 
@@ -143,10 +143,10 @@ def before_request():
     if current_user.is_authenticated:
         current_user.ping()
         if (
-            not current_user.confirmed
-            and request.endpoint
-            and request.endpoint[:5] != "auth."
-            and request.endpoint != "static"
+                not current_user.confirmed
+                and request.endpoint
+                and request.endpoint[:5] != "auth."
+                and request.endpoint != "static"
         ):
             return redirect(url_for("auth.unconfirmed"))
 

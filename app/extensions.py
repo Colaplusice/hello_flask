@@ -1,18 +1,16 @@
 from celery import Celery
-from flask_bootstrap import Bootstrap
 from flask_cache import Cache
-from flask_login import LoginManager
+from extentions.flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_pagedown import PageDown
-from flask_sqlalchemy import SQLAlchemy
+from extentions.flask_sqlalchemy import SQLAlchemy
 
 mail = Mail()
 moment = Moment()
 db = SQLAlchemy()
 pagedown = PageDown()
 login_manager = LoginManager()
-bootstrap = Bootstrap()
 cache = Cache(config={"CACHE_TYPE": "simple"})
 celery = Celery(__name__)
 

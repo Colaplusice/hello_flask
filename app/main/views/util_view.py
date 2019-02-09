@@ -1,6 +1,6 @@
 import os
 
-from flask import url_for, request, current_app, Response
+from flask import url_for, request, current_app, Response,render_template
 
 from app.models.page_view import View_message, User_message
 from .. import main
@@ -57,3 +57,8 @@ def dated_url_for(endpoint, **values):
             file_path = os.path.join(current_app.root_path, endpoint, filename)
             values["q"] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
+
+
+@main.route('/abouts')
+def about():
+    return render_template('about.html')

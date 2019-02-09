@@ -1,7 +1,8 @@
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature
-from app.search import add_to_index, query_index, remove_from_index
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
 from app.extensions import db
+from app.search import add_to_index, query_index, remove_from_index
 
 
 class SearchableMixin:
@@ -124,7 +125,7 @@ class ListPagination:
 
     def prev(self):
         assert (
-            self.iterable is not None
+                self.iterable is not None
         ), "an object is required for this method to work"
         iterable = self.iterable
         return self.__class__(iterable, self.page - 1, self.per_page)
@@ -141,7 +142,7 @@ class ListPagination:
 
     def next(self):
         assert (
-            self.iterable is not None
+                self.iterable is not None
         ), "an object is required for this method to work"
         iterable = self.iterable
         return self.__class__(iterable, self.page + 1, self.per_page)
@@ -164,11 +165,11 @@ class ListPagination:
         last = 0
         for num in range(1, self.pages + 1):
             if (
-                num <= left_edge
-                or num > self.pages - right_edge
-                or (
+                    num <= left_edge
+                    or num > self.pages - right_edge
+                    or (
                     num >= self.page - left_current and num <= self.page + right_current
-                )
+            )
             ):
                 if last + 1 != num:
                     yield None

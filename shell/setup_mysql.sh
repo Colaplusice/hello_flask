@@ -56,9 +56,9 @@ check_exec_success() {
 
 
 update_images() {
-  # pull mysql docker image
+  # pull mysql docker images
   docker pull mysql:5.6
-  check_exec_success "$?" "pulling 'mysql' image"
+  check_exec_success "$?" "pulling 'mysql' images"
 }
 
 start() {

@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
-
 {% block page_content %}
-{% if current_user.can(Permisson.WRITE_ARTICLES) %}
+    {% if current_user.can(Permisson.WRITE_ARTICLES) %}
 
-    <form method="POST">
-    {{ form.hidden_tag() }}
-        <div class="form-group group-button">
-            {{ form.title.label }}
-            <br>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group group-button">
+                {{ form.title.label }}
+                <br>
                 {{ form.title(cols=100,rows=1) }}
-        </div>
-    <div class='form-group'>
-    {{ form.body.label }}
-    {{ form.body(cols=100,rows=8) }}
-    </div>
-    {{  form.submit }}
-</form>
-{#{{ wtf.quick_form(form) }}#}
+            </div>
+            <div class='form-group'>
+                {{ form.body.label }}
+                {{ form.body(cols=100,rows=8) }}
+            </div>
+            {{ form.submit }}
+        </form>
     {% else %}
-    <p> you can't write article</p>
-{% endif %}
+        <p> you can't write article</p>
+    {% endif %}
 {% endblock %}
 
 
 {% block scripts %}
-{{ super() }}
+    {{ super() }}
     {{ pagedown.include_pagedown() }}
 {% endblock %}

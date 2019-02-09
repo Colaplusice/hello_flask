@@ -1,60 +1,44 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
 {% import "_macros.html" as macros %}
-
-{% block title %}IceCola{% endblock %}
-
 {% block page_content %}
-    <div class="page-header">
-        <h1>你好~ {% if current_user.is_authenticated %} {{ current_user.username }}{% else %}欢迎你{% endif %}</h1>
-    </div>
-
-
-    <div>
-
-    </div>
     <div class="post-tabs">
-
         <ul class="nav nav-tabs">
-            <li{% if not show_followed %} class="active"{% endif %}>
-                <a href="{{ url_for('.show_all') }}">
-                    <h2>全部文章</h2>
+            <li class="nav-pills {% if not show_followed %}  active {% endif %}">
+                <a href="{{ url_for('.show_all') }}" class="nav-link">
+                    <h1>全部文章</h1>
                 </a></li>
             {#    <如果是认证用户></如果是认证用户>#}
             {% if current_user.is_authenticated %}
-                <li{% if show_followed %} class="active" {% endif %}>
+                <li class="nav-pills {% if show_followed %} active {% endif %}">
                     <a href="{{ url_for('.show_followed') }}"><h2>订阅列表</h2></a>
                 </li>
-
             {% endif %}
-            <li class="active">
-                <div class="dropdown">
-                    <a class="dropdown-toggle active" type="button" id="about-us" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">排序
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="about-us">
-                        <a class="dropdown-item" href="#">时间</a>
-                        <a class="dropdown-item" href="#">热度</a>
-                        <a class="dropdown-item" href="#">内容</a>
-                        <h6 class="dropdown-header">Contact Us</h6>
-                        <a class="dropdown-item" href="#">Call Center</a>
-                        <a class="dropdown-item" href="#">Store Locations</a>
-                    </div>
-                </div>
-            </li>
+            {#            <li class="active">#}
+            {#                <div class="dropdown">#}
+            {#                    <a class="dropdown-toggle active" type="button" id="about-us" data-toggle="dropdown"#}
+            {#                       aria-haspopup="true" aria-expanded="false">排序#}
+            {#                    </a>#}
+            {#                    <div class="dropdown-menu" aria-labelledby="about-us">#}
+            {#                        <a class="dropdown-item" href="#">时间</a>#}
+            {#                        <a class="dropdown-item" href="#">热度</a>#}
+            {#                        <a class="dropdown-item" href="#">内容</a>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </li>#}
         </ul>
     </div>
-
     {% include '_posts.html' %}
-        <div class="pagination">
-        {{ macros.pagination_widget(pagination,'.index') }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-2">
+                <div class="pagination">
+                    {{ macros.pagination_widget(pagination,'.index') }}
+                </div>
+            </div>
+        </div>
     </div>
-
 {% endblock %}
-
-
 {% block scripts %}
     {{ super() }}
-
     {{ pagedown.include_pagedown() }}
 {% endblock %}

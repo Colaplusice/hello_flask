@@ -23,7 +23,7 @@ docker run -d --name redis \
 
 update_image(){
 docker pull redis:4-alpine
-check_exec_success "$?"  "pulling redis image"
+check_exec_success "$?"  "pulling redis images"
 }
 
 # 检测命令执行是否成功

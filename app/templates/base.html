@@ -1,71 +1,106 @@
-{% extends 'bootstrap/base.html' %}
-
-{% block title %}
-    <title>IceCola</title>
-{% endblock %}
-{% block head %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href={{ url_for('static',filename='css/my_css.css') }}>
-    <link rel="shortcut icon" href="{{ url_for('static',filename='image/1_37.jpg') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename = 'image/favicon.ico') }}"
-          type="image/x-icon">
-{% endblock %}
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}
+        <title>website</title>
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" type="text/css"
+              href={{ url_for('static',filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}>
+        <!--谷歌字体-->
+        <link rel="stylesheet"
+              href={{ url_for('static',filename='bower_components/components-font-awesome/css/fontawesome-all.min.css') }}>
+        <link rel="stylesheet" type="text/css" href={{ url_for('static',filename='css/my_css.css') }}>
+        <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet'
+              type='text/css'>
+        <link rel="icon" href="{{ url_for('static', filename = 'images/favicon.ico') }}"
+              type="image/x-icon">
+    {% endblock %}
+</head>
 <body>
 {% block navbar %}
-    <nav class="navbar navbar-light bg-light">
-        <ul class="nav navbar-collapse">
-            <li><a class="navbar-brand" href="/">首页</a></li>
-            {% if current_user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link"
-                                        href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.post_article') }}">写文章</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信 </a></li>
+    <nav class="navbar navbar-fixed-top  navbar-expand-md">
+        <a class="navbar-brand" href="/"> website
+        </a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse"
+                data-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                aria-label="Toggle navigation">
+            menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.post_article') }}">写文章</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.messages') }}">查看私信 </a></li>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('main.tasks') }}">任务队列</a></li>
-                {% set new_messages = current_user.new_messages() %}
-                <span id="message_count" class="badge" style="visibility: {% if new_messages %}
-                    visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
-                <li class="nav-item"><a href="{{ url_for('main.export_posts_view') }}">导出你的文章</a></li>
-            {% endif %}
-            {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
-                <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
-            {% endif %}
-            {% if current_user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a></li>
-            {% else %}
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
-            {% endif %}
-        {% if g.search_form %}
-            <form class="navbar-form inline-flex" method="get" action="{{ url_for('main.search') }}">
-            <div class="form-group">
-                {{ g.search_form.q(size=20,class='form-control',placeholder=g.search_form.q.label.text) }}
-            </div>
-            </form>
-        {% endif %}
-
-        </ul>
-
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.tasks') }}">任务队列</a></li>
+                    {% set new_messages = current_user.new_messages() %}
+                    <span id="message_count" class="badge" style="visibility: {% if new_messages %}
+                        visible {% else %} hidden {% endif %}"> {{ new_messages }}</span>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.export_posts_view') }}">导出你的文章</a>
+                    </li>
+                {% endif %}
+                {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
+                    <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
+                {% endif %}
+                <li class="nav-item"><a href="{{ url_for('main.about') }}" class="nav-link">关于</a></li>
+                {% if g.search_form %}
+                    <form class="navbar-form inline-flex" method="get" action="{{ url_for('main.search') }}">
+                        <div class="form-group">
+                            {{ g.search_form.q(size=20,class='form-control',placeholder=g.search_form.q.label.text) }}
+                        </div>
+                    </form>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
+    {#欢迎页面 header article title#}
+    <header class="post-heading" style="background-image: url('../static/images/bg1.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="site-heading">
+                    {% if post %}
+                        <h1>{{ post.title }}</h1>
+                        <div class="meta">
+                         <p>发表于 {{ post.timestamp }} </p>
+                        <a class="profile-href"
+                           href="{{ url_for('.user',username=post.author.username) }}">作者: {{ post.author.username }}</a>
+                        </div>
 
-
+                    {% else %}
+                        <h1>Hello {% if current_user.is_authenticated %} {{ current_user.username }}{% else %}
+                            Welcome my website{% endif %}</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock %}
 
+
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-left: 20em">
         {% if current_user.is_authenticated %}
-            {#            {% with tasks=current_user.get_tasks_in_progress() %}#}
-            {#{% if  %}#}
-            {#                {% for task in tasks %}#}
-            <div class="offset-1 col-md-6 col-sm-12">
+            <div class=" col-md-6 col-sm-12">
             <div class="alert alert-success" id="progress_bar" hidden role="alert">
                 导出进度：
-                {#                        {{ task.description }}#}
                 <span id="task-progress">0</span>%
             </div>
-            {#                {% endfor %}#}
-            {#                    {% endif %}#}
-            {#            {% endwith %}#}
         {% endif %}
         {% for message in get_flashed_messages() %}
             <div class="offset-1 col-md-6 alert alert-warning">
@@ -74,78 +109,111 @@
             </div>
         {% endfor %}
         </div>
-
         <div class="row">
-            <div class="offset-1 col-md-6">
+            <div class="col-md-10 col-lg-8">
                 {% block page_content %}
                     {% if current_user.is_authenticated %}
-                        {% with tasks=current_user.get_tasks_in_progress() %}
-                            {% if tasks %}
-                                {% for task in tasks %}
-                                    <div class="alert alert-success" role="alert">
-                                        {{ task.description }}
-                                        <span id="{{ task.id }}-progress"> {{ task.get_progress() }} </span>
-                                    </div>
-                                {% endfor %}
-
-
-                            {% endif %}
-
-                        {% endwith %}
+                        {#                        {% with tasks=current_user.get_tasks_in_progress() %}#}
+                        {#                            {% if tasks %}#}
+                        {#                                {% for task in tasks %}#}
+                        {#                                    <div class="alert alert-success" role="alert">#}
+                        {#                                        {{ task.description }}#}
+                        {#                                        <span id="{{ task.id }}-progress"> {{ task.get_progress() }} </span>#}
+                        {#                                    </div>#}
+                        {#                                {% endfor %}#}
+                        {#                            {% endif %}#}
+                        {#                        {% endwith %}#}
                     {% endif %}
                 {% endblock %}
             </div>
-
             {% block sidebar %}
-                <div class="offset-1 col-md-3">
-
+                <div class="offset-1 col-md-2 side-bar">
                     <div class="side-bar-module sidebar-module-inset">
                         <p id="people_num"> 总访问人数 </p>
-                        {#                                                <h4>About</h4>#}
-                        {#                                                <p><em>樊佳亮 山东大学 2015级 软件工程专业 <br></em>个人flask学习项目。#}
-                        {#                                                    <em>qq:995972493<br></em>#}
-                        {#                                                    <em>wechat:18340071291</em>#}
-                        {#                                                </p>#}
                     </div>
                     <div class="side-bar-module">
                         <h4>Archives</h4>
-                        <ol class="list-unstyled">
+                        <ul class="list-group-flush">
                             <li><a href="#">March 2014</a></li>
-                            <li><a href="#">February 2014</a></li>
-                            <li><a href="#">January 2014</a></li>
-                            <li><a href="#">December 2013</a></li>
-                            <li><a href="#">November 2013</a></li>
-                            <li><a href="#">October 2013</a></li>
-                            <li><a href="#">September 2013</a></li>
-                            <li><a href="#">August 2013</a></li>
-                            <li><a href="#">July 2013</a></li>
-                            <li><a href="#">June 2013</a></li>
-                            <li><a href="#">May 2013</a></li>
-                            <li><a href="#">April 2013</a></li>
-                        </ol>
+                        </ul>
                     </div>
                     <div class="side-bar-module">
                         <h4>Elsewhere</h4>
-                        <ol class="list-unstyled">
-                            <li><a href="https://github.com/Colaplusice">GitHub</a></li>
-                            <li><a href="https://blog.csdn.net/fanjialiang2401">CSDN</a></li>
-                            <li><a href="https://www.facebook.com/profile.php?id=100010410976941">Facebook</a></li>
-                        </ol>
+                        <ul>
+                        <li>
+                            <a href="https://github.com/Colaplusice">
+                                <em class="text-icon"> github:</em>
+                                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+                            </a>
+                        </li>
+                        <li><a href="https://blog.csdn.net/fanjialiang2401">
+                            <em class="text-icon">gitlab:</em>
+                            <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
+                </span>
+                        </a></li>
+                        <li>
+                            <a href="https://www.facebook.com/profile.php?id=100010410976941">
+                                <em class="text-icon">Facebook:</em>
+                                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+                </span></a></li>
+                            </ul>
                     </div>
                 </div>
             {% endblock %}
         </div>
     </div>
 {% endblock %}
+
 {% block footer %}
-    <footer class="blog-footer">
-        <p>樊佳亮的博客</p>
+
+    <footer class="footer-icecola">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
         <p><a href="#">返回顶部</a></p>
+        <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
     </footer>
+
+
 {% endblock %}
-
 {% block scripts %}
-
     <script>
         function set_task_progress(task_id, progress) {
             $('#progress_bar').removeAttr("hidden");
@@ -153,11 +221,8 @@
             if (progress === 100) {
                 alert('导出成功！');
                 $('#progress_bar').attr("hidden", 1);
-
             }
         }
-
-        {#更新id 为message的 的值和css#}
 
         function set_message_count(n) {
             $('#message_count').text(n);
@@ -190,10 +255,6 @@
         {% endif %}
 
     </script>
-
-
-
-
     <script>
 
         function update_progress(status_url) {
@@ -228,13 +289,13 @@
                 }
             });
         }
-
-
     </script>
-
-    {{ super() }}
+    {#    有依赖往后放#}
+    <script src=" {{ url_for('static',filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src=" {{ url_for('static',filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src=" {{ url_for('static',filename='js/my.js') }}"></script>
     {{ moment.include_moment() }}
     {{ moment.lang('zh-CN') }}
-
 {% endblock %}
+</body>
+</html>

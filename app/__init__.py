@@ -1,9 +1,8 @@
 import os
-
 from elasticsearch import Elasticsearch
 from flask import Flask
 from redis import Redis
-from app.extensions import pagedown, bootstrap, db, login_manager, mail, moment, celery
+from app.extensions import pagedown, db, login_manager, mail, moment, celery
 from configs import config
 
 dir_name = os.path.dirname(__file__)
@@ -33,7 +32,6 @@ def create_app(config_name=None):
     app = Flask(__name__)
     app.config.from_pyfile("../configs/celery_config.py")
     app.config.from_object(config[config_name])
-    bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
     login_manager.init_app(app)

@@ -50,6 +50,22 @@ celery worker -A celery_worker.celery --loglevel=info
 
 建立docker_compose file
 
+
+## 增加js文件
+
+bower install components-font-awesome
+bower install bootstrap
+bower install jquery
+
+
+## 版本
+
+bootstrap v4.2.1
+jquery  3.3.1
+components-font-awesome 5.4.2
+
+
+
   
 ## 上线计划
 

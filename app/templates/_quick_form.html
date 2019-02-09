@@ -1,0 +1,76 @@
+{# valid form types are "basic", "inline" and "horizontal" #}
+{% macro quick_form(form,
+                    action="",
+                    method="post",
+                    extra_classes=None,
+                    role="form",
+                    form_type="basic",
+                    horizontal_columns=('lg', 2, 10),
+                    enctype=None,
+                    button_map={},
+                    id="",
+                    novalidate=False,
+                    render_kw={}) %}
+    {#-
+action="" is what we want, from http://www.ietf.org/rfc/rfc2396.txt:
+
+4.2. Same-document References
+
+   A URI reference that does not contain a URI is a reference to the
+   current document.  In other words, an empty URI reference within a
+   document is interpreted as a reference to the start of that document,
+   and a reference containing only a fragment identifier is a reference
+   to the identified fragment of that document.  Traversal of such a
+   reference should not result in an additional retrieval action.
+   However, if the URI reference occurs in a context that is always
+   intended to result in a new request, as in the case of HTML's FORM
+   element, then an empty URI reference represents the base URI of the
+   current document and should be replaced by that URI when transformed
+   into a request.
+
+ -#}
+    {#- if any file fields are inside the form and enctype is automatic, adjust
+    if file fields are found. could really use the equalto test of jinja2
+    here, but latter is not available until 2.8
+
+    warning: the code below is guaranteed to make you cry =(
+#}
+    {%- set _enctype = [] %}
+    {%- if enctype is none -%}
+        {%- for field in form %}
+            {%- if field.type == 'FileField' %}
+                {#- for loops come with a fairly watertight scope, so this list-hack is
+          used to be able to set values outside of it #}
+                {%- set _ = _enctype.append('multipart/form-data') -%}
+            {%- endif %}
+        {%- endfor %}
+    {%- else %}
+        {% set _ = _enctype.append(enctype) %}
+    {%- endif %}
+    <form
+            {%- if action != None %} action="{{ action }}"{% endif -%}
+            {%- if id %} id="{{ id }}"{% endif -%}
+            {%- if method %} method="{{ method }}"{% endif %}
+                                     class="form
+    {%- if extra_classes %} {{ extra_classes }}{% endif -%}
+    {%- if form_type == "inline" %} form-inline{% endif -%}
+  "
+            {%- if _enctype[0] %} enctype="{{ _enctype[0] }}"{% endif -%}
+            {%- if role %} role="{{ role }}"{% endif -%}
+            {%- if novalidate %} novalidate{% endif -%}
+            {%- if render_kw %} {{ render_kw|xmlattr }}{% endif -%}
+    >
+        {{ form.hidden_tag() }}
+{#        {{ form_errors(form, hiddens='only') }}#}
+{##}
+        {%- for field in form %}
+{#            {% if not bootstrap_is_hidden_field(field) -%}#}
+                {{ form_field(field,
+                    form_type=form_type,
+                    horizontal_columns=horizontal_columns,
+                    button_map=button_map) }}
+{#            {%- endif %}#}
+        {%- endfor %}
+
+    </form>
+{%- endmacro %}

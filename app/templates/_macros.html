@@ -1,8 +1,6 @@
 {% macro pagination_widget(pagination,endpoint) %}
-
     <ul class="pagination">
         {% if pagination %}
-
             {#向前移动一页如果有前一页的话#}
             <li {% if not pagination.has_prev %} class="page-link disabled" {% else %}class="page-link"  {% endif %}  >
                 <a href="{% if pagination.has_prev %}{{ url_for(endpoint
@@ -10,7 +8,6 @@
                     &laquo;
                 </a>
             </li>
-
             {% for p in  pagination.iter_pages() %}
                 {% if p %}
                     {% if p==pagination.page %}
@@ -34,6 +31,5 @@
                     &raquo; </a>
             </li>
             </ul>
-
         {% endif %}
 {% endmacro %}

@@ -90,7 +90,7 @@
 #     with database.transaction():
 #         PageView.create_from_request()
 #
-#     response = Response(app.config['BEACON'], mimetype='image/gif')
+#     response = Response(app.config['BEACON'], mimetype='images/gif')
 #     response.headers['Cache-Control'] = 'private, no-cache'
 #     return response
 #

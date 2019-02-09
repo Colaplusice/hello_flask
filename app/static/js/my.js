@@ -2,8 +2,6 @@ $(document).ready(function () {
     $.get('/all_visit', function (data) {
         $('#people_num').append(data)
     });
-
-
 });
 
 
@@ -53,3 +51,5 @@ $(function () {
         }
     );
 });
+
+

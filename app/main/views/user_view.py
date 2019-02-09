@@ -11,16 +11,16 @@ from flask import (
     request,
     current_app,
 )
-from flask_login import login_required, current_user
 
 from app import db
 from app.celery_tasks import export_async_posts, change_task_status
 from app.decorators import amdin_required, permission_required
 from app.main import main
 from app.main.forms import UserEditForm, EditProfileAdminForm, MessageForm
+from app.models.models import Permission, Post, Comment, Notification
 from app.models.role import Role
 from app.models.users import User, Message
-from app.models.models import Permission, Post, Comment, Notification
+from extentions.flask_login import login_required, current_user
 
 
 # 设置cookie为0 然后跳转到Index页面
