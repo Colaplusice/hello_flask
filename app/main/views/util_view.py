@@ -1,6 +1,6 @@
 import os
 
-from flask import url_for, request, current_app, Response,render_template
+from flask import url_for, request, current_app, Response, render_template
 
 from app.models.page_view import View_message, User_message
 from .. import main
@@ -59,6 +59,6 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 
-@main.route('/abouts')
+@main.route("/abouts")
 def about():
-    return render_template('about.html')
+    return render_template("about.html")

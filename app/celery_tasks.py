@@ -1,12 +1,13 @@
-# encoding=utf-8
-from flask import jsonify
-from app.extensions import celery
-from .models import *
 import time
-from . import mail
-from app.main import main
-from flask_mail import Message
+
 from flask import current_app, render_template
+from flask_mail import Message
+
+from app import db
+from app.extensions import celery
+from app.models.models import Post, Task
+from app.models.users import User
+from . import mail
 
 
 # 创建线程，异步发送邮件

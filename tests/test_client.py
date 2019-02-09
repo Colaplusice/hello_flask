@@ -45,7 +45,7 @@ class FlaskClientTestCase(unittest.TestCase):
         )
 
         data = response.get_data(as_text=True)
-        self.assertTrue(re.search("Hello,\swm!", data))
+        self.assertTrue(re.search(r"Hello,\swm!", data))
         self.assertTrue("You have not confirmed your account yet." in data)
 
         # 发送确认令牌

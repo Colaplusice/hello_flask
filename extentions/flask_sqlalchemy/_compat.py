@@ -13,7 +13,6 @@
 def iteritems(d):
     return iter(d.items())
 
+
 def itervalues(d):
     return iter(d.values())
-
-

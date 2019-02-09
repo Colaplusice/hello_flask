@@ -17,5 +17,5 @@ test_all:
     - pip install -U -r requirements/test_requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 
   script:
-    #    - flake8 app commands tests
+    - flake8 app commands tests
     - python manage.py test

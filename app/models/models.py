@@ -61,6 +61,7 @@ class Post(SearchableMixin, db.Model):
     @staticmethod
     def generate_fake(count=100):
         from .users import User
+
         seed()
         user_count = User.query.count()
 
