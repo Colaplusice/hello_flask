@@ -9,8 +9,8 @@
                 </a></li>
             {#    <如果是认证用户></如果是认证用户>#}
             {% if current_user.is_authenticated %}
-                <li class="nav-pills {% if show_followed %} active {% endif %}">
-                    <a href="{{ url_for('.show_followed') }}"><h2>订阅列表</h2></a>
+                <li class=" nav-pills {%if show_followed %} active {% endif %}">
+                    <a class="nav-link" href="{{ url_for('.show_followed') }}"><h1>订阅列表</h1></a>
                 </li>
             {% endif %}
             {#            <li class="active">#}
@@ -30,7 +30,7 @@
     {% include '_posts.html' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-2">
+            <div class="col-md-6">
                 <div class="pagination">
                     {{ macros.pagination_widget(pagination,'.index') }}
                 </div>

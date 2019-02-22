@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
 {% import "_macros.html" as macros %}
-
 {% block page_content %}
-
     <h1>私信</h1>
-
     {% if messages %}
-
 {% include '_message_post.html' %}
     {% else %}
     <h1> 你还没有收到私信</h1>

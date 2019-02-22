@@ -25,7 +25,9 @@
 <body>
 {% block navbar %}
     <nav class="navbar navbar-fixed-top  navbar-expand-md">
-        <a class="navbar-brand" href="/"> website
+        <a class="navbar-brand" href="/" style="font-style: italic">
+            <h2> website
+            </h2>
         </a>
         <button class="navbar-toggler " type="button" data-toggle="collapse"
                 data-target="#navigation" aria-controls="navigation" aria-expanded="false"
@@ -34,7 +36,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link"
                                             href="{{ url_for('main.user',username=current_user.username) }}">个人主页</a>
@@ -52,19 +54,22 @@
                 {% if current_user.can(Permisson.MODERATE_COMMENTS) %}
                     <li><a class="nav-link" href="{{ url_for('main.moderate') }}">修改评论</a></li>
                 {% endif %}
-                {% if current_user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
-                {% endif %}
                 <li class="nav-item"><a href="{{ url_for('main.about') }}" class="nav-link">关于</a></li>
                 {% if g.search_form %}
-                    <form class="navbar-form inline-flex" method="get" action="{{ url_for('main.search') }}">
+                    <form class="nav-item form-inline" method="get" action="{{ url_for('main.search') }}">
                         <div class="form-group">
                             {{ g.search_form.q(size=20,class='form-control',placeholder=g.search_form.q.label.text) }}
                         </div>
                     </form>
                 {% endif %}
+                {% if current_user.is_authenticated %}
+
+                    <li class="nav-item float-sm-right"><a class="nav-link" href="{{ url_for('auth.logout') }}">注销</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item "><a class="nav-link" href="{{ url_for('auth.login') }}">登录</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </nav>
@@ -77,11 +82,10 @@
                     {% if post %}
                         <h1>{{ post.title }}</h1>
                         <div class="meta">
-                         <p>发表于 {{ post.timestamp }} </p>
-                        <a class="profile-href"
-                           href="{{ url_for('.user',username=post.author.username) }}">作者: {{ post.author.username }}</a>
+                            <p>发表于 {{ post.timestamp }} </p>
+                            <a class="profile-href"
+                               href="{{ url_for('.user',username=post.author.username) }}">作者: {{ post.author.username }}</a>
                         </div>
-
                     {% else %}
                         <h1>Hello {% if current_user.is_authenticated %} {{ current_user.username }}{% else %}
                             Welcome my website{% endif %}</h1>
@@ -94,7 +98,7 @@
 
 
 {% block content %}
-    <div class="container-fluid" style="margin-left: 20em">
+    <div class="container-fluid">
         {% if current_user.is_authenticated %}
             <div class=" col-md-6 col-sm-12">
             <div class="alert alert-success" id="progress_bar" hidden role="alert">
@@ -109,72 +113,72 @@
             </div>
         {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-md-10 col-lg-8">
-                {% block page_content %}
-                    {% if current_user.is_authenticated %}
-                        {#                        {% with tasks=current_user.get_tasks_in_progress() %}#}
-                        {#                            {% if tasks %}#}
-                        {#                                {% for task in tasks %}#}
-                        {#                                    <div class="alert alert-success" role="alert">#}
-                        {#                                        {{ task.description }}#}
-                        {#                                        <span id="{{ task.id }}-progress"> {{ task.get_progress() }} </span>#}
-                        {#                                    </div>#}
-                        {#                                {% endfor %}#}
-                        {#                            {% endif %}#}
-                        {#                        {% endwith %}#}
-                    {% endif %}
-                {% endblock %}
-            </div>
-            {% block sidebar %}
-                <div class="offset-1 col-md-2 side-bar">
-                    <div class="side-bar-module sidebar-module-inset">
-                        <p id="people_num"> 总访问人数 </p>
-                    </div>
-                    <div class="side-bar-module">
-                        <h4>Archives</h4>
-                        <ul class="list-group-flush">
-                            <li><a href="#">March 2014</a></li>
-                        </ul>
-                    </div>
-                    <div class="side-bar-module">
-                        <h4>Elsewhere</h4>
-                        <ul>
-                        <li>
-                            <a href="https://github.com/Colaplusice">
-                                <em class="text-icon"> github:</em>
-                                <span class="fa-stack fa-lg">
+            <div class="row">
+                <div class="col-md-10 offset-1 col-lg-8">
+                    {% block page_content %}
+                        {% if current_user.is_authenticated %}
+                            {% with tasks=current_user.get_tasks_in_progress() %}
+                                {% if tasks %}
+                                    {% for task in tasks %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ task.description }}
+                                            <span id="{{ task.id }}-progress"> {{ task.get_progress() }} </span>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+                {% block sidebar %}
+                    <div class="col-lg-2 side-bar">
+                        <div class="side-bar-module sidebar-module-inset">
+                            <p id="people_num"> 总访问人数 </p>
+                        </div>
+                        <div class="side-bar-module">
+                            <h4>Archives</h4>
+                            <ul class="list-group-flush">
+                                <li><a href="#">March 2014</a></li>
+                            </ul>
+                        </div>
+                        <div class="side-bar-module">
+                            <h4>Elsewhere</h4>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Colaplusice">
+                                        <em class="text-icon"> github:</em>
+                                        <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-github fa-stack-1x fa-inverse"></i>
                 </span>
-                            </a>
-                        </li>
-                        <li><a href="https://blog.csdn.net/fanjialiang2401">
-                            <em class="text-icon">gitlab:</em>
-                            <span class="fa-stack fa-lg">
+                                    </a>
+                                </li>
+                                <li><a href="https://blog.csdn.net/fanjialiang2401">
+                                    <em class="text-icon">gitlab:</em>
+                                    <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
                 </span>
-                        </a></li>
-                        <li>
-                            <a href="https://www.facebook.com/profile.php?id=100010410976941">
-                                <em class="text-icon">Facebook:</em>
-                                <span class="fa-stack fa-lg">
+                                </a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/profile.php?id=100010410976941">
+                                        <em class="text-icon">Facebook:</em>
+                                        <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
                 </span></a></li>
                             </ul>
+                        </div>
                     </div>
-                </div>
-            {% endblock %}
-        </div>
+                {% endblock %}
+            </div>
     </div>
 {% endblock %}
 
 {% block footer %}
 
     <footer class="footer-icecola">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <ul class="list-inline text-center">
@@ -211,7 +215,6 @@
         <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
     </footer>
 
-
 {% endblock %}
 {% block scripts %}
     <script>
@@ -234,7 +237,7 @@
                 var since = 0;
                 setInterval(function () {
                     $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
-                        {#返回值 #}
+                        {#返回值#}
                         function (notifications) {
                             for (var i = 0; i < notifications.length; i++) {
                                 switch (notifications[i].name) {
@@ -253,17 +256,17 @@
                 }, 1000);
             });
         {% endif %}
-
     </script>
     <script>
 
         function update_progress(status_url) {
             $.getJSON(status_url, function (data) {
                 percent = parseInt(data['current'] * 100 / data['total']);
-                {# update progress #}
+                update
+                progress
                 var task_id = status_url.split('/');
                 set_task_progress(task_id[task_id.length - 1], percent);
-                {#alert(percent);#}
+                alert(percent);
                 $('#progress_label').text(percent);
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
                 }

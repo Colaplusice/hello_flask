@@ -4,10 +4,9 @@ from flask import current_app, render_template
 from flask_mail import Message
 
 from app import db
-from app.extensions import celery
+from app.extensions import celery, mail
 from app.models.models import Post, Task
 from app.models.users import User
-from . import mail
 
 
 # 创建线程，异步发送邮件

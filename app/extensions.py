@@ -1,9 +1,11 @@
 from celery import Celery
 from flask_cache import Cache
-from extentions.flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_pagedown import PageDown
+
+from extentions.flask_bootstrap import Bootstrap
+from extentions.flask_login import LoginManager
 from extentions.flask_sqlalchemy import SQLAlchemy
 
 mail = Mail()
@@ -13,7 +15,7 @@ pagedown = PageDown()
 login_manager = LoginManager()
 cache = Cache(config={"CACHE_TYPE": "simple"})
 celery = Celery(__name__)
-
+bootstrap = Bootstrap()
 
 # class Flask_env:
 #     def __init__(self, app=None):

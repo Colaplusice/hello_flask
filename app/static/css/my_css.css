@@ -103,7 +103,6 @@ header.post-heading .site-heading p, header.post-heading .site-heading a {
 header.post-heading .site-heading .meta {
     font-size: 20px;
     font-weight: 300;
-    font-style: italic;
     font-family: Lora, 'Times New Roman', serif
 }
 
@@ -164,11 +163,12 @@ head.site-heading h1 {
     margin: 0 40px 20px;
 }
 
-.side-bar-module span{
+.side-bar-module span {
     float: right;
     height: 45px;
 }
-.side-bar-module li{
+
+.side-bar-module li {
     margin-right: 0;
     margin-top: 30px;
 }
@@ -193,6 +193,11 @@ button.group-button {
     position: absolute;
 }
 
+.profile-text {
+    margin-top: 0;
+    margin-bottom: 100px;
+}
+
 footer .copyright {
     font-size: 14px;
     margin-bottom: 0;
@@ -211,7 +216,7 @@ footer .copyright {
 
 div.post-tabs {
     margin-top: 16px;
-    margin-left: 250px;
+    margin-left: 130px;
     height: 100px
 }
 
@@ -352,12 +357,27 @@ div.user_follow {
     margin-bottom: 30px;
 }
 
+.user-posts {
+    margin-top: 50px;
+    margin-left: 180px;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
 /*page*/
 div.pagination {
     width: 100%;
     text-align: right;
     padding: 0px;
     margin: 0px;
+}
+
+.page-link {
+    color: black;
+}
+
+.page-link a:hover {
+    color: #0c5460;;
 }
 
 div.flask-pagedown-preview {
@@ -409,7 +429,6 @@ div.flask-pagedown-preview h3 {
 /*属性*/
 .post-meta {
     font-size: 18px;
-    font-style: italic;
     margin-top: 0;
     color: #868e96;
 }
@@ -422,7 +441,6 @@ li.sort_button {
 .text-icon {
     margin-right: 50px;
 }
-
 
 /*button*/
 .btn {
@@ -446,6 +464,12 @@ li.sort_button {
     border-color: #00657b !important
 }
 
+/*form的标题*/
+.form-title {
+    margin-bottom: 20px;
+    margin-top: 0;
+}
 
-
-
+.custom-form #submit {
+    margin-top: 20px;
+}

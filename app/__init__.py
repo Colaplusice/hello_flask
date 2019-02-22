@@ -1,8 +1,10 @@
 import os
+
 from elasticsearch import Elasticsearch
 from flask import Flask
 from redis import Redis
-from app.extensions import pagedown, db, login_manager, mail, moment, celery
+
+from app.extensions import pagedown, db, login_manager, mail, moment, celery, bootstrap
 from configs import config
 
 dir_name = os.path.dirname(__file__)
@@ -37,6 +39,7 @@ def create_app(config_name=None):
     login_manager.init_app(app)
     db.init_app(app)
     pagedown.init_app(app)
+    bootstrap.init_app(app)
     app.redis = Redis.from_url(app.config["REDIS_URL"])
     # 提交任务的队列
     # app.task_queue = rq.Queue('hello_flask-tasks', connection=app.redis)
@@ -49,14 +52,10 @@ def create_app(config_name=None):
     )
 
     from .main import main as main_blueprint
-
     app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
-
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
-    # error
-    #
     # # 配置log 在非debug情形下
     # if not app.debug:
     #     basedir = os.path.abspath(os.path.dirname(__file__))
@@ -74,9 +73,7 @@ def create_app(config_name=None):
     #     app.logger.setLevel(logging.INFO)
     #     app.logger.info('hello_flask start up')
     from .api import api as api_blueprint
-
     app.register_blueprint(api_blueprint, url_prefix="/api")
-
     from .play import play as play_blueprint
 
     app.register_blueprint(play_blueprint, url_prefix="/play")

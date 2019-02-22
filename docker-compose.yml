@@ -28,14 +28,8 @@ services:
     depends_on:
       - db
       - redis
-    #     image: hello_flask:latest
     build: .
-#    ports:
-#      - 5000:5000
     restart: always
     environment:
       DB_HOST: db
       REDIS_HOST: redis
-volumes:
-  db_data:
-#    redis_data:

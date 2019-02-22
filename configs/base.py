@@ -54,6 +54,11 @@ var d=document,i=new Image,e=encodeURIComponent;
     BEACON = b64decode("R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
 
     # SERVER_NAME = "localhost"
+    # 验证码
+    RECAPTCHA_PUBLIC_KEY = "6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J"
+    RECAPTCHA_PRIVATE_KEY = "6LeYIbsSAAAAAJezaIq3Ft_hSTo0YtyeFG-JgRtu"
+    RECAPTCHA_API_SERVER = "localhost"
+    # RECAPTCHA_DATA_ATTRS = {'theme': 'dark'}
 
     def init_app(self, app):
         pass

@@ -1,5 +1,5 @@
 # encoding=utf-8
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, session
 from flask_login import current_user
 
 # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -7,14 +7,9 @@ from extentions.flask_login import login_required, login_user, logout_user
 from . import auth
 from .forms import LoginForm, RegisterForm, ResetForm, NewPassForm
 from .. import db
-from ..celery_tasks import send_email
+from app.tasks.celery_tasks import send_email
 from ..models.users import User
 from ..utils import Generate_reset_password_token, verify_reset_password
-
-
-# @auth.route('/login')
-# def login():
-#     return render_template('auth/login.html')
 
 
 @auth.route("/secret")
@@ -36,10 +31,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
-            login_user(user, form.remeber_me.data)
+            login_user(user, form.remember_me.data)
             return redirect(request.args.get("next") or url_for("main.index"))
         flash("用户名或密码错误")
-
     return render_template("auth/login.html", form=form)
 
 
@@ -47,7 +41,6 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        # print('chucuole'*300)
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
             flash("注册成功")
@@ -143,10 +136,10 @@ def before_request():
     if current_user.is_authenticated:
         current_user.ping()
         if (
-            not current_user.confirmed
-            and request.endpoint
-            and request.endpoint[:5] != "auth."
-            and request.endpoint != "static"
+                not current_user.confirmed
+                and request.endpoint
+                and request.endpoint[:5] != "auth."
+                and request.endpoint != "static"
         ):
             return redirect(url_for("auth.unconfirmed"))
 

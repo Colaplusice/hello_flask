@@ -14,7 +14,7 @@ from flask import (
 from flask_login import login_required, current_user
 
 from app import db
-from app.celery_tasks import export_async_posts
+from app.tasks.celery_tasks import export_async_posts
 from app.decorators import permission_required
 from app.main import forms
 from app.main import main

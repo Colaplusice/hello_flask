@@ -43,7 +43,9 @@ gunicorn -c gunicorn.py hello_flask:app
 
 celery worker 运行
 celery worker -A app.celery --loglevel=info
-celery worker -A celery_worker.celery --loglevel=info
+celery worker -A run_celery.celery --loglevel=info
+celery -A run_celery.celery purge 丢弃任务
+
 
 
 ### 将项目通过docker发布出去

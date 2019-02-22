@@ -1,5 +1,5 @@
 {% macro pagination_widget(pagination,endpoint) %}
-    <ul class="pagination">
+    <ul class="pagination pagination-lg">
         {% if pagination %}
             {#向前移动一页如果有前一页的话#}
             <li {% if not pagination.has_prev %} class="page-link disabled" {% else %}class="page-link"  {% endif %}  >

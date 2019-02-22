@@ -13,7 +13,7 @@ from flask import (
 )
 
 from app import db
-from app.celery_tasks import export_async_posts, change_task_status
+from app.tasks.celery_tasks import export_async_posts, change_task_status
 from app.decorators import amdin_required, permission_required
 from app.main import main
 from app.main.forms import UserEditForm, EditProfileAdminForm, MessageForm

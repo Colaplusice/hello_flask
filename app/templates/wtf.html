@@ -1,10 +1,10 @@
-{% macro form_errors(form, hiddens=True) %}
+{% macro form_errors(form, hidden=True) %}
     {%- if form.errors %}
         {%- for fieldname, errors in form.errors.items() %}
-            {%- if bootstrap_is_hidden_field(form[fieldname]) and hiddens or
-             not bootstrap_is_hidden_field(form[fieldname]) and hiddens != 'only' %}
+            {%- if bootstrap_is_hidden_field(form[fieldname]) and hidden or
+             not bootstrap_is_hidden_field(form[fieldname]) and hidden != 'only' %}
                 {%- for error in errors %}
-                    <div class="invalid-feedback">{{ error }}</div>
+                    <div class="invalid-feedback"> {{ error }}</div>
                 {%- endfor %}
             {%- endif %}
         {%- endfor %}
@@ -200,7 +200,7 @@ action="" is what we want, from http://www.ietf.org/rfc/rfc2396.txt:
             {%- if render_kw %} {{ render_kw|xmlattr }}{% endif -%}
     >
         {{ form.hidden_tag() }}
-        {{ form_errors(form, hiddens='only') }}
+        {{ form_errors(form, hidden='only') }}
 
         {%- for field in form %}
             {% if not bootstrap_is_hidden_field(field) -%}
